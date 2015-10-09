@@ -25,6 +25,20 @@ public class TestInventory {
 	}
 	
 	@Test
+	public void testViewItemList(){
+		Item myItem1 = new Item();
+		Item myItem2 = new Item();
+		Item myItem3 = new Item();
+		Inventory myInventory = new Inventory();
+		myInventory.add(myItem1);
+		myInventory.add(myItem2);
+		myInventory.add(myItem3);
+		AssertTrue(myInventory.getItems.contains(myItem1));
+		AssertTrue(myInventory.getItems.contains(myItem2));
+		AssertTrue(myInventory.getItems.contains(myItem3));
+	}
+	
+	@Test
 	public void testViewMyUnsharedItems(){
 		Item myItem = new Item();
 		Inventory myInventory = new Inventory();
