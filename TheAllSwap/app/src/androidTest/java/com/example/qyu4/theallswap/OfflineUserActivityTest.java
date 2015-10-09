@@ -21,6 +21,11 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         //TODO: check if new result and item created when offline is equal.
 
     }
+    public void testAddItem(){
+        //TODO: initialize a item name(string Type: itemName)
+        //TODO: create an item setName(itemNam)
+        //assertEquals(item.getName().equals(String));
+    }
     public boolean testIsOffline(){
         return true;
     }
