@@ -14,17 +14,18 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
     }
     public void testNewItemCreated(){
         ArrayList<Item> itemList = new ArrayList<Item>();
-        assertTrue(testIsOffline());
         //TODO: creating item offline;
         Item itemOffline = new Item("offline item", "category", "offline item description");
         itemList.add(itemOffline);
-        //TODO: reconnect internet;
-        assertTrue(testIsOnline());
+
         //TODO: get result while online
         //TODO: check if new result and item created when offline is equal.
         assertEqual("offline item", item.getName(0));
     }
     public void testAddItem(){
+        assertTrue(testIsOffline());
+        //TODO: reconnect internet;
+        assertTrue(testIsOnline());
         //TODO: initialize a item name(string Type: itemName)
         //TODO: create an item setName(itemNam)
         //assertEquals(item.getName().equals(String));
