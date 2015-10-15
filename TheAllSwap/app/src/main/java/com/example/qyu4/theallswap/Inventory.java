@@ -1,4 +1,5 @@
+package com.example.qyu4.theallswap;
 
-public abstract class LonelyTweetModel {
-
+public class Inventory{
+  
 }
