@@ -12,6 +12,9 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
     public OfflineUserActivityTest(){
         super(UserEditInventoryActivity.class);
     }
+    /**
+     * testNewItemCreated is related to use cases #1
+     **/
     public void testNewItemCreated(){
         ArrayList<Item> itemList = new ArrayList<Item>();
         //TODO: creating item offline;
@@ -22,7 +25,10 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         //TODO: check if new result and item created when offline is equal.
         assertEqual("offline item", item.getName(0));
     }
-    public void testAddItem(){
+    /**
+     * testNewItemCreated is related to use cases #1
+     **/
+    public void testAddItemPushed(){
         InternetConnection ic = new InternetConnection();
         ic.setInternet(false);
         assertTrue(testIsOffline());
