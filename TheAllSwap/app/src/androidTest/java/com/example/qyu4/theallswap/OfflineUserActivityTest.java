@@ -31,6 +31,7 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         Item itemOffline = new Item("offline item", "category", "offline item description");
         itemList.add(itemOffline);
         ic.setInternet(true);
+        assertTrue(testIsOnline());
         //TODO: get result while online
         //and load the result item into itemList 
         ListItem.loadFile(itemList);
@@ -40,7 +41,7 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         assertEqual("offline item", item.getName(0));
         
         //TODO: reconnect internet;
-        assertTrue(testIsOnline());
+       
         //TODO: initialize a item name(string Type: itemName)
         //TODO: create an item setName(itemNam)
         //assertEquals(item.getName().equals(String));
