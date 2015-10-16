@@ -17,13 +17,28 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         //TODO: creating item offline;
         Item itemOffline = new Item("offline item", "category", "offline item description");
         itemList.add(itemOffline);
-
+        assertEqual("offline item", String.vavlueOf(itemList.getItemIndex(0)))
         //TODO: get result while online
         //TODO: check if new result and item created when offline is equal.
         assertEqual("offline item", item.getName(0));
     }
     public void testAddItem(){
+        InternetConnection ic = new InternetConnection();
+        ic.setInternet(false);
         assertTrue(testIsOffline());
+        ArrayList<Item> itemList = new ArrayList<Item>();
+        //TODO: creating item offline;
+        Item itemOffline = new Item("offline item", "category", "offline item description");
+        itemList.add(itemOffline);
+        ic.setInternet(true);
+        //TODO: get result while online
+        //and load the result item into itemList 
+        ListItem.loadFile(itemList);
+        
+        assertEqual("offline item", String.vavlueOf(itemList.getItemIndex(0)));
+        //TODO: check if new result and item created when offline is equal.
+        assertEqual("offline item", item.getName(0));
+        
         //TODO: reconnect internet;
         assertTrue(testIsOnline());
         //TODO: initialize a item name(string Type: itemName)
