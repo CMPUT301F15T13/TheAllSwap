@@ -26,7 +26,7 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         assertEqual("offline item", item.getName(0));
     }
     /**
-     * testNewItemCreated is related to use cases #1
+     * testNewItemCreated is related to use cases #2
      **/
     public void testAddItemPushed(){
         InternetConnection ic = new InternetConnection();
