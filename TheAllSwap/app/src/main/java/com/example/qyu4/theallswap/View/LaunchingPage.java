@@ -1,11 +1,14 @@
-package com.example.qyu4.theallswap;
+package com.example.qyu4.theallswap.View;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class LaunchingPage extends ActionBarActivity {
+import com.example.qyu4.theallswap.R;
+
+public class LaunchingPage extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
