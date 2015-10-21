@@ -24,6 +24,10 @@
             android:name=".UserTradingActivity"
             android:label="@string/title_activity_user_trading" >
         </activity>
+        <activity
+            android:name=".View.UserLogin"
+            android:label="@string/title_activity_user_login" >
+        </activity>
     </application>
 
 </manifest>
