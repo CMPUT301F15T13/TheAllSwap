@@ -2,9 +2,6 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.example.qyu4.theallswap.UserProfileActivity;
-import com.example.qyu4.theallswap.UserTradingActivity;
-
 import java.io.File;
 
 /**

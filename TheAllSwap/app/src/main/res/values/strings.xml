@@ -16,4 +16,20 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="title_activity_user_register">User Register</string>
+    <string name="title_activity_user_main_viewing">UserMainViewing</string>
+    <string name="my_inventory">My Inventory</string>
+    <string name="my_trade">My Trade</string>
+    <string name="my_friends">My Friends</string>
+    <string name="my_profile">My Profile</string>
+    <string name="search">Search</string>
+    <string name="previous_browse">Previous Browse</string>
+    <string name="logout">Log Out</string>
+    <string name="dash_line">-----------------------------------------------</string>
+    <string name="title_activity_user_inventory">UserInventory</string>
+    <string name="title_activity_user_trade">UserTrade</string>
+    <string name="title_activity_user_friends">UserFriends</string>
+    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_search">Search</string>
+    <string name="title_activity_previous_browsed_trade">Previous Browsed Trade</string>
+
 </resources>

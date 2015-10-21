@@ -32,6 +32,34 @@
             android:name=".View.UserRegister"
             android:label="@string/title_activity_user_register" >
         </activity>
+        <activity
+            android:name=".View.UserMainViewing"
+            android:label="@string/title_activity_user_main_viewing" >
+        </activity>
+        <activity
+            android:name=".View.UserInventory"
+            android:label="@string/title_activity_user_inventory" >
+        </activity>
+        <activity
+            android:name=".View.UserTrade"
+            android:label="@string/title_activity_user_trade" >
+        </activity>
+        <activity
+            android:name=".View.UserFriends"
+            android:label="@string/title_activity_user_friends" >
+        </activity>
+        <activity
+            android:name=".View.UserProfile"
+            android:label="@string/title_activity_user_profile" >
+        </activity>
+        <activity
+            android:name=".View.Search"
+            android:label="@string/title_activity_search" >
+        </activity>
+        <activity
+            android:name=".View.PreviousBrowsedTrade"
+            android:label="@string/title_activity_previous_browsed_trade" >
+        </activity>
     </application>
 
 </manifest>
