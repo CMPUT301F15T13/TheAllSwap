@@ -59,7 +59,8 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin" >
     android:layout_alignLeft="@+id/usernameET"
     android:hint="user_password_hit"
     android:inputType="textPassword"
-    android:layout_alignParentEnd="true" />
+    android:layout_alignParentEnd="true"
+    android:text="@string/user_password_hit" />
 
 <TextView
     android:id="@+id/attemptsLeftTV"
@@ -77,10 +78,9 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin" >
     android:id="@+id/loginBtn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@+id/passwordET"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="94dp"
-    android:text="@string/login" />
+    android:text="@string/login"
+    android:layout_below="@+id/attemptsLeftTV"
+    android:layout_alignStart="@+id/textView1" />
 
 <TextView
     android:id="@+id/numberOfRemainingLoginAttemptsTV"
@@ -99,5 +99,13 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin" >
     android:layout_centerHorizontal="true"
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:visibility="invisible" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:id="@+id/b_register"
+        android:layout_alignBottom="@+id/loginBtn"
+        android:layout_alignEnd="@+id/numberOfRemainingLoginAttemptsTV" />
 
 </RelativeLayout>
