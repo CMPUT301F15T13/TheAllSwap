@@ -22,6 +22,7 @@ public class LaunchingPage extends Activity implements OnClickListener {
         setContentView(R.layout.activity_launching_page);
         buttonToLoginPage = (Button) findViewById(R.id.b_to_login_page);
         buttonToLoginPage.setOnClickListener(this);
+        //adding comments to commit
     }
 
 

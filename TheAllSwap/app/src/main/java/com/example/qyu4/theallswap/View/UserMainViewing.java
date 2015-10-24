@@ -1,6 +1,5 @@
 package com.example.qyu4.theallswap.View;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.qyu4.theallswap.R;
 
-public class UserMainViewing extends Activity {
+public class UserMainViewing extends ActionBarActivity {
     private UserMainViewing activity = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
