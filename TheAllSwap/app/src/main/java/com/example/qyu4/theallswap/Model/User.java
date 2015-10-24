@@ -1,7 +1,5 @@
 package com.example.qyu4.theallswap.Model;
 
-import com.example.qyu4.theallswap.Friends;
-
 import java.util.ArrayList;
 
 /**
