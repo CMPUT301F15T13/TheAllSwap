@@ -9,9 +9,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.R;
+import com.example.qyu4.theallswap.Controller.UserController;
 
 public class UserMainViewing extends ActionBarActivity {
     private UserMainViewing activity = this;
+    private UserController uc = new UserController();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,30 +41,29 @@ public class UserMainViewing extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
     public void userMyInventorySelected(MenuItem menu){
-        classIntent(UserInventory.class);
+        uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
-        classIntent(UserTrade.class);
+
+        uc.classIntent(UserTrade.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        classIntent(UserFriends.class);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userMyProfileSelected(MenuItem menu){
-        classIntent(UserProfile.class);
+        uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        classIntent(Search.class);
+        uc.classIntent(Search.class, activity);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        classIntent(PreviousBrowsedTrade.class);
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        classIntent(UserLogin.class);
+        uc.classIntent(UserLogin.class, activity);
     }
 
-    public void classIntent(Class newClass){
-        Intent openNewActivity = new Intent(activity, newClass);
-        startActivity(openNewActivity);
-    }
+
 }

@@ -3,9 +3,11 @@ package com.example.qyu4.theallswap.Controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.View.UserInventory;
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
@@ -81,5 +83,6 @@ public class UserController {
         Intent openNewActivity = new Intent(context, newClass);
         context.startActivity(openNewActivity);
     }
+
 
 }
