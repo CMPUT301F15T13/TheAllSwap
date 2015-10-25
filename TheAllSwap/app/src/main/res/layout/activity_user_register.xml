@@ -76,7 +76,7 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_alignParentStart="true" />
 
 <EditText
-    android:id="@+id/text_new_patient_diagnosis"
+    android:id="@+id/text_new_city"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"

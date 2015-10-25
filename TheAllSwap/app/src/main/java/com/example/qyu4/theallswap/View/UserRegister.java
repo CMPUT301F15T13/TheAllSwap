@@ -30,6 +30,8 @@ public class UserRegister extends Activity implements View.OnClickListener{
     private EditText userName;
     private EditText passwordOne;
     private EditText passwordTwo;
+    private EditText inputEmail;
+    private EditText inputCity;
 
 
     @Override
@@ -46,30 +48,29 @@ public class UserRegister extends Activity implements View.OnClickListener{
         if(view.getId()==R.id.b_new_user_submit){
             passwordOne= (EditText)findViewById(R.id.edit_text_firstpassword);
             passwordTwo= (EditText)findViewById(R.id.edit_text_password_two);
+            inputEmail=(EditText)findViewById(R.id.text_new_user_email);
+            inputCity =(EditText)findViewById(R.id.text_new_city);
             userName = (EditText)findViewById(R.id.new_user_name);
+
             String firstPassword = passwordOne.getText().toString();
             String secondPassword = passwordTwo.getText().toString();
+            String newEmail = inputEmail.getText().toString();
+            String newCity  = inputCity.getText().toString();
             String userId = userName.getText().toString();
             boolean check= uc.registerNewUserPasswordCheck(firstPassword, secondPassword);
             if  (check){
+                newProfile.setUserCity(newCity);
+                newProfile.setUserContactInformation(newEmail);
+
                 newUser.setUserId(userId);
                 newUser.setUserPassword(firstPassword);
-                uc.saveInFile(FILENAME, activity, newUser);
+                newUser.setUserProfile(newProfile);
 
+                uc.saveInFile(FILENAME, activity, newUser);
                 uc.classIntent(UserMainViewing.class, activity);
             }else{
                uc.makeInvalidPasswordToast(activity);
             }
-
         }
-
     }
-    /**
-    public void classIntent(Class newClass, Context context){
-        Intent openNewActivity = new Intent(context, newClass);
-        startActivity(openNewActivity);
-    }
-     **/
-
-
 }

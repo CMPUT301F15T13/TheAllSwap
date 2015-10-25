@@ -14,6 +14,15 @@ public class User {
     private ArrayList<User> userFriendList;
     private ArrayList<Trade> userRequestTradeList = new ArrayList<Trade>();
     private ArrayList<Trade> userOfferTradeList = new ArrayList<Trade>();
+
+    public Profile getUserProfile() {
+        return userProfile;
+    }
+
+    public void setUserProfile(Profile userProfile) {
+        this.userProfile = userProfile;
+    }
+
     private Profile userProfile;
 
     public User() {
