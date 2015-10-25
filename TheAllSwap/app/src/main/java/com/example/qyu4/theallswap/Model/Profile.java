@@ -6,7 +6,9 @@ package com.example.qyu4.theallswap.Model;
 public class Profile {
     private String userContactInformation;
     private String userCity;
+    public Profile(){
 
+    }
     public Profile(String userContactInformation, String userCity) {
         this.setUserContactInformation(userContactInformation);
         this.setUserCity(userCity);

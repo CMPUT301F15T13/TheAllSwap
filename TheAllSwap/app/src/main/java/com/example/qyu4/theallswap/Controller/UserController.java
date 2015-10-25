@@ -48,5 +48,9 @@ public class UserController {
                 throw new RuntimeException(e);
             }
         }
+    public void classIntent(Class newClass, Context context){
+        Intent openNewActivity = new Intent(context, newClass);
+        context.startActivity(openNewActivity);
+    }
 
 }
