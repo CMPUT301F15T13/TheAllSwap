@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
+import com.example.qyu4.theallswap.Model.User;
 import com.google.gson.Gson;
 
 import java.io.BufferedWriter;
@@ -27,10 +28,10 @@ public class UserController {
             return false;
         }
     }
-    public void makeToastIn(Context context){
+    public void makeInvalidPasswordToast(Context context){
         Toast.makeText(context, "invalid same password", Toast.LENGTH_LONG).show();
     }
-    private void saveInFile(String FileName, Context context, Objects nameOfClass) {
+    public void saveInFile(String FileName, Context context, User nameOfClass) {
 
             try {
                 FileOutputStream fos = context.openFileOutput(FileName, 0);
@@ -47,4 +48,5 @@ public class UserController {
                 throw new RuntimeException(e);
             }
         }
+
 }

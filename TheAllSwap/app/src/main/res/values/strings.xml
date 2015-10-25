@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">The All Swap</string>
-
+    <string name="submit">Submit</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Settings</string>repeat_password
+    <string name="repeat_password">Repeat Password</string>
     <string name="title_activity_user_edit_inventory">User Edit Inventory Activity</string>
     <string name="title_activity_user_trading">User Trading Activity</string>
     <string name="welcome">This is a welcome page</string>

@@ -89,12 +89,12 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_height="wrap_content"
     android:layout_alignParentBottom="true"
     android:layout_alignParentRight="true"
-    android:text="submit" />
+    android:text="@string/submit" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Repeat Password"
+        android:text="@string/repeat_password"
         android:id="@+id/text_repeat_password"
         android:layout_below="@+id/edit_text_firstpassword"
         android:layout_alignParentStart="true" />
