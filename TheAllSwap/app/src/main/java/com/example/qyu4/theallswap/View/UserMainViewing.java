@@ -6,18 +6,56 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
+
+import java.util.ArrayList;
 
 public class UserMainViewing extends ActionBarActivity {
     private UserMainViewing activity = this;
     private UserController uc = new UserController();
+    private ArrayList<User> userList= new ArrayList<User>();
+    private ArrayAdapter<User> adapter;
+    private ListView friendList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_viewing);
+        friendList = (ListView)findViewById(R.id.lv_friend_list);
+        friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO: some stuff
+                uc.makeInvalidPasswordToast(activity);
+            }
+
+
+        });
+    }
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        //loadFromFile();oldTweetsList.setAdapter(adapter);
+        /***************************************************
+         TODO: add loading friends list method.
+         *************************************************/
+        User sampleUser = new User();
+        sampleUser.setUserId("123");
+        sampleUser.setUserPassword("123");
+        userList.add(sampleUser);
+        /***************************************************
+         TODO: add loading friends list method.
+        *************************************************/
+
+        adapter = new ArrayAdapter<User>(this, R.layout.list_item, userList);
+        friendList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
