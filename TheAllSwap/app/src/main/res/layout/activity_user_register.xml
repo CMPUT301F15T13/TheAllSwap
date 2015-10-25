@@ -14,17 +14,17 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:id="@+id/new_patient_id_label"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/new_patient_id"
+    android:layout_alignLeft="@+id/new_user_name"
     android:layout_alignParentTop="true"
     android:layout_marginTop="24px"
     android:text="User Name" />
 
 <EditText
-    android:id="@+id/new_patient_id"
+    android:id="@+id/new_user_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignLeft="@+id/new_patient_name_label"
-    android:layout_alignStart="@+id/new_patient_name"
+    android:layout_alignStart="@+id/edit_text_firstpassword"
     android:layout_below="@+id/new_patient_id_label"
     android:ems="10"
 
@@ -37,11 +37,11 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Password"
-    android:layout_below="@+id/new_patient_id"
+    android:layout_below="@+id/new_user_name"
     android:layout_alignParentStart="true" />
 
 <EditText
-    android:id="@+id/new_patient_name"
+    android:id="@+id/edit_text_firstpassword"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentLeft="true"
@@ -54,7 +54,7 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:text="Email Adress"
-        android:layout_below="@+id/text_input_repeat_password"
+        android:layout_below="@+id/edit_text_password_two"
         android:layout_alignParentStart="true" />
 
 <EditText
@@ -96,11 +96,11 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
         android:layout_height="wrap_content"
         android:text="Repeat Password"
         android:id="@+id/text_repeat_password"
-        android:layout_below="@+id/new_patient_name"
+        android:layout_below="@+id/edit_text_firstpassword"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/text_input_repeat_password"
+        android:id="@+id/edit_text_password_two"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"

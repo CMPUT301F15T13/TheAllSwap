@@ -10,21 +10,24 @@ import java.util.ArrayList;
 public class User {
     private String userId;
     private String userPassword;
-    private ArrayList<Item> userInventory = new ArrayList<Item>();
-    private ArrayList<User> userFriendList = new ArrayList<User>();
+    private ArrayList<Item> userInventory;
+    private ArrayList<User> userFriendList;
     private ArrayList<Trade> userRequestTradeList = new ArrayList<Trade>();
     private ArrayList<Trade> userOfferTradeList = new ArrayList<Trade>();
     private Profile userProfile;
-    public User(String userId, String userPassword, ArrayList<Item> userInventory,
-                ArrayList<User> userFriendList, ArrayList<Trade> userRequestTradeList,
-                ArrayList<Trade> userOfferTradeList, Profile userProfile) {
+
+    public User() {
+
+    }
+    public User(String userId, String userPassword) {
         this.userId = userId;
         this.userPassword = userPassword;
-        this.userInventory = userInventory;
-        this.userFriendList = userFriendList;
-        this.userRequestTradeList = userRequestTradeList;
-        this.userOfferTradeList = userOfferTradeList;
-        this.userProfile = userProfile;
+        this.userInventory = new ArrayList<Item>();
+        this.userFriendList = new ArrayList<User>();
+        this.userRequestTradeList = new ArrayList<Trade>();
+        this.userOfferTradeList = new ArrayList<Trade>();
+        this.userProfile.setUserCity(null);
+        this.userProfile.setUserContactInformation(null);
     }
 
     /**
