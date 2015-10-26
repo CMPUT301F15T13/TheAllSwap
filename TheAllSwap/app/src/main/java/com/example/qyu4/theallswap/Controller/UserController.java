@@ -10,7 +10,9 @@ import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.View.UserInventory;
 import com.google.gson.Gson;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -84,5 +86,24 @@ public class UserController {
         context.startActivity(openNewActivity);
     }
 
+    /**
+     * Fixing needed
+     * @param context
+     * @param fileName
+     */
+    private void loadFromFile(Context context, String fileName) {
+        try {
+            FileInputStream fis = context.openFileInput(fileName);
+            //BufferedReader in = new BufferedReader(new context.InputStreamReader(fis));
+            Gson gson = new Gson();
+            // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
+            //Type arraylistType = new TypeToken<ArrayList<NormalTweet>>() {}.getType();
+            //tweets = gson.fromJson(in, arraylistType);
 
+        } catch (FileNotFoundException e) {
+            //tweets = new ArrayList<Tweet>();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

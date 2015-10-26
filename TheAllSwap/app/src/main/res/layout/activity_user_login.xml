@@ -30,7 +30,7 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin" >
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <EditText
-    android:id="@+id/usernameET"
+    android:id="@+id/user_name"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignBottom="@+id/textView2"
@@ -52,11 +52,11 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin" >
     android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <EditText
-    android:id="@+id/passwordET"
+    android:id="@+id/user_password"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignBottom="@+id/textView3"
-    android:layout_alignLeft="@+id/usernameET"
+    android:layout_alignLeft="@+id/user_name"
     android:hint="@string/user_password_hit"
     android:inputType="textPassword"
     android:layout_alignParentEnd="true" />

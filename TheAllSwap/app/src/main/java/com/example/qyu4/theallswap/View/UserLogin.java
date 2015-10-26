@@ -2,12 +2,10 @@ package com.example.qyu4.theallswap.View;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.example.qyu4.theallswap.R;
 
@@ -15,6 +13,8 @@ public class UserLogin extends Activity implements View.OnClickListener{
     private UserLogin activity = this;
     private Button userLogin;
     private Button userRegister;
+    private EditText userName;
+    private EditText userPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,9 @@ public class UserLogin extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.b_user_login){
+            userName = (EditText) findViewById(R.id.user_name);
+            userPassword=(EditText)findViewById(R.id.user_password);
+            //TODO: load file and save objects in arrayList.
             classIntent(UserMainViewing.class);
         }
         if(view.getId()==R.id.b_user_register){
