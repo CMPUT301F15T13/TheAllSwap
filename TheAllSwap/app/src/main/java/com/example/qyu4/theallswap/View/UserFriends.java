@@ -1,6 +1,6 @@
 package com.example.qyu4.theallswap.View;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,14 +9,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
-import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
+import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
 
-public class UserFriends extends Activity {
+public class UserFriends extends ActionBarActivity {
     private UserFriends activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
@@ -26,7 +27,7 @@ public class UserFriends extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
-        friendList = (ListView)findViewById(R.id.lv_all_friend);
+        friendList = (ListView)findViewById(R.id.lv_user_friends);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: some stuff
@@ -56,10 +57,11 @@ public class UserFriends extends Activity {
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_friends, menu);
+        getMenuInflater().inflate(R.menu.menu_user_main_viewing, menu);
         return true;
     }
 
@@ -77,4 +79,29 @@ public class UserFriends extends Activity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void userMyInventorySelected(MenuItem menu){
+        uc.classIntent(UserInventory.class, activity);
+    }
+    public void userMyTradeSelected(MenuItem menu){
+
+        uc.classIntent(UserTrade.class, activity);
+    }
+    public void userMyFriendsSelected(MenuItem menu){
+        uc.classIntent(UserFriends.class, activity);
+    }
+    public void userMyProfileSelected(MenuItem menu){
+        uc.classIntent(UserProfile.class, activity);
+    }
+    public void userSearchSelected(MenuItem menu){
+        uc.classIntent(Search.class, activity);
+    }
+    public void userPreviousBrowseSelected(MenuItem menu){
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
+    }
+    public void userLogoutSelected(MenuItem menu){
+        uc.classIntent(UserLogin.class, activity);
+    }
+
+
 }
