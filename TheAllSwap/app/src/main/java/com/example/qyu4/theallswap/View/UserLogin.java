@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.R;
 
 public class UserLogin extends Activity implements View.OnClickListener{
@@ -15,6 +16,7 @@ public class UserLogin extends Activity implements View.OnClickListener{
     private Button userRegister;
     private EditText userName;
     private EditText userPassword;
+    private UserController uc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,16 +33,19 @@ public class UserLogin extends Activity implements View.OnClickListener{
     public void onClick(View view) {
         if(view.getId()==R.id.b_user_login){
             userName = (EditText) findViewById(R.id.user_name);
-            userPassword=(EditText)findViewById(R.id.user_password);
+            String currentUserName = userName.getText().toString();
+            /**
+             * User does not need password to login.
+             */
+            //userPassword=(EditText)findViewById(R.id.user_password);
             //TODO: load file and save objects in arrayList.
-            classIntent(UserMainViewing.class);
+            if(uc.checkingUserExist(currentUserName)){
+                uc.classIntent(UserMainViewing.class, activity);
+            }
+            
         }
         if(view.getId()==R.id.b_user_register){
-            classIntent(UserRegister.class);
+            uc.classIntent(UserRegister.class, activity);
         }
-    }
-    public void classIntent(Class newClass){
-        Intent openNewActivity = new Intent(activity, newClass);
-        startActivity(openNewActivity);
     }
 }

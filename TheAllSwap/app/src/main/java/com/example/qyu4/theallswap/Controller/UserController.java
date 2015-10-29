@@ -106,4 +106,7 @@ public class UserController {
             throw new RuntimeException(e);
         }
     }
+    public boolean checkingUserExist(String userName){
+        return true;
+    }
 }
