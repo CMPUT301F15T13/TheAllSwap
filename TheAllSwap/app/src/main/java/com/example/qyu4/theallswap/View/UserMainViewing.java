@@ -33,6 +33,7 @@ public class UserMainViewing extends ActionBarActivity {
     private ArrayAdapter<User> adapter;
     private ListView friendList;
     private static final String FILENAME = "userProfile.txt";
+    private ArrayList resultList = new ArrayList();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,20 +52,32 @@ public class UserMainViewing extends ActionBarActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-
         /***************************************************
          TODO: add loading friends list method
          TODO: into arrayList user list
          *************************************************/
-        loadFromFile();
-
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
         /***************************************************
-         TODO: add loading friends list method.
+         TODO: Done adding loading friends list method.
         *************************************************/
 
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, userList);
+        /***************************************************
+         TODO: setup the result list for list view.
+         *************************************************/
+        resultList = uc.convertUserToString(userList, resultList);
+        /***************************************************
+         TODO: done setup the result list for list view.
+         *************************************************/
+
+        /***************************************************
+         TODO: connect result list and adapter.
+         *************************************************/
+        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        /***************************************************
+         TODO: done result list and adapter.
+         *************************************************/
     }
 
     @Override
@@ -105,25 +118,10 @@ public class UserMainViewing extends ActionBarActivity {
     public void userPreviousBrowseSelected(MenuItem menu){
         uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
-    public void userLogoutSelected(MenuItem menu){uc.classIntent(UserLogin.class, activity);
+    public void userLogoutSelected(MenuItem menu){
+        uc.classIntent(UserLogin.class, activity);
     }
 
-    public void loadFromFile(){
-        try{
-        FileInputStream fis = openFileInput(FILENAME);
-        BufferedReader in = new BufferedReader(new InputStreamReader(fis));
 
 
-        Gson gson = new Gson();
-        // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
-        Type arrayListType = new TypeToken<ArrayList<User>>(){}.getType();
-        userList = gson.fromJson(in, arrayListType);
-
-
-    } catch (FileNotFoundException e) {
-        // TODO Auto-generated catch block
-        userList = new ArrayList<User>();
-    }
-
-    }
 }

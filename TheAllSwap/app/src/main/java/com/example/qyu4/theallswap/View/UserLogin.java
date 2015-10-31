@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,7 +21,7 @@ public class UserLogin extends Activity implements View.OnClickListener{
     private Button userRegister;
     private EditText userName;
     private UserController uc= new UserController();
-    private static final String FILENAME = "userProfile.sav";
+    private static final String FILENAME = "userProfile.txt";
     private ArrayList<User> userList = new ArrayList<User>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,33 +30,32 @@ public class UserLogin extends Activity implements View.OnClickListener{
         userLogin = (Button) findViewById(R.id.b_user_login);
         userRegister = (Button) findViewById(R.id.b_user_register);
         userRegister.setOnClickListener(this);
-        //userLogin.setOnClickListener(this);
+        userLogin.setOnClickListener(this);
 
     }
 
 
     @Override
-    public void onStart(){
+    protected void onStart() {
+        // TODO Auto-generated method stub
         super.onStart();
-        //  userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        /**
-        String test = userList.get(0).toString();
-        if (test.equals(null)){
-            uc.makeInputStringToast(activity, "no userprofile");
-        }else{
-            uc.makeInputStringToast(activity, userList.get(0).toString()+"");
-        }
-**/
+        /***************************************************
+         TODO: add loading friends list method
+         TODO: into arrayList user list
+         *************************************************/
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        /***************************************************
+         TODO: Done adding loading friends list method.
+         *************************************************/
+
     }
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.b_user_login){
-            userName = (EditText) findViewById(R.id.user_name);
 
+            userName = (EditText) findViewById(R.id.user_name);
             String currentUserName = userName.getText().toString();
-            /**
-             * User does not need password to login.
-             */
+
 
             //TODO: load file and save objects in arrayList.
             if(uc.checkingUserExist(currentUserName, userList)){

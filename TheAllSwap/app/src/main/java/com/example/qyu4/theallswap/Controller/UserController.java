@@ -62,15 +62,15 @@ public class UserController {
      *
      * @param FileName: file name
      * @param context: convenience of openFileOutput method.
-     * @param nameOfClass: the class type that will be saved in the file.
+     * @param userArrayList: the class type that will be saved in the file.
      */
-    public void saveInFile(String FileName, Context context, User nameOfClass) {
+    public void saveInFile(String FileName, Context context, ArrayList<User> userArrayList) {
 
             try {
                 FileOutputStream fos = context.openFileOutput(FileName, 0);
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
                 Gson gson = new Gson();
-                gson.toJson(nameOfClass, out);
+                gson.toJson(userArrayList, out);
                 out.flush();
                 fos.close();
             } catch (FileNotFoundException e) {
@@ -131,5 +131,30 @@ public class UserController {
 
         }
         return false;
+    }
+
+    /**
+     *
+     * @param userList
+     * @param resultList
+     * @return
+     */
+    public ArrayList convertUserToString(ArrayList<User>userList, ArrayList resultList){
+        for (int i=0; i< userList.size(); i++){
+            resultList.add(userList.get(i).toString());
+        }
+
+        return resultList;
+    }
+
+    /**
+     * make toast of all item in user list.
+     * @param context: current context
+     * @param userList: the arrayList tester want to test.
+     */
+    public void checkingUserListContent(Context context, ArrayList<User>userList){
+        for(int i=0; i<userList.size();i++){
+            makeInputStringToast(context, userList.get(i).getUserId());
+        }
     }
 }

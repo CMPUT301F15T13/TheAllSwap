@@ -103,4 +103,9 @@ public class User {
         return item;
     }
 
+    @Override
+    public String toString(){
+        return userId + " || "+ userProfile.getUserCity()+" || "+userProfile.getUserContactInformation();
+    }
+
 }

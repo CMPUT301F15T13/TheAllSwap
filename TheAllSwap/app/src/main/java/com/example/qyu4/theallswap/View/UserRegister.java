@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.qyu4.theallswap.Controller.UserController;
@@ -35,11 +36,10 @@ public class UserRegister extends Activity implements View.OnClickListener{
     private static final String FILENAME = "userProfile.txt";
     private UserController uc = new UserController();
     private User newUser = new User();
+    private ArrayList<User> newUserList = new ArrayList<User>();
     private Profile newProfile= new Profile();
     private Button userRegister;
     private EditText userName;
-    private EditText passwordOne;
-    private EditText passwordTwo;
     private EditText inputEmail;
     private EditText inputCity;
 
@@ -52,7 +52,20 @@ public class UserRegister extends Activity implements View.OnClickListener{
         userRegister =(Button) findViewById(R.id.b_new_user_submit);
         userRegister.setOnClickListener(this);
     }
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
+        /***************************************************
+         TODO: add loading friends list method
+         TODO: into arrayList user list
+         *************************************************/
+        newUserList = uc.loadUserFromFile(activity, FILENAME, newUserList);
+        /***************************************************
+         TODO: Done adding loading friends list method.
+         *************************************************/
 
+    }
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.b_new_user_submit){
@@ -68,7 +81,8 @@ public class UserRegister extends Activity implements View.OnClickListener{
             newProfile.setUserCity(newCity);
             newProfile.setUserContactInformation(newEmail);
             newUser.setUserProfile(newProfile);
-            uc.saveInFile(FILENAME, activity, newUser);
+            newUserList.add(newUser);
+            uc.saveInFile(FILENAME, activity, newUserList);
             uc.classIntent(UserMainViewing.class, activity);
 
         }
