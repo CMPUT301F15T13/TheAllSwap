@@ -2,13 +2,15 @@ package com.example.qyu4.theallswap.Controller;
 
 
 import android.content.Context;
+
 import android.content.Intent;
 import android.view.MenuItem;
 import android.widget.Toast;
-
+import java.lang.reflect.Type;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.View.UserInventory;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,7 +18,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -46,8 +50,11 @@ public class UserController {
      *
      * @param context: for the convenience of Toast methods.
      */
-    public void makeInvalidPasswordToast(Context context){
-        Toast.makeText(context, "invalid same password", Toast.LENGTH_LONG).show();
+    public void makeInvalidUserToast(Context context){
+        Toast.makeText(context, "invalid user name!", Toast.LENGTH_LONG).show();
+    }
+    public void makeInputStringToast(Context context, String inputString){
+        Toast.makeText(context, inputString, Toast.LENGTH_LONG).show();
     }
 
     /**
@@ -91,22 +98,38 @@ public class UserController {
      * @param context
      * @param fileName
      */
-    private void loadFromFile(Context context, String fileName) {
+    public ArrayList<User> loadUserFromFile(Context context, String fileName, ArrayList<User> userList) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
-            //BufferedReader in = new BufferedReader(new context.InputStreamReader(fis));
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
             // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
-            //Type arraylistType = new TypeToken<ArrayList<NormalTweet>>() {}.getType();
-            //tweets = gson.fromJson(in, arraylistType);
+            Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
+            userList = gson.fromJson(in, userListType);
 
         } catch (FileNotFoundException e) {
-            //tweets = new ArrayList<Tweet>();
+            userList = new ArrayList<User>();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        return userList;
     }
-    public boolean checkingUserExist(String userName){
-        return true;
+
+    /**
+     * check loaded user list has current input user name or not.
+     * @param inputUserName: input user name
+     * @param userList: loaded userList
+     * @return: if current user exists, return true; false otherwise.
+     */
+    public boolean checkingUserExist(String inputUserName, ArrayList<User> userList){
+        for(int i=0; i< userList.size(); i ++) {
+            String userName = userList.get(i).getUserId();
+
+            if (inputUserName.equals(userName)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }

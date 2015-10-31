@@ -8,10 +8,14 @@ import java.util.ArrayList;
  * Created by qyu4 on 10/20/15.
  */
 public class User {
+
+
+
+
     private String userId;
-    private String userPassword;
-    private ArrayList<Item> userInventory;
-    private ArrayList<User> userFriendList;
+
+    private ArrayList<Item> userInventory= new ArrayList<Item>();
+    private ArrayList<User> userFriendList = new ArrayList<User>();
     private ArrayList<Trade> userRequestTradeList = new ArrayList<Trade>();
     private ArrayList<Trade> userOfferTradeList = new ArrayList<Trade>();
 
@@ -26,11 +30,11 @@ public class User {
     private Profile userProfile;
 
     public User() {
-
+        this.setUserId(userId);
     }
-    public User(String userId, String userPassword) {
+
+    public User(String userId, String userEmail, String userCity) {
         this.userId = userId;
-        this.userPassword = userPassword;
         this.userInventory = new ArrayList<Item>();
         this.userFriendList = new ArrayList<User>();
         this.userRequestTradeList = new ArrayList<Trade>();
@@ -40,6 +44,13 @@ public class User {
     }
 
     /**
+     * get user id
+     * @return user id
+     */
+    public String getUserId() {
+        return userId;
+    }
+    /**
      * set user id
      * @param userId: generate user id from user input
      */
@@ -48,13 +59,7 @@ public class User {
 
     }
 
-    /**
-     * set user password
-     * @param userPassword: generate user password from user input.
-     */
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
+
 
     /**
      * add new Friend to friend list.

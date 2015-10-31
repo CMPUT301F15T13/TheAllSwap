@@ -31,7 +31,7 @@ public class UserTrade extends ActionBarActivity {
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: some stuff
-                uc.makeInvalidPasswordToast(activity);
+                uc.makeInvalidUserToast(activity);
             }
 
 
@@ -46,8 +46,7 @@ public class UserTrade extends ActionBarActivity {
          TODO: add loading friends list method.
          *************************************************/
         User sampleUser = new User();
-        sampleUser.setUserId("123");
-        sampleUser.setUserPassword("123");
+        sampleUser.setUserId("123");;
         userList.add(sampleUser);
         /***************************************************
          TODO: add loading friends list method.

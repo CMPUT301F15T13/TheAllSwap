@@ -41,70 +41,21 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin" >
     <requestFocus />
 </EditText>
 
-<TextView
-    android:id="@+id/textView3"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/textView2"
-    android:layout_below="@+id/textView2"
-    android:layout_marginTop="40dp"
-    android:text="@string/user_password"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-<EditText
-    android:id="@+id/user_password"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignBottom="@+id/textView3"
-    android:layout_alignLeft="@+id/user_name"
-    android:hint="@string/user_password_hit"
-    android:inputType="textPassword"
-    android:layout_alignParentEnd="true" />
-
-<TextView
-    android:id="@+id/attemptsLeftTV"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/textView3"
-    android:layout_below="@+id/textView3"
-    android:layout_marginLeft="30dp"
-    android:layout_marginTop="48dp"
-    android:text="Attempts Left:"
-    android:visibility="invisible"
-    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-<Button
+    <Button
     android:id="@+id/b_user_login"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/login"
-    android:layout_below="@+id/attemptsLeftTV"
-    android:layout_alignStart="@+id/textView1" />
-
-<TextView
-    android:id="@+id/numberOfRemainingLoginAttemptsTV"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignRight="@+id/textView1"
-    android:layout_alignTop="@+id/attemptsLeftTV"
-    android:visibility="invisible" />
-
-<TextView
-    android:id="@+id/loginLockedTV"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/b_user_login"
-    android:layout_marginTop="35dp"
-    android:layout_centerHorizontal="true"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:visibility="invisible" />
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/textView1" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:id="@+id/b_user_register"
-        android:layout_alignBottom="@+id/b_user_login"
-        android:layout_alignEnd="@+id/numberOfRemainingLoginAttemptsTV" />
+        android:layout_alignTop="@+id/b_user_login"
+        android:layout_alignEnd="@+id/textView1" />
 
 </RelativeLayout>
