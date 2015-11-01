@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -26,7 +28,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class UserMainViewing extends ActionBarActivity {
+public class UserMainViewing extends ActionBarActivity implements View.OnClickListener{
     private UserMainViewing activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
@@ -34,52 +36,21 @@ public class UserMainViewing extends ActionBarActivity {
     private ListView friendList;
     private static final String FILENAME = "userProfile.txt";
     private ArrayList resultList = new ArrayList();
+    private Button myInventoryButton;
+    private Button myTradeButton;
+    private Button mySearchButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_viewing);
-        friendList = (ListView)findViewById(R.id.lv_friend_list);
-        friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: some stuff
-                uc.makeInvalidUserToast(activity);
-            }
+        myInventoryButton = (Button)findViewById(R.id.b_my_inventory);
+        myTradeButton = (Button)findViewById(R.id.b_my_trade);
+        mySearchButton = (Button)findViewById(R.id.b_search);
+        myInventoryButton.setOnClickListener(this);
+        myTradeButton.setOnClickListener(this);
+        mySearchButton.setOnClickListener(this);
 
-
-        });
     }
-    @Override
-    protected void onStart() {
-        // TODO Auto-generated method stub
-        super.onStart();
-        /***************************************************
-         TODO: add loading friends list method
-         TODO: into arrayList user list
-         *************************************************/
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        /***************************************************
-         TODO: Done adding loading friends list method.
-        *************************************************/
-
-        /***************************************************
-         TODO: setup the result list for list view.
-         *************************************************/
-        resultList = uc.convertUserToString(userList, resultList);
-        /***************************************************
-         TODO: done setup the result list for list view.
-         *************************************************/
-
-        /***************************************************
-         TODO: connect result list and adapter.
-         *************************************************/
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
-        friendList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        /***************************************************
-         TODO: done result list and adapter.
-         *************************************************/
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -121,7 +92,18 @@ public class UserMainViewing extends ActionBarActivity {
     public void userLogoutSelected(MenuItem menu){
         uc.classIntent(UserLogin.class, activity);
     }
-
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.b_my_inventory){
+            uc.classIntent(UserInventory.class, activity);
+        }
+        else if(view.getId()==R.id.b_my_trade){
+            uc.classIntent(UserTrade.class, activity);
+        }
+        else if(view.getId()==R.id.b_search){
+            uc.classIntent(Search.class, activity);
+        }
+    }
 
 
 }
