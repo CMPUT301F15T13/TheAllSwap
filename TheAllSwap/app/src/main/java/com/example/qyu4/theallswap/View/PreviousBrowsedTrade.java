@@ -23,14 +23,14 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
-    private ListView friendList;
+    private ListView preBrowsedTradeList;
     private ArrayList resultList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_browsed_trade);
-        friendList = (ListView)findViewById(R.id.lv_user_previous);
-        friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        preBrowsedTradeList = (ListView)findViewById(R.id.lv_user_previous);
+        preBrowsedTradeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: some stuff
                 uc.makeInvalidUserToast(activity);
@@ -39,8 +39,8 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
 
         });
 
-        friendList.setLongClickable(true);
-        friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        preBrowsedTradeList.setLongClickable(true);
+        preBrowsedTradeList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 /**
                  * call removeUser from controller to delete an user from the userList.
@@ -79,7 +79,7 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
 
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
 
-        friendList.setAdapter(adapter);
+        preBrowsedTradeList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
     }
