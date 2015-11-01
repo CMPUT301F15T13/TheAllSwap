@@ -134,10 +134,11 @@ public class UserController {
     }
 
     /**
-     *
-     * @param userList
-     * @param resultList
-     * @return
+     * convert the User object list to a useful information arrayList.
+     * @param userList: the UserList has all User objects.
+     * @param resultList: an arrayList has all the user information. it
+     *                  calls toString() method of User class is an override method.
+     * @return the result list.
      */
     public ArrayList convertUserToString(ArrayList<User>userList, ArrayList resultList){
         for (int i=0; i< userList.size(); i++){
@@ -166,5 +167,17 @@ public class UserController {
     public ArrayList<User> removeUser(ArrayList<User>userList, int position){
         userList.remove(position);
         return userList;
+    }
+
+    /**
+     * remove an item from an arrayList mostly for the use of delete an item from
+     * the result list.
+     * @param itemList: the arrayList that contains result items.
+     * @param position: the index of item to be deleted.
+     * @return a new arrayList.
+     */
+    public ArrayList removeItem(ArrayList itemList, int position){
+        itemList.remove(position);
+        return itemList;
     }
 }

@@ -42,10 +42,23 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
         friendList.setLongClickable(true);
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                uc.makeInputStringToast(activity, "long click works");
+                /**
+                 * call removeUser from controller to delete an user from the userList.
+                 */
                 userList = uc.removeUser(userList, position);
+                /**
+                 * save the new userList to the file to sync.
+                 */
                 uc.saveInFile(FILENAME, activity, userList);
+                /**
+                 * call remove item of the result list.
+                 */
+                userList =uc.removeItem(resultList, position);
+                /**
+                 * notify adapter changes have been done.
+                 */
                 adapter.notifyDataSetChanged();
+                //uc.classIntent(PreviousBrowsedTrade.class, activity);
                 return true;
             }
         });
@@ -54,6 +67,7 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
+
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
         /***************************************************
          TODO: add loading friends list method.
@@ -64,8 +78,10 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
          *************************************************/
 
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
+
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
     }
 
     @Override
