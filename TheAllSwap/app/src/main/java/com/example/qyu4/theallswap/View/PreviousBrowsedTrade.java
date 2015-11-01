@@ -43,7 +43,7 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 uc.makeInputStringToast(activity, "long click works");
-                removeUser(userList, position);
+                userList = uc.removeUser(userList, position);
                 uc.saveInFile(FILENAME, activity, userList);
                 adapter.notifyDataSetChanged();
                 return true;
@@ -113,8 +113,6 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
         uc.classIntent(UserLogin.class, activity);
     }
 
-    public void removeUser(ArrayList<User>UserList, int position){
-        userList.remove(position);
-    }
+
 
 }

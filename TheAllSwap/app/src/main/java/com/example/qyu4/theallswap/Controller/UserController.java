@@ -157,4 +157,14 @@ public class UserController {
             makeInputStringToast(context, userList.get(i).getUserId());
         }
     }
+
+    /**
+     * remove one user from the list.
+     * @param userList: the arrayList that contains all the users.
+     * @param position: the index of user to be deleted.
+     */
+    public ArrayList<User> removeUser(ArrayList<User>userList, int position){
+        userList.remove(position);
+        return userList;
+    }
 }
