@@ -21,13 +21,15 @@ public class UserTrade extends ActionBarActivity {
     private UserTrade activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
+    private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
     private ListView friendList;
+    private ArrayList resultList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_trade);
-        friendList = (ListView)findViewById(R.id.lv_user_inventory);
+        friendList = (ListView)findViewById(R.id.lv_user_trade_item);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: some stuff
@@ -41,18 +43,16 @@ public class UserTrade extends ActionBarActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        //loadFromFile();oldTweetsList.setAdapter(adapter);
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/
-        User sampleUser = new User();
-        sampleUser.setUserId("123");;
-        userList.add(sampleUser);
+        resultList = uc.convertUserToString(userList, resultList);
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/
 
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, userList);
+        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

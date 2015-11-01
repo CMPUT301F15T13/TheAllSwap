@@ -2,8 +2,6 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import com.example.qyu4.theallswap.UserTradingActivity;
-
 /**
  * Created by lixin1 on 10/5/2015.
  */

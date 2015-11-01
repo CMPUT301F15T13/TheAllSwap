@@ -9,7 +9,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/lv_user_inventory"
+        android:id="@+id/lv_user_trade_item"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 

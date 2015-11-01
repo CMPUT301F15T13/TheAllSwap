@@ -21,8 +21,10 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
     private PreviousBrowsedTrade activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
+    private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
     private ListView friendList;
+    private ArrayList resultList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,23 +38,32 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
 
 
         });
+
+        friendList.setLongClickable(true);
+        friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                uc.makeInputStringToast(activity, "long click works");
+                removeUser(userList, position);
+                uc.saveInFile(FILENAME, activity, userList);
+                adapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        //loadFromFile();oldTweetsList.setAdapter(adapter);
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/
-        User sampleUser = new User();
-        sampleUser.setUserId("123");
-        userList.add(sampleUser);
+        resultList = uc.convertUserToString(userList, resultList);
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/
 
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, userList);
+        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -102,5 +113,8 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
         uc.classIntent(UserLogin.class, activity);
     }
 
+    public void removeUser(ArrayList<User>UserList, int position){
+        userList.remove(position);
+    }
 
 }
