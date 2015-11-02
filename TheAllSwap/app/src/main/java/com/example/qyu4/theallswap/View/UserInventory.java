@@ -67,10 +67,11 @@ public class UserInventory extends ActionBarActivity {
         // TODO Auto-generated method stub
         super.onStart();
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        User currentUser = userList.get(0);
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/
-        resultList = uc.convertUserToString(userList, resultList);
+        resultList = uc.convertItemToString(currentUser, resultList);
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/

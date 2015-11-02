@@ -158,6 +158,13 @@ public class UserController {
 
         return resultList;
     }
+    public ArrayList convertItemToString(User currentUser, ArrayList resultList){
+        for (int i=0; i< currentUser.getUserInventory().size(); i++){
+            resultList.add(currentUser.getUserInventory().get(i).getItemName());
+        }
+
+        return resultList;
+    }
 
     /**
      * make toast of all item in user list.

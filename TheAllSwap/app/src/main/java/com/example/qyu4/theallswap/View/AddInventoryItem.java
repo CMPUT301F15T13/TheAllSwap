@@ -86,6 +86,7 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
                 uc.makeInputStringToast(activity, itemQuality);
                 ic.addItemToInventory(curentUser, newItem);
                 uc.saveInFile(FILENAME, activity, userList);
+                uc.classIntent(UserInventory.class, activity);
             }
         });
 

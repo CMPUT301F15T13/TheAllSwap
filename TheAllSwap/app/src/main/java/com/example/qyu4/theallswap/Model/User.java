@@ -108,4 +108,7 @@ public class User {
         return userId + " || "+ userProfile.getUserCity()+" || "+userProfile.getUserContactInformation();
     }
 
+    public ArrayList<Item> getUserInventory() {
+        return userInventory;
+    }
 }
