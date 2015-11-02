@@ -58,7 +58,6 @@ public class UserInventory extends ActionBarActivity {
                  * notify adapter changes have been done.
                  */
                 adapter.notifyDataSetChanged();
-                //uc.classIntent(PreviousBrowsedTrade.class, activity);
                 return true;
             }
         });
@@ -84,7 +83,7 @@ public class UserInventory extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_main_viewing, menu);
+        getMenuInflater().inflate(R.menu.menu_user_inventory, menu);
         return true;
     }
 
@@ -102,7 +101,9 @@ public class UserInventory extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    public void userAddItemToInventory(MenuItem menu){
+        uc.classIntent(AddInventoryItem.class, activity);
+    }
     public void userMyInventorySelected(MenuItem menu){
         uc.classIntent(UserInventory.class, activity);
     }

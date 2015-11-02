@@ -32,5 +32,12 @@
     <string name="title_activity_user_profile">UserProfile</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_previous_browsed_trade">Previous Browsed Trade</string>
+    <string name="add_item">Add Item</string>
+    <string name="add_friend">Add a Friend</string>
+    <string name="title_activity_add_inventory_item">Add Inventory Item</string>
+    <string name="new_item_quantity">Item Quantity</string>
+    <string name="new_item_name">Item Name</string>
+    <string name="new_item_quality">Item Quality</string>
+    <string name="new_item_category">Item Category</string>
 
 </resources>

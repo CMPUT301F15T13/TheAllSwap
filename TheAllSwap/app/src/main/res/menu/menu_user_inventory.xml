@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.qyu4.theallswap.View.UserInventory">
     <item
-        android:id="@+id/action_my_inventory"
-        android:title="@string/my_inventory"
+        android:id="@+id/action_add_item"
+        android:title="@string/add_item"
         android:orderInCategory="100"
-        android:onClick="userMyInventorySelected"/>
+        android:onClick="userAddItemToInventory"/>
     <item
         android:id="@+id/action_my_trade"
         android:title="@string/my_trade"

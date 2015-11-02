@@ -56,6 +56,10 @@
             android:name=".View.PreviousBrowsedTrade"
             android:label="@string/title_activity_previous_browsed_trade" >
         </activity>
+        <activity
+            android:name=".View.AddInventoryItem"
+            android:label="@string/title_activity_add_inventory_item" >
+        </activity>
     </application>
 
 </manifest>
