@@ -12,6 +12,28 @@ public class Item {
     private boolean itemPrivacy;
     private String itemComments;
 
+    public String getItemName() {
+        return itemName;
+    }
+
+    public int getItemQuantity() {
+        return itemQuantity;
+    }
+
+    public String getItemQuality() {
+        return itemQuality;
+    }
+
+    public boolean isItemPrivacy() {
+        return itemPrivacy;
+    }
+
+    public String getItemComments() {
+        return itemComments;
+    }
+
+
+
     public Item(){}
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
@@ -49,6 +71,8 @@ public class Item {
     public void setItemComments(String itemComments) {
         this.itemComments = itemComments;
     }
-
+    public String getItemCatgory() {
+        return itemCatgory;
+    }
 
 }

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -24,6 +25,7 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private Button newItemSubmitButton;
     private InventoryController ic = new InventoryController();
     private UserController uc = new UserController();
+    private User curentUser = new User();
     private ArrayList<User>userList = new ArrayList<User>();
     private ArrayAdapter<String> adapter;
     private AddInventoryItem activity = this;
@@ -31,8 +33,16 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private RadioButton isNotPrivateButton;
     private EditText inputItemName;
     private EditText inputItemQuality;
+    private EditText inputItemQuantity;
     private EditText inputItemComment;
+    private String itemName;
+    private String itemQuality;
+    private int itemQuantity;
+    private String itemComment;
+    private String itemCategory;
+    private boolean itemPrivacy;
     private String spinerItemCategory;
+    private String checklistenerScope;
 
     private static final String[] m={"A", "B", "C", "D", "E", "F", "G", "H", "I", "j"};
     private static final String FILENAME = "userProfile.txt";
@@ -40,6 +50,10 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_inventory_item);
+        inputItemName = (EditText)findViewById(R.id.new_item_name);
+        inputItemQuality=(EditText)findViewById(R.id.new_item_quality);
+        inputItemComment=(EditText)findViewById(R.id.text_item_comment);
+        inputItemQuantity=(EditText)findViewById(R.id.new_item_quantity);
 
         /************************************************
          TODO: spinner adapter starts.
@@ -61,7 +75,20 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
          TODO: submit button starts.
          ************************************************/
         newItemSubmitButton = (Button) findViewById(R.id.b_new_item_submit);
-        newItemSubmitButton.setOnClickListener(this);
+        newItemSubmitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                itemName = inputItemName.getText().toString();
+                itemQuality=inputItemQuality.getText().toString();
+                itemQuantity=Integer.parseInt(inputItemQuantity.getText().toString());
+                itemComment=inputItemComment.getText().toString();
+                curentUser = uc.findCurrentUserObject("3", userList);
+                Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
+                uc.makeInputStringToast(activity, itemQuality);
+                ic.addItemToInventory(curentUser, newItem);
+                uc.saveInFile(FILENAME, activity, userList);
+            }
+        });
+
         /************************************************
          TODO: submit button done.
          ************************************************/
@@ -73,10 +100,19 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
         isNotPrivateButton = (RadioButton) findViewById(R.id.b_new_item_not_private);
         isPrivateButton.setOnClickListener(this);
         isNotPrivateButton.setOnClickListener(this);
-
         /************************************************
          TODO: radio button done.
-         ************************************************/
+
+        inputItemName = (EditText)findViewById(R.id.new_item_name);
+        inputItemQuality=(EditText)findViewById(R.id.new_item_quality);
+        inputItemComment=(EditText)findViewById(R.id.text_item_comment);
+        inputItemQuantity=(EditText)findViewById(R.id.new_item_quantity);
+
+        itemQuality=inputItemQuality.getText().toString();
+        itemQuantity=Integer.parseInt(inputItemQuantity.getText().toString());
+        itemComment=inputItemComment.getText().toString();
+        ************************************************/
+
     }
     @Override
     protected void onStart() {
@@ -112,8 +148,7 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                    long arg3) {
             //TODO: some stuff
-            uc.makeInputStringToast(activity, "You have chosen "+ m[arg2]);
-            spinerItemCategory = m[arg2];
+            itemCategory = m[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {
@@ -121,26 +156,21 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.b_my_inventory){
-            inputItemName = (EditText) findViewById(R.id.new_item_name);
-            inputItemQuality= (EditText) findViewById(R.id.new_item_quality);
-            inputItemComment= (EditText) findViewById(R.id.text_item_comment);
-            uc.classIntent(UserInventory.class, activity);
-        }
-        boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
+        boolean checked = ((RadioButton) view).isChecked();
+        /**
+         * Check which radio button was clicked
+         */
         switch(view.getId()) {
             case R.id.b_new_item_private:
                 if (checked)
-                    uc.makeInputStringToast(activity,"checking private");
+                    itemPrivacy = true;
                 break;
             case R.id.b_new_item_not_private:
                 if (checked)
-                    // Ninjas rule
-                    uc.makeInputStringToast(activity,"checking not private");
-
+                    itemPrivacy = false;
                 break;
+
         }
     }
 }

@@ -133,6 +133,17 @@ public class UserController {
         return false;
     }
 
+    public User findCurrentUserObject(String inputUserName, ArrayList<User> userList){
+        User currentUser = new User();
+        for(int i=0; i< userList.size(); i ++) {
+            String userName = userList.get(i).getUserId();
+            if (inputUserName.equals(userName)) {
+                currentUser = userList.get(i);
+            }
+        }
+        return currentUser;
+    }
+
     /**
      * convert the User object list to a useful information arrayList.
      * @param userList: the UserList has all User objects.

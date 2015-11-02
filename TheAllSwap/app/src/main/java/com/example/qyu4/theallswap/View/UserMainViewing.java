@@ -43,9 +43,11 @@ public class UserMainViewing extends ActionBarActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_viewing);
+
         myInventoryButton = (Button)findViewById(R.id.b_my_inventory);
         myTradeButton = (Button)findViewById(R.id.b_my_trade);
         mySearchButton = (Button)findViewById(R.id.b_search);
+
         myInventoryButton.setOnClickListener(this);
         myTradeButton.setOnClickListener(this);
         mySearchButton.setOnClickListener(this);
