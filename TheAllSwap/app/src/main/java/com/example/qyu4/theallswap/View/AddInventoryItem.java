@@ -13,6 +13,7 @@ import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
+import android.widget.RadioButton;
 import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import android.widget.Button;
@@ -26,6 +27,8 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private ArrayList<User>userList = new ArrayList<User>();
     private ArrayAdapter<String> adapter;
     private AddInventoryItem activity = this;
+    private RadioButton isPrivateButton;
+    private RadioButton isNotPrivateButton;
     private EditText inputItemName;
     private EditText inputItemQuality;
     private EditText inputItemComment;
@@ -63,6 +66,17 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
          TODO: submit button done.
          ************************************************/
 
+        /************************************************
+         TODO: radio button starts.
+         ************************************************/
+        isPrivateButton = (RadioButton) findViewById(R.id.b_new_item_private);
+        isNotPrivateButton = (RadioButton) findViewById(R.id.b_new_item_not_private);
+        isPrivateButton.setOnClickListener(this);
+        isNotPrivateButton.setOnClickListener(this);
+
+        /************************************************
+         TODO: radio button done.
+         ************************************************/
     }
     @Override
     protected void onStart() {
@@ -112,6 +126,21 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
             inputItemQuality= (EditText) findViewById(R.id.new_item_quality);
             inputItemComment= (EditText) findViewById(R.id.text_item_comment);
             uc.classIntent(UserInventory.class, activity);
+        }
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.b_new_item_private:
+                if (checked)
+                    uc.makeInputStringToast(activity,"checking private");
+                break;
+            case R.id.b_new_item_not_private:
+                if (checked)
+                    // Ninjas rule
+                    uc.makeInputStringToast(activity,"checking not private");
+
+                break;
         }
     }
 }
