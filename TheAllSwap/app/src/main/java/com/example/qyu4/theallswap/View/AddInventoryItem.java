@@ -1,22 +1,38 @@
 package com.example.qyu4.theallswap.View;
 
+import android.app.Activity;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.internal.widget.AdapterViewCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-
+import com.example.qyu4.theallswap.Controller.InventoryController;
+import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Spinner;
 import android.widget.ArrayAdapter;
+import java.util.ArrayList;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class AddInventoryItem extends ActionBarActivity {
+public class AddInventoryItem extends Activity implements View.OnClickListener {
     private Spinner spinner;
+    private Button newItemSubmitButton;
+    private InventoryController ic = new InventoryController();
+    private UserController uc = new UserController();
+    private ArrayList<User>userList = new ArrayList<User>();
     private ArrayAdapter<String> adapter;
+    private AddInventoryItem activity = this;
+    private EditText inputItemName;
+    private EditText inputItemQuality;
+    private EditText inputItemComment;
+    private String spinerItemCategory;
+
     private static final String[] m={"A", "B", "C", "D", "E", "F", "G", "H", "I", "j"};
+    private static final String FILENAME = "userProfile.txt";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,20 +42,34 @@ public class AddInventoryItem extends ActionBarActivity {
          TODO: spinner adapter starts.
          ************************************************/
         spinner = (Spinner) findViewById(R.id.new_item_category_spinner);
-        //将可选内容与ArrayAdapter连接起来
+
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
-        //将adapter 添加到spinner中
+
         spinner.setAdapter(adapter);
-        //添加事件Spinner事件监听
+
         spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
-        //设置默认值
+
         spinner.setVisibility(View.VISIBLE);
         /************************************************
-         TODO: spinner adapter starts.
+         TODO: spinner adapter done.
          ************************************************/
 
+        /************************************************
+         TODO: submit button starts.
+         ************************************************/
+        newItemSubmitButton = (Button) findViewById(R.id.b_new_item_submit);
+        newItemSubmitButton.setOnClickListener(this);
+        /************************************************
+         TODO: submit button done.
+         ************************************************/
 
+    }
+    @Override
+    protected void onStart() {
+        // TODO Auto-generated method stub
+        super.onStart();
 
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
     }
 
     @Override
@@ -68,9 +98,20 @@ public class AddInventoryItem extends ActionBarActivity {
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                    long arg3) {
             //TODO: some stuff
+            uc.makeInputStringToast(activity, "You have chosen "+ m[arg2]);
+            spinerItemCategory = m[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {
+        }
+    }
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.b_my_inventory){
+            inputItemName = (EditText) findViewById(R.id.new_item_name);
+            inputItemQuality= (EditText) findViewById(R.id.new_item_quality);
+            inputItemComment= (EditText) findViewById(R.id.text_item_comment);
+            uc.classIntent(UserInventory.class, activity);
         }
     }
 }

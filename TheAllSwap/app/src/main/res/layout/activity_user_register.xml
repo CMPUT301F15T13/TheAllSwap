@@ -14,7 +14,7 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:id="@+id/new_patient_id_label"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/new_user_name"
+    android:layout_alignLeft="@+id/new_item_name"
     android:layout_alignParentTop="true"
     android:layout_marginTop="24px"
     android:text="User Name" />
@@ -25,17 +25,17 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
         android:text="Email Adress"
-        android:layout_below="@+id/new_user_name"
+        android:layout_below="@+id/new_item_name"
         android:layout_alignParentStart="true" />
 
 <EditText
-    android:id="@+id/text_new_user_email"
+    android:id="@+id/new_item_quantity"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"
     android:layout_below="@+id/new_user_email"
     android:layout_alignParentStart="true"
-    android:layout_alignEnd="@+id/text_new_city">
+    android:layout_alignEnd="@+id/new_item_quality">
 </EditText>
 
 <TextView
@@ -43,20 +43,20 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="City"
-    android:layout_below="@+id/text_new_user_email"
+    android:layout_below="@+id/new_item_quantity"
     android:layout_alignParentStart="true" />
 
 <EditText
-    android:id="@+id/text_new_city"
+    android:id="@+id/new_item_quality"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:ems="10"
     android:layout_below="@+id/new_user_city"
     android:layout_alignParentStart="true"
-    android:layout_alignEnd="@+id/b_new_user_submit" />
+    android:layout_alignEnd="@+id/b_new_item_submit" />
 
 <Button
-    android:id="@+id/b_new_user_submit"
+    android:id="@+id/b_new_item_submit"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/submit"
@@ -67,12 +67,12 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
 
 
     <EditText
-        android:id="@+id/new_user_name"
+        android:id="@+id/new_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_patient_id_label"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/text_new_user_email" />
+        android:layout_alignEnd="@+id/new_item_quantity" />
 
 </RelativeLayout>

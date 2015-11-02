@@ -39,5 +39,9 @@
     <string name="new_item_name">Item Name</string>
     <string name="new_item_quality">Item Quality</string>
     <string name="new_item_category">Item Category</string>
+    <string name="new_item_privacy">Is current item a private item?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="new_item_comment">Item Comment:</string>
 
 </resources>

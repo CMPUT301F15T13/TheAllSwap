@@ -5,7 +5,6 @@ package com.example.qyu4.theallswap.Model;
  */
 
 public class Item {
-    private String itemId;
     private String itemName;
     private int itemQuantity;
     private String itemQuality;
@@ -13,10 +12,11 @@ public class Item {
     private boolean itemPrivacy;
     private String itemComments;
 
-    public Item(String itemId, String itemName, int itemQuantity,
+    public Item(){}
+    public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
                 String ItemComments) {
-        this.setItemId(itemId);
+
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
         this.setItemQuantity(itemQuantity);
@@ -25,9 +25,7 @@ public class Item {
         this.setItemComments(ItemComments);
     }
 
-    public void setItemId(String itemId) {
-        this.itemId = itemId;
-    }
+
 
     public void setItemName(String itemName) {
         this.itemName = itemName;

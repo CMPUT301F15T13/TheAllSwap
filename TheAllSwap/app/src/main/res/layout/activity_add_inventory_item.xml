@@ -12,7 +12,7 @@
         android:id="@+id/new_patient_id_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/new_user_name"
+        android:layout_alignLeft="@+id/new_item_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="24px"
         android:text="@string/new_item_name" />
@@ -23,17 +23,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_item_quantity"
-        android:layout_below="@+id/new_user_name"
+        android:layout_below="@+id/new_item_name"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/text_new_user_email"
+        android:id="@+id/new_item_quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_user_email"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/text_new_city">
+        android:layout_alignEnd="@+id/new_item_quality">
     </EditText>
 
     <TextView
@@ -41,38 +41,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_item_quality"
-        android:layout_below="@+id/text_new_user_email"
+        android:layout_below="@+id/new_item_quantity"
         android:layout_alignParentStart="true" />
 
     <EditText
-        android:id="@+id/text_new_city"
+        android:id="@+id/new_item_quality"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_user_city"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/b_new_user_submit" />
+        android:layout_alignEnd="@+id/b_new_item_submit" />
 
     <Button
-        android:id="@+id/b_new_user_submit"
+        android:id="@+id/b_new_item_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"
-        android:layout_below="@+id/new_item_category_spinner"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="39dp"
         android:layout_alignParentEnd="true" />
 
 
 
     <EditText
-        android:id="@+id/new_user_name"
+        android:id="@+id/new_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_patient_id_label"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/text_new_user_email" />
+        android:layout_alignEnd="@+id/new_item_quantity" />
     <Spinner
         android:id="@+id/new_item_category_spinner"
         android:layout_width="fill_parent"
@@ -88,7 +87,55 @@
         android:layout_height="wrap_content"
         android:text="@string/new_item_category"
         android:id="@+id/textView3"
-        android:layout_below="@+id/text_new_city"
+        android:layout_below="@+id/new_item_quality"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_item_privacy"
+        android:id="@+id/textView4"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true"
+        android:id="@+id/radioGroup">
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/yes"
+        android:id="@+id/b_new_item_private"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true"
+        android:checked="false" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no"
+        android:id="@+id/b_new_item_not_private"
+        android:layout_alignTop="@+id/b_new_item_private"
+        android:layout_toEndOf="@+id/b_new_item_private"
+        android:checked="false" />
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_item_comment"
+        android:id="@+id/textView5"
+        android:layout_below="@+id/radioGroup"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text_item_comment"
+        android:layout_below="@+id/textView5"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/b_new_item_submit" />
 
 </RelativeLayout>
