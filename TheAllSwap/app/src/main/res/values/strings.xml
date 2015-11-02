@@ -43,5 +43,9 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="new_item_comment">Item Comment:</string>
+    <string name="title_activity_single_friend_profile">SingleFriendProfile</string>
+    <string name="user_contact_information">User Contact Information:</string>
+    <string name="user_city">User City:</string>
+    <string name="user_inventory">User Inventory:</string>
 
 </resources>

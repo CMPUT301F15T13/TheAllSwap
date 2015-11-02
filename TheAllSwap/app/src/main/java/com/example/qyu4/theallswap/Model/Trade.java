@@ -12,6 +12,18 @@ public class Trade {
     private String borrowerId;
     private boolean ownerAcceptTrade = false;
 
+    public Trade() {
+
+    }
+
+    public Trade(boolean ownerAcceptTrade, ArrayList<Item> ownerOfferItemList, ArrayList<Item> borrowRequestList, String ownwerId, String borrowerId) {
+        this.ownerAcceptTrade = ownerAcceptTrade;
+        this.ownerOfferItemList = ownerOfferItemList;
+        this.borrowRequestList = borrowRequestList;
+        this.ownwerId = ownwerId;
+        this.borrowerId = borrowerId;
+    }
+
     /**
      * ownerAnswer is for determine if the request is accepted or declined.
      *  1. If 'owner' accept the trade, requestAccepted() is called for swap items.

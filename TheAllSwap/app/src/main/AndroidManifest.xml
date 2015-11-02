@@ -60,6 +60,10 @@
             android:name=".View.AddInventoryItem"
             android:label="@string/title_activity_add_inventory_item" >
         </activity>
+        <activity
+            android:name=".View.SingleFriendProfile"
+            android:label="@string/title_activity_single_friend_profile" >
+        </activity>
     </application>
 
 </manifest>
