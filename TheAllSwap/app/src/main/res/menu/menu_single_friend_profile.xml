@@ -2,6 +2,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.qyu4.theallswap.View.SingleFriendProfile">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item
+        android:id="@+id/action_my_inventory"
+        android:title="@string/my_inventory"
+        android:orderInCategory="100"
+        android:onClick="userMyInventorySelected"/>
+    <item
+        android:id="@+id/action_my_trade"
+        android:title="@string/my_trade"
+        android:orderInCategory="100"
+        android:onClick="userMyTradeSelected"/>
+    <item
+        android:id="@+id/action_my_friends"
+        android:title="@string/my_friends"
+        android:orderInCategory="100"
+        android:onClick="userMyFriendsSelected"/>
+    <item
+        android:id="@+id/action_my_Profile"
+        android:title="@string/my_profile"
+        android:orderInCategory="100"
+        android:onClick="userMyProfileSelected"/>
+    <item
+        android:id="@+id/action_search"
+        android:title="@string/search"
+        android:orderInCategory="100"
+        android:onClick="userSearchSelected"/>
+    <item
+        android:id="@+id/action_previous_browse"
+        android:title="@string/previous_browse"
+        android:orderInCategory="100"
+        android:onClick="userPreviousBrowseSelected"/>
+    <item
+        android:id="@+id/action_no_function"
+        android:title="@string/dash_line"
+        android:orderInCategory="100"
+        />
+    <item
+        android:id="@+id/action_logout"
+        android:title="@string/logout"
+        android:orderInCategory="100"
+        android:onClick="userLogoutSelected"/>
 </menu>

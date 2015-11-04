@@ -45,9 +45,10 @@ public class SingleFriendProfile extends ActionBarActivity {
         itemList = (ListView)findViewById(R.id.single_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: some stuff
-                uc.makeInputStringToast(activity, "You click on the TREASURE!!");
-                //comments for git crash......damn....
+                //TODO: After I fix this part click on the item current user can start a trade...
+                uc.makeInputStringToast(activity, "You click on the TREASURE!! After I fix this part click on the " +
+                        "item current user can start a trade...");
+
             }
 
 
@@ -109,5 +110,28 @@ public class SingleFriendProfile extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void userMyInventorySelected(MenuItem menu){
+        uc.classIntent(UserInventory.class, activity);
+    }
+    public void userMyTradeSelected(MenuItem menu){
+
+        uc.classIntent(UserTrade.class, activity);
+    }
+    public void userMyFriendsSelected(MenuItem menu){
+        uc.classIntent(UserFriends.class, activity);
+    }
+    public void userMyProfileSelected(MenuItem menu){
+        uc.classIntent(UserProfile.class, activity);
+    }
+    public void userSearchSelected(MenuItem menu){
+        uc.classIntent(Search.class, activity);
+    }
+    public void userPreviousBrowseSelected(MenuItem menu){
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
+    }
+    public void userLogoutSelected(MenuItem menu){
+        uc.classIntent(UserLogin.class, activity);
     }
 }
