@@ -23,14 +23,14 @@ public class UserInventory extends ActionBarActivity {
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
-    private ListView friendList;
+    private ListView itemList;
     private ArrayList resultList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_inventory);
-        friendList = (ListView)findViewById(R.id.lv_user_inventory);
-        friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemList = (ListView)findViewById(R.id.lv_user_inventory);
+        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: some stuff
                 uc.makeInvalidUserToast(activity);
@@ -39,8 +39,8 @@ public class UserInventory extends ActionBarActivity {
 
 
         });
-        friendList.setLongClickable(true);
-        friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        itemList.setLongClickable(true);
+        itemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 /**
                  * call removeUser from controller to delete an user from the userList.
@@ -77,7 +77,7 @@ public class UserInventory extends ActionBarActivity {
          *************************************************/
 
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
-        friendList.setAdapter(adapter);
+        itemList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 

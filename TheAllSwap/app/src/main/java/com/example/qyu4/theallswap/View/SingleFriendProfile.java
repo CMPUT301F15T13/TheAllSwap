@@ -6,6 +6,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
@@ -21,6 +24,7 @@ public class SingleFriendProfile extends ActionBarActivity {
     private UserController uc= new UserController();
     private static final String FILENAME = "userProfile.txt";
     private ArrayList<User> userList =new ArrayList<User>();
+    private User singleUser = new User();
 
     private TextView userName;
     private TextView userEmail;
@@ -30,11 +34,24 @@ public class SingleFriendProfile extends ActionBarActivity {
     private String tvUserEmail;
     private String tvUserCity;
 
+    private ArrayList itemArray = new ArrayList();
+    private ArrayAdapter<User> adapter;
+    private ListView itemList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_friend_profile);
+        itemList = (ListView)findViewById(R.id.single_inventory);
+        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO: some stuff
+                uc.makeInputStringToast(activity, "You click on the TREASURE!!");
+                //comments for git crash......damn....
+            }
 
+
+        });
     }
 
     @Override
@@ -43,17 +60,32 @@ public class SingleFriendProfile extends ActionBarActivity {
         super.onStart();
 
         Intent intent = getIntent();
+        /**
+         * getting user id from UserFriends Activity
+         */
         String id = intent.getStringExtra("id");
 
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
         int userId =uc.stringToInt(id);
-        User singleUser = userList.get(userId);
+        singleUser = userList.get(userId);
         userName = (TextView) findViewById(R.id.single_user_name);
         userEmail = (TextView) findViewById(R.id.single_user_email);
         userCity = (TextView) findViewById(R.id.single_user_city);
         userName.setText(singleUser.getUserId());
         userEmail.setText(singleUser.getUserProfile().getUserContactInformation());
         userCity.setText(singleUser.getUserProfile().getUserCity());
+
+        /***************************************************
+         TODO: add loading item list method.
+         *************************************************/
+        itemArray = uc.convertItemToString(singleUser, itemArray);
+        /***************************************************
+         TODO: add loading item list method.
+         *************************************************/
+
+        adapter = new ArrayAdapter<User>(this, R.layout.list_item, itemArray);
+        itemList.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
 
     }
 
