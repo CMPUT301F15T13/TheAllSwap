@@ -90,7 +90,12 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
                 currentUser = uc.findCurrentUserObject("3", userList);
                 currentUserId = userList.indexOf(currentUser);
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
-                userList.get(currentUserId).getUserInventory().set(itemId, newItem);
+                /************************************************
+                 TODO: to edit current item and save it in the local user list for saving
+                 TODO: later.
+                 ************************************************/
+                userList = ic.editItem(userList, currentUserId, itemId, newItem);
+
 
                 uc.makeInputStringToast(activity, itemQuality);
 

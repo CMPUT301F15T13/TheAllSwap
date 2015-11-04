@@ -1,7 +1,12 @@
 package com.example.qyu4.theallswap.Controller;
 
+import android.content.Context;
+import android.content.Intent;
+
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
+
+import java.util.ArrayList;
 
 /**
  * Created by qyu4 on 11/1/15.
@@ -21,6 +26,10 @@ public class InventoryController {
         newItem.setItemPrivacy(itemPrivacy);
         newItem.setItemComments(itemComment);
         return newItem;
+    }
+    public ArrayList<User> editItem(ArrayList<User> userList, int currentUserId, int itemId, Item newItem){
+        userList.get(currentUserId).getUserInventory().set(itemId, newItem);
+        return userList;
     }
 
 }

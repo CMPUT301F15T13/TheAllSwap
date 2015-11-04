@@ -54,6 +54,12 @@ public class UserController {
     public void makeInvalidUserToast(Context context){
         Toast.makeText(context, "invalid user name!", Toast.LENGTH_LONG).show();
     }
+
+    /**
+     * make toast that is based on user input string.(this is for testing values in program...)
+     * @param context: current activity. (eg. UserFriends.class)
+     * @param inputString: String that is want to be shown at certain point.
+     */
     public void makeInputStringToast(Context context, String inputString){
         Toast.makeText(context, inputString, Toast.LENGTH_LONG).show();
     }
@@ -134,6 +140,12 @@ public class UserController {
         return false;
     }
 
+    /**
+     *
+     * @param inputUserName
+     * @param userList
+     * @return
+     */
     public User findCurrentUserObject(String inputUserName, ArrayList<User> userList){
         User currentUser = new User();
         for(int i=0; i< userList.size(); i ++) {
@@ -144,6 +156,13 @@ public class UserController {
         }
         return currentUser;
     }
+
+    /**
+     *
+     * @param inputUserName
+     * @param userList
+     * @return
+     */
     public int findCurrentUserIndex(String inputUserName, ArrayList<User> userList){
         User currentUser = new User();
         int currentIndex = -1;
@@ -171,7 +190,12 @@ public class UserController {
         return resultList;
     }
 
-
+    /**
+     *
+     * @param currentUser
+     * @param resultList
+     * @return
+     */
     public ArrayList convertItemToString(User currentUser, ArrayList resultList){
         for (int i=0; i< currentUser.getUserInventory().size(); i++){
             resultList.add(currentUser.getUserInventory().get(i).getItemName());
