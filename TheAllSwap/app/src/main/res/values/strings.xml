@@ -47,5 +47,6 @@
     <string name="user_contact_information">User Contact Information:</string>
     <string name="user_city">User City:</string>
     <string name="user_inventory">User Inventory:</string>
+    <string name="title_activity_testing">TestingActivity</string>
 
 </resources>

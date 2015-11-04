@@ -33,7 +33,12 @@ public class UserFriends extends ActionBarActivity {
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: some stuff
-                uc.makeInvalidUserToast(activity);
+
+                Intent i=new Intent(activity,SingleFriendProfile.class);
+                i.putExtra("id", String.valueOf(position));
+
+                uc.passingValueBetweentActivity(SingleFriendProfile.class, activity,position);
+
             }
 
 

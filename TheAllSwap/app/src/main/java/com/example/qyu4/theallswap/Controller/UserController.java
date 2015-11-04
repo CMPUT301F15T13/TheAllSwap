@@ -4,6 +4,7 @@ package com.example.qyu4.theallswap.Controller;
 import android.content.Context;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 import java.lang.reflect.Type;
@@ -198,4 +199,20 @@ public class UserController {
         itemList.remove(position);
         return itemList;
     }
+
+    public void passingValueBetweentActivity(Class newClass, Context context, int userPosition){
+        Intent openNewActivity = new Intent(context, newClass);
+        openNewActivity.putExtra("id", String.valueOf(userPosition));
+
+        context.startActivity(openNewActivity);
+    }
+    public void gettingIndexFromIntent(Context context){
+
+        //String id = intent.getStringExtra("id");
+    }
+    public int stringToInt(String inputString){
+        int foo = Integer.parseInt(inputString);
+        return foo;
+    }
+
 }
