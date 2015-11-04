@@ -16,7 +16,11 @@ import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-
+/**
+ * UserInventory class is an activity that showing all inventory items of current user.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class UserInventory extends ActionBarActivity {
     private UserInventory activity = this;
     private UserController uc = new UserController();

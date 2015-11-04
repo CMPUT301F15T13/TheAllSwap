@@ -16,7 +16,11 @@ import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-
+/**
+ * UserFriends class is an activity that showing all the current user's friends.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class UserFriends extends ActionBarActivity {
     private UserFriends activity = this;
     private UserController uc = new UserController();

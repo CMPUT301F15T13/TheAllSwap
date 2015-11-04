@@ -18,7 +18,11 @@ import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import android.widget.Button;
 import android.widget.EditText;
-
+/**
+ * AddInventoryItem class is an activity that add an item to owner's inventory.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class AddInventoryItem extends Activity implements View.OnClickListener {
     private Spinner spinner;
     private Button newItemSubmitButton;

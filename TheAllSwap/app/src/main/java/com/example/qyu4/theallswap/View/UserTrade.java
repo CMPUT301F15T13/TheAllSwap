@@ -16,7 +16,11 @@ import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-
+/**
+ * UserTrade class is an activity that showing all trade request to the current user.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class UserTrade extends ActionBarActivity {
     private UserTrade activity = this;
     private UserController uc = new UserController();

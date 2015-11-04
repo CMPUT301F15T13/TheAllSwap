@@ -16,7 +16,11 @@ import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-
+/**
+ * PreviousBrowsedTrade class is an activity that current user can browse his/her trade history.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class PreviousBrowsedTrade extends ActionBarActivity {
     private PreviousBrowsedTrade activity = this;
     private UserController uc = new UserController();

@@ -16,7 +16,11 @@ import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-
+/**
+ * Search class is an activity that current user can search for a certain Friend.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class Search extends ActionBarActivity {
     private Search activity =this;
     private UserController uc = new UserController();

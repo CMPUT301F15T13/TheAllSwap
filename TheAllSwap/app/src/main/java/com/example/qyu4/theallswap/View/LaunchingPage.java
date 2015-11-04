@@ -12,7 +12,11 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.example.qyu4.theallswap.R;
-
+/**
+ * LaunchingPage activity is designed for giving some basic user manual to current user.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class LaunchingPage extends Activity implements OnClickListener {
     private LaunchingPage activity = this;
     private Button buttonToLoginPage;

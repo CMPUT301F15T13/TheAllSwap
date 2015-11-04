@@ -22,6 +22,11 @@ import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
 
+/**
+ * EditSingleItem class is an activity that edit owner's single item.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class EditSingleItem extends ActionBarActivity implements View.OnClickListener{
     private UserController uc = new UserController();
     private InventoryController ic = new InventoryController();

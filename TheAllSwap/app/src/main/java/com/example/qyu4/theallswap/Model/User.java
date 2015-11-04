@@ -103,6 +103,10 @@ public class User {
         return item;
     }
 
+    /**
+     * restructure the layout string in the friend list view.
+     * @return  output a string that contains current user's name, city and email.
+     */
     @Override
     public String toString(){
         return userId + " || "+ userProfile.getUserCity()+" || "+userProfile.getUserContactInformation();

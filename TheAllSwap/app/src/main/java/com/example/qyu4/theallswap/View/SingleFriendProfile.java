@@ -17,7 +17,11 @@ import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
-
+/**
+ * SingleFriendProfile class is an activity that current user can check one of his friend's profile.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class SingleFriendProfile extends ActionBarActivity {
 
     private SingleFriendProfile activity = this;

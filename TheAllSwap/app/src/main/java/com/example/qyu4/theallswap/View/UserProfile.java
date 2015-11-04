@@ -16,7 +16,11 @@ import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-
+/**
+ * UserProfile class is an activity that showing current user's profile.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class UserProfile extends ActionBarActivity {
     private UserProfile activity =this;
     private UserController uc = new UserController();

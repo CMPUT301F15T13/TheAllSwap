@@ -14,7 +14,11 @@ import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
-
+/**
+ * userLogin class is an activity that current user login page with his/her user name.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class UserLogin extends Activity implements View.OnClickListener{
     private UserLogin activity = this;
     private Button userLogin;

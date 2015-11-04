@@ -1,7 +1,9 @@
 package com.example.qyu4.theallswap.Model;
 
 /**
- * Created by qyu4 on 10/20/15.
+ * Profile class is an Model that handles all Profile structure.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
  */
 public class Profile {
     private String userContactInformation;

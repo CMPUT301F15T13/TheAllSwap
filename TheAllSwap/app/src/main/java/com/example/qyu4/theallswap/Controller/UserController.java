@@ -91,7 +91,7 @@ public class UserController {
 
     /**
      * Intent method between activities.
-     * s
+     *
      * @param newClass: the target activity.
      * @param context: the convenience of Intent.
      */
@@ -101,9 +101,9 @@ public class UserController {
     }
 
     /**
-     * Fixing needed
-     * @param context
-     * @param fileName
+     * loading the file that is given and return a user array list.
+     * @param context: current activity.
+     * @param fileName: file name.
      */
     public ArrayList<User> loadUserFromFile(Context context, String fileName, ArrayList<User> userList) {
         try {
@@ -141,10 +141,10 @@ public class UserController {
     }
 
     /**
-     *
-     * @param inputUserName
-     * @param userList
-     * @return
+     * given a user name and the user list find the user object.
+     * @param inputUserName: user name.
+     * @param userList: user array list.
+     * @return: the user object.
      */
     public User findCurrentUserObject(String inputUserName, ArrayList<User> userList){
         User currentUser = new User();
@@ -158,10 +158,10 @@ public class UserController {
     }
 
     /**
-     *
-     * @param inputUserName
-     * @param userList
-     * @return
+     * find the index of given user.
+     * @param inputUserName: user name.
+     * @param userList: user array list.
+     * @return: the index of the user that is found.
      */
     public int findCurrentUserIndex(String inputUserName, ArrayList<User> userList){
         User currentUser = new User();
@@ -191,10 +191,10 @@ public class UserController {
     }
 
     /**
-     *
-     * @param currentUser
-     * @param resultList
-     * @return
+     * add a list of item name into the array list.
+     * @param currentUser: current user object.
+     * @param resultList: an array of item names.
+     * @return: an array of item names.
      */
     public ArrayList convertItemToString(User currentUser, ArrayList resultList){
         for (int i=0; i< currentUser.getUserInventory().size(); i++){
@@ -237,6 +237,12 @@ public class UserController {
         return itemList;
     }
 
+    /**
+     * passing values between activities.
+     * @param newClass: the intended activity.
+     * @param context: current activity.
+     * @param userPosition: index of current object.
+     */
     public void passingValueBetweentActivity(Class newClass, Context context, int userPosition){
         Intent openNewActivity = new Intent(context, newClass);
         openNewActivity.putExtra("id", String.valueOf(userPosition));
@@ -252,6 +258,12 @@ public class UserController {
 
         //String id = intent.getStringExtra("id");
     }
+
+    /**
+     * convert a string value to int.
+     * @param inputString: input string.
+     * @return: a integer value of string point to.
+     */
     public int stringToInt(String inputString){
         int foo = Integer.parseInt(inputString);
         return foo;

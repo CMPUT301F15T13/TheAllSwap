@@ -27,7 +27,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
+/**
+ * UserMainViewing class is an activity that Navigates current user's requirement.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 public class UserMainViewing extends ActionBarActivity implements View.OnClickListener{
     private UserMainViewing activity = this;
     private UserController uc = new UserController();

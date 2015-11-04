@@ -9,13 +9,30 @@ import com.example.qyu4.theallswap.Model.User;
 import java.util.ArrayList;
 
 /**
- * Created by qyu4 on 11/1/15.
+ * InventoryController class is an Controller that handling all method that dealing with Item model class.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
  */
 public class InventoryController {
-
+    /**
+     * add an item to current user's inventory list.
+     * @param currentUser: current user name.(it's User object here).
+     * @param item: the item current user want to add to the inventory(this method could be used in the trade success part).
+     */
     public void addItemToInventory(User currentUser, Item item){
         currentUser.addItemToInventory(item);
     }
+
+    /**
+     * create a new item
+     * @param itemName: item name
+     * @param itemQuantity: item quantity
+     * @param itemQuality: item quality
+     * @param itemCategory: item category
+     * @param itemPrivacy: item privacy
+     * @param itemComment: item comments
+     * @return a new Item
+     */
     public Item createNewItem(String itemName, int itemQuantity, String itemQuality, String itemCategory,
                               boolean itemPrivacy, String itemComment){
         Item newItem = new Item();
@@ -27,6 +44,15 @@ public class InventoryController {
         newItem.setItemComments(itemComment);
         return newItem;
     }
+
+    /**
+     * edit an item and save it in the current local userList.
+     * @param userList: current User List
+     * @param currentUserId: current User id
+     * @param itemId: the index of current item
+     * @param newItem: the item that will replace the old one
+     * @return a new user list for the future save to the server
+     */
     public ArrayList<User> editItem(ArrayList<User> userList, int currentUserId, int itemId, Item newItem){
         userList.get(currentUserId).getUserInventory().set(itemId, newItem);
         return userList;

@@ -3,7 +3,9 @@ package com.example.qyu4.theallswap.Model;
 import java.util.ArrayList;
 
 /**
- * Created by qyu4 on 10/20/15.
+ * Trade class is an Model that handles all Trade structure.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
  */
 public class Trade {
     private ArrayList<Item> ownerOfferItemList = new ArrayList<Item>();
