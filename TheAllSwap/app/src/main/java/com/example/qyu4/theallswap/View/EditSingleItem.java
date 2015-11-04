@@ -139,7 +139,7 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
         oldItemName.setText("(old item name: "+currentItem.getItemName()+")");
         oldItemQuality.setText("(old item quality: "+currentItem.getItemQuality()+")");
         oldItemCategory.setText("(old item category: "+currentItem.getItemCatgory()+")");
-        oldItemQuantity.setText("(old item name: " + String.valueOf(currentItem.getItemQuantity())+")");
+        oldItemQuantity.setText("(old item quantity: " + String.valueOf(currentItem.getItemQuantity())+")");
 
     }
     @Override
