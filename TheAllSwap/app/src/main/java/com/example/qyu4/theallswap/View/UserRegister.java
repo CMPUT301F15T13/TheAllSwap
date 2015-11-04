@@ -37,7 +37,7 @@ public class UserRegister extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_register);
 
-        userRegister =(Button) findViewById(R.id.b_new_item_submit);
+        userRegister =(Button) findViewById(R.id.b_edit_item_submit);
         userRegister.setOnClickListener(this);
     }
     @Override
@@ -56,7 +56,7 @@ public class UserRegister extends Activity implements View.OnClickListener{
     }
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.b_new_item_submit){
+        if(view.getId()==R.id.b_edit_item_submit){
 
             inputEmail=(EditText)findViewById(R.id.new_item_quantity);
             inputCity =(EditText)findViewById(R.id.new_item_quality);

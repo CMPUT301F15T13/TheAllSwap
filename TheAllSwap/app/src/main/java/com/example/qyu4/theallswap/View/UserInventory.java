@@ -32,9 +32,9 @@ public class UserInventory extends ActionBarActivity {
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: some stuff
-                uc.makeInvalidUserToast(activity);
-                //comments for git crash......damn....
+                Intent i=new Intent(activity,EditSingleItem.class);
+                i.putExtra("id", String.valueOf(position));
+                uc.passingValueBetweentActivity(EditSingleItem.class, activity, position);
             }
 
 

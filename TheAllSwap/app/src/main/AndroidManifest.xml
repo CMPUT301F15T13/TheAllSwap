@@ -64,6 +64,10 @@
             android:name=".View.SingleFriendProfile"
             android:label="@string/title_activity_single_friend_profile" >
         </activity>
+        <activity
+            android:name=".View.EditSingleItem"
+            android:label="@string/title_activity_edit_single_item" >
+        </activity>
     </application>
 
 </manifest>

@@ -208,6 +208,11 @@ public class UserController {
 
         context.startActivity(openNewActivity);
     }
+    public void passingCurrentUserNameBetweenActivity(Class newClass, Context context, String currentUserName){
+        Intent openNewActivity = new Intent(context, newClass);
+        openNewActivity.putExtra("current user", currentUserName);
+        context.startActivity(openNewActivity);
+    }
     public void gettingIndexFromIntent(Context context){
 
         //String id = intent.getStringExtra("id");

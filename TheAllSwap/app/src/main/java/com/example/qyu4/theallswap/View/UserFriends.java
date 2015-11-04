@@ -36,7 +36,6 @@ public class UserFriends extends ActionBarActivity {
 
                 Intent i=new Intent(activity,SingleFriendProfile.class);
                 i.putExtra("id", String.valueOf(position));
-
                 uc.passingValueBetweentActivity(SingleFriendProfile.class, activity,position);
 
             }

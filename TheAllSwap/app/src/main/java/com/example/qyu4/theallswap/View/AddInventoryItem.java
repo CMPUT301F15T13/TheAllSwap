@@ -1,7 +1,6 @@
 package com.example.qyu4.theallswap.View;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -74,7 +73,7 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
         /************************************************
          TODO: submit button starts.
          ************************************************/
-        newItemSubmitButton = (Button) findViewById(R.id.b_new_item_submit);
+        newItemSubmitButton = (Button) findViewById(R.id.b_edit_item_submit);
         newItemSubmitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 itemName = inputItemName.getText().toString();
