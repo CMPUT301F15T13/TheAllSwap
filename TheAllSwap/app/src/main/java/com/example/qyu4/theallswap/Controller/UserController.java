@@ -144,6 +144,17 @@ public class UserController {
         }
         return currentUser;
     }
+    public int findCurrentUserIndex(String inputUserName, ArrayList<User> userList){
+        User currentUser = new User();
+        int currentIndex = -1;
+        for(int i=0; i< userList.size(); i ++) {
+            String userName = userList.get(i).getUserId();
+            if (inputUserName.equals(userName)) {
+                currentIndex = i;
+            }
+        }
+        return currentIndex;
+    }
 
     /**
      * convert the User object list to a useful information arrayList.

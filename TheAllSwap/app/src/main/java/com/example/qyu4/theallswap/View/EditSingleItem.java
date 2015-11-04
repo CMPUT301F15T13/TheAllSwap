@@ -13,6 +13,8 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Button;
+
+import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
@@ -22,6 +24,7 @@ import java.util.ArrayList;
 
 public class EditSingleItem extends ActionBarActivity implements View.OnClickListener{
     private UserController uc = new UserController();
+    private InventoryController ic = new InventoryController();
     private EditSingleItem activity = this;
     private ArrayList<User> userList = new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
@@ -38,6 +41,9 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
     private String itemQuality;
     private String itemComment;
     private boolean itemPrivacy;
+    private int itemId;
+    private int currentUserId;
+
 
     private EditText newItemName;
     private EditText newItemQuantity;
@@ -78,14 +84,19 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
 
                 uc.makeInputStringToast(activity, itemComment);
 
-                /**
-                curentUser = uc.findCurrentUserObject("3", userList);
+                /************************************************
+                 TODO: find a way store current user id...
+                 ************************************************/
+                currentUser = uc.findCurrentUserObject("3", userList);
+                currentUserId = userList.indexOf(currentUser);
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
+                userList.get(currentUserId).getUserInventory().set(itemId, newItem);
+
                 uc.makeInputStringToast(activity, itemQuality);
-                ic.addItemToInventory(curentUser, newItem);
+
                 uc.saveInFile(FILENAME, activity, userList);
                 uc.classIntent(UserInventory.class, activity);
-                 **/
+
             }
         });
         /************************************************
@@ -123,7 +134,7 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
          */
 
         String id = intent.getStringExtra("id");
-        int itemId =uc.stringToInt(id);
+        itemId =uc.stringToInt(id);
         currentItem = currentUser.getUserInventory().get(itemId);
         oldItemName.setText("(old item name: "+currentItem.getItemName()+")");
         oldItemQuality.setText("(old item quality: "+currentItem.getItemQuality()+")");
