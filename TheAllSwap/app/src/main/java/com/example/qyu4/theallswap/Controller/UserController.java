@@ -254,10 +254,7 @@ public class UserController {
         openNewActivity.putExtra("current user", currentUserName);
         context.startActivity(openNewActivity);
     }
-    public void gettingIndexFromIntent(Context context){
 
-        //String id = intent.getStringExtra("id");
-    }
 
     /**
      * convert a string value to int.

@@ -14,6 +14,12 @@ public class Item {
     private boolean itemPrivacy;
     private String itemComments;
 
+    public void setItemImgId(Integer[] itemImgId) {
+        this.itemImgId = itemImgId;
+    }
+
+    private Integer[] itemImgId={};
+
     public String getItemName() {
         return itemName;
     }
@@ -39,7 +45,7 @@ public class Item {
     public Item(){}
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
-                String ItemComments) {
+                String ItemComments, Integer[] itemImgId) {
 
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
@@ -47,6 +53,7 @@ public class Item {
         this.setItemCategory(itemCategory);
         this.setItemPrivacy(itemPrivacy);
         this.setItemComments(ItemComments);
+        this.setItemImgId(itemImgId);
     }
 
 
