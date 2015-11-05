@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-public class TestInventory {
+public class InventoryTest {
 
 	@Test
 	public void testAddItem(){
