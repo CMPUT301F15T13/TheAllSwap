@@ -68,6 +68,10 @@
             android:name=".View.EditSingleItem"
             android:label="@string/title_activity_edit_single_item" >
         </activity>
+        <activity
+            android:name=".View.CreateTrade"
+            android:label="@string/title_activity_create_trade" >
+        </activity>
     </application>
 
 </manifest>

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class Trade {
     private ArrayList<Item> ownerOfferItemList = new ArrayList<Item>();
     private ArrayList<Item> borrowRequestList = new ArrayList<Item>();
-    private String ownwerId;
+    private String ownerId;
     private String borrowerId;
     private boolean ownerAcceptTrade = false;
 
@@ -18,11 +18,11 @@ public class Trade {
 
     }
 
-    public Trade(boolean ownerAcceptTrade, ArrayList<Item> ownerOfferItemList, ArrayList<Item> borrowRequestList, String ownwerId, String borrowerId) {
+    public Trade(boolean ownerAcceptTrade, ArrayList<Item> ownerOfferItemList, ArrayList<Item> borrowRequestList, String ownerId, String borrowerId) {
         this.ownerAcceptTrade = ownerAcceptTrade;
         this.ownerOfferItemList = ownerOfferItemList;
         this.borrowRequestList = borrowRequestList;
-        this.ownwerId = ownwerId;
+        this.ownerId = ownerId;
         this.borrowerId = borrowerId;
     }
 
@@ -35,7 +35,7 @@ public class Trade {
      */
     private void ownerAnswer (String ownerId, boolean acceptOrDecline){
         if (acceptOrDecline){
-            requestAccepted(ownerOfferItemList, ownwerId,
+            requestAccepted(ownerOfferItemList, ownerId,
                             borrowRequestList,  borrowerId);
         }else {
             requestDeclined();
