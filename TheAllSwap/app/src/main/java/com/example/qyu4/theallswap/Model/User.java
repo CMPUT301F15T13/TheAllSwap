@@ -8,10 +8,6 @@ import java.util.ArrayList;
  * Created by qyu4 on 10/20/15.
  */
 public class User {
-
-
-
-
     private String userId;
 
     private ArrayList<Item> userInventory= new ArrayList<Item>();
@@ -29,8 +25,16 @@ public class User {
 
     private Profile userProfile;
 
-    public User() {
+    public User(){}
+
+    public User(String userId) {
         this.setUserId(userId);
+        this.userInventory = new ArrayList<Item>();
+        this.userFriendList = new ArrayList<User>();
+        this.userRequestTradeList = new ArrayList<Trade>();
+        this.userOfferTradeList = new ArrayList<Trade>();
+        this.userProfile.setUserCity(null);
+        this.userProfile.setUserContactInformation(null);
     }
 
     public User(String userId, String userEmail, String userCity) {
@@ -59,7 +63,16 @@ public class User {
 
     }
 
-
+    /**
+     * Checks if friend has been added previously to friend list
+     * @param friend: friend to check if in list
+     */
+    public boolean isFriend(User friend) {
+        if(userFriendList.contains(friend)){
+            return true;
+        }
+        return false;
+    }
 
     /**
      * add new Friend to friend list.

@@ -17,7 +17,7 @@ public class UserOfflineTradingTest extends ActivityInstrumentationTestCase2 {
         //TODO: creating item offline;
         Trade tradeOffline = new Trade("offline Trade", "offer item description");
         itemList.add(tradeOffline);
-        assertEqual("offline Trade", String.vavlueOf(tradeList.getItemIndex(0)))
+        assertEqual("offline Trade", String.vavlueOf(tradeList.getItemIndex(0)));
         //TODO: get result while online
         //TODO: check if new result and item created when offline is equal.
         assertEqual("offline Trade", trade.getName(0));
@@ -51,7 +51,7 @@ public class UserOfflineTradingTest extends ActivityInstrumentationTestCase2 {
     }
     public boolean testIsOffline(){
         boolean cantConnect = NetworkConnector.tryConnect(); 
-        return not canConnect;
+        return !canConnect;
     }
     public boolean testIsOnline(){
         boolean canConnect = NetworkConnector.tryConnect(); 

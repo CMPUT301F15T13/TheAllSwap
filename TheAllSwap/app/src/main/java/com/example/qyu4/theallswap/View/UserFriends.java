@@ -22,6 +22,7 @@ import java.util.ArrayList;
  *
  */
 public class UserFriends extends ActionBarActivity {
+    private User currentUser;
     private UserFriends activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
@@ -33,6 +34,13 @@ public class UserFriends extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
+
+        //Track currently logged in user
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        Intent intent = getIntent();
+        String current = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(current, userList);
+
         friendList = (ListView)findViewById(R.id.lv_user_friends);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -40,12 +48,13 @@ public class UserFriends extends ActionBarActivity {
 
                 Intent i=new Intent(activity,SingleFriendProfile.class);
                 i.putExtra("id", String.valueOf(position));
-                uc.passingValueBetweentActivity(SingleFriendProfile.class, activity,position);
-
+                i.putExtra("myID", currentUser.getUserId());
+                activity.startActivity(i);
             }
 
 
         });
+
         friendList.setLongClickable(true);
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
@@ -60,7 +69,7 @@ public class UserFriends extends ActionBarActivity {
                 /**
                  * call remove item of the result list.
                  */
-                userList = uc.removeItem(resultList, position);
+                userList = uc.removeItem(userList, position);
                 /**
                  * notify adapter changes have been done.
                  */

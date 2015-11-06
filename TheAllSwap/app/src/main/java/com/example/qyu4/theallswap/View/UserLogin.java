@@ -60,11 +60,11 @@ public class UserLogin extends Activity implements View.OnClickListener{
             userName = (EditText) findViewById(R.id.user_name);
             String currentUserName = userName.getText().toString();
 
-
             //TODO: load file and save objects in arrayList.
             if(uc.checkingUserExist(currentUserName, userList)){
-
-                uc.classIntent(UserMainViewing.class, activity);
+                Intent nextScreen = new Intent(activity, UserMainViewing.class);
+                nextScreen.putExtra("myID", currentUserName);
+                activity.startActivity(nextScreen);
             }else{
                 uc.makeInvalidUserToast(activity);
             }

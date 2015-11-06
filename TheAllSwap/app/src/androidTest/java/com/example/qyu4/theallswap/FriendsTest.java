@@ -2,6 +2,8 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.Model.User;
+
 /**
  * Created by ozero. Test file is skeletal.
  */
@@ -12,18 +14,23 @@ public class FriendsTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testAddFriend() {
-        assertFalse(testFriendExists());
-        // TODO Add friend
-        assertTrue(testFriendExists());
+        User me = new User();
+        User friend = new User();
+        assertFalse(me.isFriend(friend));
+        me.addFriend(friend);
+        assertTrue(me.isFriend(friend));
     }
 
     public void testRemoveFriend() {
-        assertTrue(testFriendExists());
-        // TODO Remove friend
-        assertFalse(testFriendExists());
+        User me = new User();
+        User friend = new User();
+        me.addFriend(friend);
+        assertTrue(me.isFriend(friend));
+        me.removeFriend(friend);
+        assertFalse(me.isFriend(friend));
     }
 
-    public boolean testFriendExists() {
-        return true;
-    }
+    //public void testFriendExists() {
+    //    assertTrue(friend);
+    //}
 }

@@ -20,7 +20,7 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
         //TODO: creating item offline;
         Item itemOffline = new Item("offline item", "category", "offline item description");
         itemList.add(itemOffline);
-        assertEqual("offline item", String.vavlueOf(itemList.getItemIndex(0)))
+        assertEqual("offline item", String.vavlueOf(itemList.getItemIndex(0)));
         //TODO: get result while online
         //TODO: check if new result and item created when offline is equal.
         assertEqual("offline item", item.getName(0));
@@ -54,7 +54,7 @@ public class OfflineUserActivityTest extends ActivityInstrumentationTestCase2 {
     }
     public boolean testIsOffline(){
         boolean cantConnect = NetworkConnector.tryConnect(); 
-        return not canConnect;
+        return !canConnect;
     }
     public boolean testIsOnline(){
         boolean canConnect = NetworkConnector.tryConnect(); 
