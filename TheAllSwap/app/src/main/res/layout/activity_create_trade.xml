@@ -47,7 +47,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_weight="7"
             android:clickable="true"
-            android:choiceMode="singleChoice" />
+            android:choiceMode="singleChoice"
+            android:drawSelectorOnTop="false" />
 
         <Button
             android:layout_width="match_parent"
