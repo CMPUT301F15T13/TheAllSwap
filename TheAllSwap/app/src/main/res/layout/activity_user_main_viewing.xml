@@ -12,9 +12,8 @@
         android:layout_height="wrap_content"
         android:text="@string/my_inventory"
         android:id="@+id/b_my_inventory"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp" />
+        android:layout_above="@+id/b_my_trade"
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -22,9 +21,8 @@
         android:layout_height="wrap_content"
         android:text="@string/my_trade"
         android:id="@+id/b_my_trade"
-        android:layout_below="@+id/b_my_inventory"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="119dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -32,7 +30,6 @@
         android:layout_height="wrap_content"
         android:text="@string/search"
         android:id="@+id/b_search"
-        android:layout_marginTop="89dp"
         android:layout_below="@+id/b_my_trade"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
