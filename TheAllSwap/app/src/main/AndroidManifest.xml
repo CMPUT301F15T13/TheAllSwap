@@ -69,13 +69,12 @@
             android:label="@string/title_activity_edit_single_item" >
         </activity>
         <activity
-<<<<<<< HEAD
             android:name=".View.UserInventoryWithImage"
             android:label="@string/title_activity_user_inventory_with_image" >
-=======
+        </activity>
+        <activity
             android:name=".View.CreateTrade"
             android:label="@string/title_activity_create_trade" >
->>>>>>> 4ae218d6964f30ef4d5e08f245fde3dbaa443182
         </activity>
     </application>
 

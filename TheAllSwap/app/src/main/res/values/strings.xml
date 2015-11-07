@@ -49,11 +49,8 @@
     <string name="user_inventory">User Inventory:</string>
     <string name="title_activity_testing">TestingActivity</string>
     <string name="title_activity_edit_single_item">Edit Single Item</string>
-<<<<<<< HEAD
     <string name="title_activity_user_inventory_with_image">UserInventoryWithImage</string>
-=======
     <string name="title_activity_create_trade">Create Trade</string>
     <string name="friends">Friends</string>
->>>>>>> 4ae218d6964f30ef4d5e08f245fde3dbaa443182
 
 </resources>
