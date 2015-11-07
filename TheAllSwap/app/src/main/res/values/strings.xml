@@ -49,5 +49,6 @@
     <string name="user_inventory">User Inventory:</string>
     <string name="title_activity_testing">TestingActivity</string>
     <string name="title_activity_edit_single_item">Edit Single Item</string>
+    <string name="title_activity_user_inventory_with_image">UserInventoryWithImage</string>
 
 </resources>

@@ -68,6 +68,10 @@
             android:name=".View.EditSingleItem"
             android:label="@string/title_activity_edit_single_item" >
         </activity>
+        <activity
+            android:name=".View.UserInventoryWithImage"
+            android:label="@string/title_activity_user_inventory_with_image" >
+        </activity>
     </application>
 
 </manifest>
