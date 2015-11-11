@@ -35,6 +35,7 @@ import java.util.ArrayList;
 public class UserMainViewing extends ActionBarActivity implements View.OnClickListener{
     private UserMainViewing activity = this;
     private UserController uc = new UserController();
+    private String myID;
     private ArrayList<User> userList= new ArrayList<User>();
     private ArrayAdapter<User> adapter;
     private ListView friendList;
@@ -47,6 +48,9 @@ public class UserMainViewing extends ActionBarActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_viewing);
+
+        Intent intent = getIntent();
+        myID = intent.getStringExtra("myID");
 
         myInventoryButton = (Button)findViewById(R.id.b_my_inventory);
         myTradeButton = (Button)findViewById(R.id.b_my_trade);
@@ -80,34 +84,34 @@ public class UserMainViewing extends ActionBarActivity implements View.OnClickLi
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
+        uc.passUserToActivity(UserInventory.class, activity, myID);
     }
-    public void userMyTradeSelected(MenuItem menu){uc.classIntent(UserTrade.class, activity);
+    public void userMyTradeSelected(MenuItem menu){uc.passUserToActivity(UserTrade.class, activity, myID);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.classIntent(UserFriends.class, activity);
+        uc.passUserToActivity(UserFriends.class, activity, myID);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.classIntent(UserProfile.class, activity);
+        uc.passUserToActivity(UserProfile.class, activity, myID);
     }
-    public void userSearchSelected(MenuItem menu){uc.classIntent(Search.class, activity);
+    public void userSearchSelected(MenuItem menu){uc.passUserToActivity(Search.class, activity, myID);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.classIntent(PreviousBrowsedTrade.class, activity);
+        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, myID);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        uc.passUserToActivity(UserLogin.class, activity, myID);
     }
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.b_my_inventory){
-            uc.classIntent(UserInventory.class, activity);
+            uc.passUserToActivity(UserInventory.class, activity, myID);
         }
         else if(view.getId()==R.id.b_my_trade){
-            uc.classIntent(UserTrade.class, activity);
+            uc.passUserToActivity(UserTrade.class, activity, myID);
         }
         else if(view.getId()==R.id.b_search){
-            uc.classIntent(Search.class, activity);
+            uc.passUserToActivity(Search.class, activity, myID);
         }
     }
 
