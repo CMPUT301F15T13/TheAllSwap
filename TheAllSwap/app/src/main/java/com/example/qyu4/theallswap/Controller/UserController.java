@@ -272,4 +272,15 @@ public class UserController {
         return foo;
     }
 
+    /**
+     * Adds a user to another users friend list.
+     * @param currentUser: User to add a friend to their friend list
+     * @param otherUser: User to be added as a friend.
+     */
+    //Currently unidirectional, should friendship be one sided?
+    public void addUserAsFriend(User currentUser, User otherUser){
+        currentUser.addFriend(otherUser);
+    }
+
+
 }
