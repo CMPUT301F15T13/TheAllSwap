@@ -116,8 +116,6 @@ public class UserController {
 
         } catch (FileNotFoundException e) {
             userList = new ArrayList<User>();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return userList;
     }
@@ -142,15 +140,18 @@ public class UserController {
 
     /**
      * given a user name and the user list find the user object.
-     * @param inputUserName: user name.
+     * If none is found return a new user object with 'No User' as ID
+     * ***Should change this function to throw a 'UserNotFoundException'***
+     * or something along those lines.
+     * @param inputUsername: user name.
      * @param userList: user array list.
      * @return: the user object.
      */
-    public User findCurrentUserObject(String inputUserName, ArrayList<User> userList){
+    public User findUserById(String inputUsername, ArrayList<User> userList) {
         User currentUser = new User();
-        for(int i=0; i< userList.size(); i ++) {
-            String userName = userList.get(i).getUserId();
-            if (inputUserName.equals(userName)) {
+        for(int i=0; i < userList.size(); i++) {
+            String username = userList.get(i).getUserId();
+            if (inputUsername.equals(username)) {
                 currentUser = userList.get(i);
             }
         }
@@ -163,16 +164,14 @@ public class UserController {
      * @param userList: user array list.
      * @return: the index of the user that is found.
      */
-    public int findCurrentUserIndex(String inputUserName, ArrayList<User> userList){
-        User currentUser = new User();
-        int currentIndex = -1;
+    public int findUserIndexById(String inputUserName, ArrayList<User> userList){
         for(int i=0; i< userList.size(); i ++) {
             String userName = userList.get(i).getUserId();
             if (inputUserName.equals(userName)) {
-                currentIndex = i;
+                return i;
             }
         }
-        return currentIndex;
+        return -1;
     }
 
     /**
@@ -243,18 +242,25 @@ public class UserController {
      * @param context: current activity.
      * @param userPosition: index of current object.
      */
-    public void passingValueBetweentActivity(Class newClass, Context context, int userPosition){
+    public void passValueBetweenActivity(Class newClass, Context context, int userPosition){
         Intent openNewActivity = new Intent(context, newClass);
         openNewActivity.putExtra("id", String.valueOf(userPosition));
 
         context.startActivity(openNewActivity);
     }
-    public void passingCurrentUserNameBetweenActivity(Class newClass, Context context, String currentUserName){
+
+    public void passUserToActivity(Class newClass, Context context, String myID){
+        Intent openNewActivity = new Intent(context, newClass);
+        openNewActivity.putExtra("myID", String.valueOf(myID));
+        context.startActivity(openNewActivity);
+    }
+
+    //Don't think this is necessary
+    public void passCurrentUsernameBetweenActivity(Class newClass, Context context, String currentUserName){
         Intent openNewActivity = new Intent(context, newClass);
         openNewActivity.putExtra("current user", currentUserName);
         context.startActivity(openNewActivity);
     }
-
 
     /**
      * convert a string value to int.

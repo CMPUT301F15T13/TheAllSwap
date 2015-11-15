@@ -29,7 +29,7 @@
             android:label="@string/title_activity_user_register" >
         </activity>
         <activity
-            android:name=".View.UserMainViewing"
+            android:name=".View.UserMainView"
             android:label="@string/title_activity_user_main_viewing" >
         </activity>
         <activity

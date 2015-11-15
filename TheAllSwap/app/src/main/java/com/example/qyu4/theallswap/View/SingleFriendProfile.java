@@ -46,6 +46,7 @@ public class SingleFriendProfile extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_friend_profile);
+
         itemList = (ListView)findViewById(R.id.single_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -71,7 +72,7 @@ public class SingleFriendProfile extends ActionBarActivity {
         String id = intent.getStringExtra("id");
 
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        int userId =uc.stringToInt(id);
+        int userId = uc.stringToInt(id);
         singleUser = userList.get(userId);
         userName = (TextView) findViewById(R.id.single_user_name);
         userEmail = (TextView) findViewById(R.id.single_user_email);

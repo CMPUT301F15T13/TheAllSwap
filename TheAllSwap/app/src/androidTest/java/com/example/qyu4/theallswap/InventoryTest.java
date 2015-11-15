@@ -1,3 +1,9 @@
+import com.example.qyu4.theallswap.Inventory;
+import com.example.qyu4.theallswap.Model.Item;
+
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -11,7 +17,7 @@ public class InventoryTest {
 		Item myItem = new Item();
 		Inventory myInventory = new Inventory();
 		myInventory.add(myItem);
-		AssertTrue(myInventory.getItems.contains(myItem));
+		assertTrue(myInventory.getItems.contains(myItem));
 	}
 	
 	@Test
@@ -19,9 +25,9 @@ public class InventoryTest {
 		Item myItem = new Item();
 		Inventory myInventory = new Inventory();
 		myInventory.add(myItem);
-		AssertTrue(myInventory.getItems.contains(myItem));
+		assertTrue(myInventory.getItems.contains(myItem));
 		myInventory.remove(myItem);
-		AssertFalse(myInventory.getItems.contains(myItem));
+		assertFalse(myInventory.getItems.contains(myItem));
 	}
 	
 	@Test
@@ -33,9 +39,9 @@ public class InventoryTest {
 		myInventory.add(myItem1);
 		myInventory.add(myItem2);
 		myInventory.add(myItem3);
-		AssertTrue(myInventory.getItems.contains(myItem1));
-		AssertTrue(myInventory.getItems.contains(myItem2));
-		AssertTrue(myInventory.getItems.contains(myItem3));
+		assertEquals(myInventory.getItems.contains(myItem1));
+		assertTrue(myInventory.getItems.contains(myItem2));
+		assertTrue(myInventory.getItems.contains(myItem3));
 	}
 	
 	@Test
@@ -45,7 +51,7 @@ public class InventoryTest {
 		myInventory.setOwnership(true);
 		myItem.setShared(false);
 		myInventory.add(myItem);
-		AssertTrue(myInventory.getItems.contains(myItem));
+		assertTrue(myInventory.getItems.contains(myItem));
 	}
 	
 	@Test
@@ -58,7 +64,7 @@ public class InventoryTest {
 		
 		Transaction myOffer = new Transaction();
 		myOffer.add(myInventory.getItem(myItem));
-		AssertTrue(myOffer.getItems.contains(myItem));
+		assertTrue(myOffer.getItems.contains(myItem));
 	}
 
 	@Test
@@ -68,7 +74,7 @@ public class InventoryTest {
 		notMyInventory.setOwnership(false);
 		item.setShared(false);
 		notMyInventory.add(item);
-		AssertFalse(notMyInventory.getItems.contains(item));
+		assertFalse(notMyInventory.getItems.contains(item));
 	}
 	
 	@Test
@@ -88,8 +94,8 @@ public class InventoryTest {
 		Item myItem = new Item();
 		Inventory myInventory = new Inventory();
 		ArrayList<String> allowedCatagories = new ArrayList<String>();	
-		AssertTrue(allowedCatagories.contains(myItem.getCatagory()));
+		assertTrue(allowedCatagories.contains(myItem.getCatagory()));
 		myItem.setCatagory("somethingNotInList"); 
-		AssertFalse(allowedCatagories.contains(myItem.getCatagory()));
+		assertFalse(allowedCatagories.contains(myItem.getCatagory()));
 	}
 }

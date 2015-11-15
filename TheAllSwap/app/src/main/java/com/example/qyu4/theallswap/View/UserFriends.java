@@ -22,6 +22,7 @@ import java.util.ArrayList;
  *
  */
 public class UserFriends extends ActionBarActivity {
+    private User currentUser;
     private UserFriends activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
@@ -29,10 +30,24 @@ public class UserFriends extends ActionBarActivity {
     private ArrayAdapter<User> adapter;
     private ListView friendList;
     private ArrayList resultList = new ArrayList<>();
+    private String currentUserString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
+
+
+
+        //Track currently logged in user
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        Intent intent = getIntent();
+        currentUserString = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(currentUserString, userList);
+
+        //Shows currently logged in username in a toast
+        uc.makeInputStringToast(this, currentUserString);
+
         friendList = (ListView)findViewById(R.id.lv_user_friends);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -40,12 +55,13 @@ public class UserFriends extends ActionBarActivity {
 
                 Intent i=new Intent(activity,SingleFriendProfile.class);
                 i.putExtra("id", String.valueOf(position));
-                uc.passingValueBetweentActivity(SingleFriendProfile.class, activity,position);
-
+                i.putExtra("myID", currentUser.getUserId());
+                activity.startActivity(i);
             }
 
 
         });
+
         friendList.setLongClickable(true);
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
@@ -60,7 +76,7 @@ public class UserFriends extends ActionBarActivity {
                 /**
                  * call remove item of the result list.
                  */
-                userList = uc.removeItem(resultList, position);
+                userList = uc.removeItem(userList, position);
                 /**
                  * notify adapter changes have been done.
                  */
@@ -111,26 +127,26 @@ public class UserFriends extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
+        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
     }
     public void userMyTradeSelected(MenuItem menu){
 
-        uc.classIntent(UserTrade.class, activity);
+        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.classIntent(UserFriends.class, activity);
+        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.classIntent(UserProfile.class, activity);
+        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.classIntent(Search.class, activity);
+        uc.passUserToActivity(Search.class, activity, currentUserString);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.classIntent(PreviousBrowsedTrade.class, activity);
+        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
     }
 
 

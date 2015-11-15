@@ -1,6 +1,7 @@
 package com.example.qyu4.theallswap.View;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +29,7 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private Button newItemSubmitButton;
     private InventoryController ic = new InventoryController();
     private UserController uc = new UserController();
-    private User curentUser = new User();
+    private User currentUser = new User();
     private ArrayList<User>userList = new ArrayList<User>();
     private ArrayAdapter<String> adapter;
     private AddInventoryItem activity = this;
@@ -84,10 +85,16 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
                 itemQuality=inputItemQuality.getText().toString();
                 itemQuantity=Integer.parseInt(inputItemQuantity.getText().toString());
                 itemComment=inputItemComment.getText().toString();
-                curentUser = uc.findCurrentUserObject("3", userList);
+
+                //Track currently logged in use
+                userList = uc.loadUserFromFile(activity, FILENAME, userList);
+                Intent intent = getIntent();
+                String current = intent.getStringExtra("myID");
+                currentUser = uc.findUserById(current, userList);
+
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
                 uc.makeInputStringToast(activity, itemQuality);
-                ic.addItemToInventory(curentUser, newItem);
+                ic.addItemToInventory(currentUser, newItem);
                 uc.saveInFile(FILENAME, activity, userList);
                 uc.classIntent(UserInventory.class, activity);
             }

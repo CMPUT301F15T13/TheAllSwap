@@ -1,40 +1,29 @@
 package com.example.qyu4.theallswap.View;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 /**
- * UserMainViewing class is an activity that Navigates current user's requirement.
+ * UserMainView class is an activity that Navigates current user's requirement.
  * @author qyu4, egsmith, lixin1, ozero, debelang.
  *
  */
-public class UserMainViewing extends ActionBarActivity implements View.OnClickListener{
-    private UserMainViewing activity = this;
+public class UserMainView extends ActionBarActivity implements View.OnClickListener{
+    private UserMainView activity = this;
     private UserController uc = new UserController();
+    private String myID;
     private ArrayList<User> userList= new ArrayList<User>();
     private ArrayAdapter<User> adapter;
     private ListView friendList;
@@ -48,6 +37,9 @@ public class UserMainViewing extends ActionBarActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main_viewing);
 
+        Intent intent = getIntent();
+        myID = intent.getStringExtra("myID");
+
         myInventoryButton = (Button)findViewById(R.id.b_my_inventory);
         myTradeButton = (Button)findViewById(R.id.b_my_trade);
         mySearchButton = (Button)findViewById(R.id.b_search);
@@ -55,7 +47,7 @@ public class UserMainViewing extends ActionBarActivity implements View.OnClickLi
         myInventoryButton.setOnClickListener(this);
         myTradeButton.setOnClickListener(this);
         mySearchButton.setOnClickListener(this);
-
+        System.out.println("Words: This is where the console out is");
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,34 +72,35 @@ public class UserMainViewing extends ActionBarActivity implements View.OnClickLi
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
+        uc.passUserToActivity(UserInventory.class, activity, myID);
     }
-    public void userMyTradeSelected(MenuItem menu){uc.classIntent(UserTrade.class, activity);
+    public void userMyTradeSelected(MenuItem menu){uc.passUserToActivity(UserTrade.class, activity, myID);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.classIntent(UserFriends.class, activity);
+        uc.passUserToActivity(UserFriends.class, activity, myID);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.classIntent(UserProfile.class, activity);
+        uc.passUserToActivity(UserProfile.class, activity, myID);
     }
-    public void userSearchSelected(MenuItem menu){uc.classIntent(Search.class, activity);
+    public void userSearchSelected(MenuItem menu){uc.passUserToActivity(Search.class, activity, myID);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.classIntent(PreviousBrowsedTrade.class, activity);
+        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, myID);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        uc.passUserToActivity(UserLogin.class, activity, myID);
     }
+
     @Override
     public void onClick(View view) {
         if(view.getId()==R.id.b_my_inventory){
-            uc.classIntent(UserInventory.class, activity);
+            uc.passUserToActivity(UserInventory.class, activity, myID);
         }
         else if(view.getId()==R.id.b_my_trade){
-            uc.classIntent(UserTrade.class, activity);
+            uc.passUserToActivity(UserTrade.class, activity, myID);
         }
         else if(view.getId()==R.id.b_search){
-            uc.classIntent(Search.class, activity);
+            uc.passUserToActivity(Search.class, activity, myID);
         }
     }
 
