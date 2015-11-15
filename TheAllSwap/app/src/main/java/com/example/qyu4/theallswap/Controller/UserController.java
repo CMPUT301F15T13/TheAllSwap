@@ -116,8 +116,6 @@ public class UserController {
 
         } catch (FileNotFoundException e) {
             userList = new ArrayList<User>();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return userList;
     }
@@ -145,15 +143,15 @@ public class UserController {
      * If none is found return a new user object with 'No User' as ID
      * ***Should change this function to throw a 'UserNotFoundException'***
      * or something along those lines.
-     * @param inputUserName: user name.
+     * @param inputUsername: user name.
      * @param userList: user array list.
      * @return: the user object.
      */
-    public User findUserById(String inputUserName, ArrayList<User> userList) {
-        User currentUser = new User("No User");
-        for(int i=0; i< userList.size(); i ++) {
-            String userName = userList.get(i).getUserId();
-            if (inputUserName.equals(userName)) {
+    public User findUserById(String inputUsername, ArrayList<User> userList) {
+        User currentUser = new User();
+        for(int i=0; i < userList.size(); i++) {
+            String username = userList.get(i).getUserId();
+            if (inputUsername.equals(username)) {
                 currentUser = userList.get(i);
             }
         }
@@ -257,12 +255,12 @@ public class UserController {
         context.startActivity(openNewActivity);
     }
 
-    public void passingCurrentUserNameBetweenActivity(Class newClass, Context context, String currentUserName){
+    //Don't think this is necessary
+    public void passCurrentUsernameBetweenActivity(Class newClass, Context context, String currentUserName){
         Intent openNewActivity = new Intent(context, newClass);
         openNewActivity.putExtra("current user", currentUserName);
         context.startActivity(openNewActivity);
     }
-
 
     /**
      * convert a string value to int.

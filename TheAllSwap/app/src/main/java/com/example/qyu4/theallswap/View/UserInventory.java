@@ -29,16 +29,20 @@ public class UserInventory extends ActionBarActivity {
     private ArrayAdapter<User> adapter;
     private ListView itemList;
     private ArrayList resultList = new ArrayList<>();
+    private User currentUser = new User();
+    private String currentUserString;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_inventory);
+
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i=new Intent(activity,EditSingleItem.class);
                 i.putExtra("id", String.valueOf(position));
-                uc.passingValueBetweentActivity(EditSingleItem.class, activity, position);
+                uc.passValueBetweenActivity(EditSingleItem.class, activity, position);
             }
 
 
@@ -68,10 +72,17 @@ public class UserInventory extends ActionBarActivity {
     }
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
+
+        //Track currently logged in user
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        User currentUser = userList.get(0);
+        Intent intent = getIntent();
+        currentUserString = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(currentUserString, userList);
+
+        //Shows currently logged in username in a toast
+        uc.makeInputStringToast(this, currentUserString);
+
         /***************************************************
          TODO: add loading friends list method.
          *************************************************/
@@ -107,29 +118,29 @@ public class UserInventory extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void userAddItemToInventory(MenuItem menu){
-        uc.classIntent(AddInventoryItem.class, activity);
+        uc.passUserToActivity(AddInventoryItem.class, activity, currentUserString);
     }
     public void userMyInventorySelected(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
+        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
     }
     public void userMyTradeSelected(MenuItem menu){
 
-        uc.classIntent(UserTrade.class, activity);
+        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.classIntent(UserFriends.class, activity);
+        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.classIntent(UserProfile.class, activity);
+        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.classIntent(Search.class, activity);
+        uc.passUserToActivity(Search.class, activity, currentUserString);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.classIntent(PreviousBrowsedTrade.class, activity);
+        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
     }
 
 

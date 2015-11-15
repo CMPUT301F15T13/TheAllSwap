@@ -27,8 +27,9 @@ public class User {
 
     public User(){}
 
+    //This constructor breaks for some reason
     public User(String userId) {
-        this.setUserId(userId);
+        this.userId = userId;
         this.userInventory = new ArrayList<Item>();
         this.userFriendList = new ArrayList<User>();
         this.userRequestTradeList = new ArrayList<Trade>();
@@ -37,6 +38,7 @@ public class User {
         this.userProfile.setUserContactInformation(null);
     }
 
+    //As, I must assume does this one.
     public User(String userId, String userEmail, String userCity) {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();

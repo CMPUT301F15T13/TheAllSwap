@@ -1,11 +1,9 @@
 package com.example.qyu4.theallswap.View;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -62,7 +60,7 @@ public class UserLogin extends Activity implements View.OnClickListener{
 
             //TODO: load file and save objects in arrayList.
             if(uc.checkingUserExist(currentUserName, userList)){
-                Intent nextScreen = new Intent(activity, UserMainViewing.class);
+                Intent nextScreen = new Intent(activity, UserMainView.class);
                 nextScreen.putExtra("myID", currentUserName);
                 activity.startActivity(nextScreen);
             }else{

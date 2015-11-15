@@ -89,10 +89,12 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
 
                 uc.makeInputStringToast(activity, itemComment);
 
-                /************************************************
-                 TODO: find a way store current user id...
-                 ************************************************/
-                currentUser = uc.findCurrentUserObject("3", userList);
+                //Track currently logged in user
+                userList = uc.loadUserFromFile(activity, FILENAME, userList);
+                Intent intent = getIntent();
+                String current = intent.getStringExtra("myID");
+                currentUser = uc.findUserById(current, userList);
+
                 currentUserId = userList.indexOf(currentUser);
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
                 /************************************************

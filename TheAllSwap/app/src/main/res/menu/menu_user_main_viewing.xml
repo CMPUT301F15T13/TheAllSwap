@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.qyu4.theallswap.View.UserMainViewing">
+    tools:context="com.example.qyu4.theallswap.View.UserMainView">
     <item
         android:id="@+id/action_my_inventory"
         android:title="@string/my_inventory"
