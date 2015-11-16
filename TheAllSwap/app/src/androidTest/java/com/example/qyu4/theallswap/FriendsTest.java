@@ -3,14 +3,16 @@ package com.example.qyu4.theallswap;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.View.UserProfile;
 
 /**
  * Created by ozero. Test file is skeletal.
  */
+
 public class FriendsTest extends ActivityInstrumentationTestCase2 {
 
     public FriendsTest() {
-        super(UserProfileActivity.class);
+        super(UserProfile.class);
     }
 
     public void testAddFriend() {
