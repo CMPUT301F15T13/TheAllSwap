@@ -181,7 +181,7 @@ public class UserController {
      *                  calls toString() method of User class is an override method.
      * @return the result list.
      */
-    public ArrayList convertUserToString(ArrayList<User>userList, ArrayList resultList){
+    public ArrayList<String> convertUserToString(ArrayList<User>userList, ArrayList resultList){
         for (int i=0; i< userList.size(); i++){
             resultList.add(userList.get(i).toString());
         }

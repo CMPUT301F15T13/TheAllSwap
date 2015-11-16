@@ -49,6 +49,10 @@ public class User {
         this.userProfile.setUserContactInformation(null);
     }
 
+    public ArrayList<User> getFriendsList(){
+        return userFriendList;
+    }
+
     /**
      * get user id
      * @return user id
@@ -60,6 +64,7 @@ public class User {
      * set user id
      * @param userId: generate user id from user input
      */
+
     public void setUserId(String userId) {
         this.userId = userId;
 
