@@ -102,7 +102,7 @@ public class UserFriends extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
+        adapter = new ArrayAdapter<String>(activity, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
