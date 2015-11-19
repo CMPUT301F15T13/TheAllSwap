@@ -37,6 +37,17 @@ public class UserInventory extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_inventory);
 
+        //Track currently logged in user
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        Intent intent = getIntent();
+        currentUserString = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(currentUserString, userList);
+
+        //Shows currently logged in username in a toast
+        uc.makeInputStringToast(this, currentUserString);
+
+        resultList = uc.convertItemToString(currentUser, resultList);
+
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -53,19 +64,19 @@ public class UserInventory extends ActionBarActivity {
                 /**
                  * call removeUser from controller to delete an user from the userList.
                  */
-                userList = uc.removeUser(userList, position);
+                //userList = uc.removeUser(userList, position);
                 /**
                  * save the new userList to the file to sync.
                  */
-                uc.saveInFile(FILENAME, activity, userList);
+                //uc.saveInFile(FILENAME, activity, userList);
                 /**
                  * call remove item of the result list.
                  */
-                userList = uc.removeItem(resultList, position);
+                //userList = uc.removeItem(resultList, position);
                 /**
                  * notify adapter changes have been done.
                  */
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
                 return true;
             }
         });
@@ -73,23 +84,6 @@ public class UserInventory extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        //Track currently logged in user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
-
-        //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUserString);
-
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-        resultList = uc.convertItemToString(currentUser, resultList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
 
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
         itemList.setAdapter(adapter);

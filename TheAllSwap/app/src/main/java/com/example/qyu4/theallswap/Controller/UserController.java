@@ -181,7 +181,7 @@ public class UserController {
      *                  calls toString() method of User class is an override method.
      * @return the result list.
      */
-    public ArrayList convertUserToString(ArrayList<User>userList, ArrayList resultList){
+    public ArrayList<String> convertUserToString(ArrayList<User>userList, ArrayList resultList){
         for (int i=0; i< userList.size(); i++){
             resultList.add(userList.get(i).toString());
         }
@@ -278,8 +278,18 @@ public class UserController {
      * @param otherUser: User to be added as a friend.
      */
     //Currently unidirectional, should friendship be one sided?
-    public void addUserAsFriend(User currentUser, User otherUser){
-        currentUser.addFriend(otherUser);
+    public void addUserAsFriend(Context context, User currentUser, User otherUser){
+        if(currentUser.equals(otherUser)){
+            makeInputStringToast(context, "Error: Cannot add yourself");
+            return;
+        }
+        if(currentUser.getFriendsList().contains(otherUser)){
+            makeInputStringToast(context, "Error: " + otherUser.getUserId() + " already a friend");
+        }
+        else {
+            currentUser.addFriend(otherUser);
+            makeInputStringToast(context, otherUser.getUserId() + " added as friend");
+        }
     }
 
 

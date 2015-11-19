@@ -76,6 +76,14 @@
             android:name=".View.CreateTrade"
             android:label="@string/title_activity_create_trade" >
         </activity>
+        <activity
+            android:name=".View.AddFriend"
+            android:label="@string/title_activity_add_friend"
+            android:parentActivityName=".View.UserFriends" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.qyu4.theallswap.View.UserFriends" />
+        </activity>
     </application>
 
 </manifest>

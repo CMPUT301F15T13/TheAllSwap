@@ -49,6 +49,10 @@ public class User {
         this.userProfile.setUserContactInformation(null);
     }
 
+    public ArrayList<User> getFriendsList(){
+        return userFriendList;
+    }
+
     /**
      * get user id
      * @return user id
@@ -60,6 +64,7 @@ public class User {
      * set user id
      * @param userId: generate user id from user input
      */
+
     public void setUserId(String userId) {
         this.userId = userId;
 
@@ -125,6 +130,21 @@ public class User {
     @Override
     public String toString(){
         return userId + " || "+ userProfile.getUserCity()+" || "+userProfile.getUserContactInformation();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        return userId.equals(user.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        return userId.hashCode();
     }
 
     public ArrayList<Item> getUserInventory() {
