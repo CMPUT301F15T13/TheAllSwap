@@ -71,6 +71,7 @@ public class UserRegister extends Activity implements View.OnClickListener{
             newUser.setUserProfile(newProfile);
             newUserList.add(newUser);
             uc.saveInFile(FILENAME, activity, newUserList);
+            uc.makeInputStringToast(this, "Registered username: " + userId);
             uc.classIntent(UserLogin.class, activity);
 
         }
