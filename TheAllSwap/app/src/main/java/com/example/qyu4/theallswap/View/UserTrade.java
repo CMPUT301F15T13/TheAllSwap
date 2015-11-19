@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -23,41 +24,74 @@ import java.util.ArrayList;
  */
 public class UserTrade extends ActionBarActivity {
     private UserTrade activity = this;
+    private User currentUser;
+    private String currentUserString;
+
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
-    private ListView friendList;
     private ArrayList resultList = new ArrayList<>();
+
+    private ListView friendList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_trade);
+
+        //Track currently logged in user
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        Intent intent = getIntent();
+        currentUserString = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(currentUserString, userList);
+
+        //Shows currently logged in username in a toast
+        //uc.makeInputStringToast(this, currentUserString);
+
+        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+
         friendList = (ListView)findViewById(R.id.lv_user_trade_item);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: some stuff
-                //uc.makeInvalidUserToast(activity);
-                uc.classIntent(CreateTrade.class, activity);
+                Intent i=new Intent(activity,SingleFriendProfile.class);
+                i.putExtra("id", String.valueOf(position));
+                i.putExtra("myID", currentUser.getUserId());
+                activity.startActivity(i);
             }
+        });
 
-
+        friendList.setLongClickable(true);
+        friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                //This should maybe prompt for a new menu of options but not delete outright.
+                //Especially right now it deletes the entire user from existence.
+                uc.makeInputStringToast(activity, "Long Click");
+                /**
+                 * call removeUser from controller to delete an user from the userList.
+                 */
+                //userList = uc.removeUser(userList, position);
+                /**
+                 * save the new userList to the file to sync.
+                 */
+                //uc.saveInFile(FILENAME, activity, userList);
+                /**
+                 * call remove item of the result list.
+                 */
+                //userList = uc.removeItem(userList, position);
+                /**
+                 * notify adapter changes have been done.
+                 */
+                //adapter.notifyDataSetChanged();
+                //uc.classIntent(PreviousBrowsedTrade.class, activity);
+                return true;
+            }
         });
     }
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-        resultList = uc.convertUserToString(userList, resultList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
+        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -65,7 +99,7 @@ public class UserTrade extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_trade, menu);
+        getMenuInflater().inflate(R.menu.menu_user_main_viewing, menu);
         return true;
     }
 
@@ -85,26 +119,25 @@ public class UserTrade extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
+        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
     }
     public void userMyTradeSelected(MenuItem menu){
-
-        uc.classIntent(UserTrade.class, activity);
+        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.classIntent(UserFriends.class, activity);
+        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.classIntent(UserProfile.class, activity);
+        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.classIntent(Search.class, activity);
+        uc.passUserToActivity(Search.class, activity, currentUserString);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.classIntent(PreviousBrowsedTrade.class, activity);
+        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
     }
 
 

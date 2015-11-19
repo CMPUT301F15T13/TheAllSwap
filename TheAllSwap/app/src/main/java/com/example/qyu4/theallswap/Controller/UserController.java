@@ -52,6 +52,7 @@ public class UserController {
      * @param context: for the convenience of Toast methods.
      */
     public void makeInvalidUserToast(Context context){
+        //I think this is pretty redundant since we only use it once. May as well be generic toast
         Toast.makeText(context, "Invalid user name!", Toast.LENGTH_LONG).show();
     }
 

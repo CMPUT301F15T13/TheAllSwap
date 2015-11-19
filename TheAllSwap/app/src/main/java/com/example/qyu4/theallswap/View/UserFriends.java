@@ -23,13 +23,14 @@ import java.util.ArrayList;
  */
 public class UserFriends extends ActionBarActivity {
     private User currentUser;
+    private String currentUserString;
+
     private UserFriends activity = this;
     private UserController uc = new UserController();
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
     private ArrayList resultList = new ArrayList<>();
-    private String currentUserString;
 
     private ListView friendList;
     private Button addFriend;
@@ -46,7 +47,7 @@ public class UserFriends extends ActionBarActivity {
         currentUser = uc.findUserById(currentUserString, userList);
 
         //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUserString);
+        //uc.makeInputStringToast(this, currentUserString);
 
         resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
 
@@ -130,7 +131,6 @@ public class UserFriends extends ActionBarActivity {
         uc.passUserToActivity(UserInventory.class, activity, currentUserString);
     }
     public void userMyTradeSelected(MenuItem menu){
-
         uc.passUserToActivity(UserTrade.class, activity, currentUserString);
     }
     public void userMyFriendsSelected(MenuItem menu){
