@@ -54,7 +54,7 @@ public class UserTrade extends ActionBarActivity {
         friendList = (ListView)findViewById(R.id.lv_user_trade_item);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i=new Intent(activity,SingleFriendProfile.class);
+                Intent i = new Intent(activity, CreateTrade.class);
                 i.putExtra("id", String.valueOf(position));
                 i.putExtra("myID", currentUser.getUserId());
                 activity.startActivity(i);
