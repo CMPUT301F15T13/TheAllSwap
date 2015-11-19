@@ -28,6 +28,10 @@ public class SingleFriendProfile extends ActionBarActivity {
     private UserController uc= new UserController();
     private static final String FILENAME = "userProfile.txt";
     private ArrayList<User> userList =new ArrayList<User>();
+
+    private String currentUserString;
+    private User currentUser;
+
     private User singleUser = new User();
 
     private TextView userName;
@@ -47,6 +51,21 @@ public class SingleFriendProfile extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_friend_profile);
 
+        //Track currently logged in user
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        Intent intent = getIntent();
+        currentUserString = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(currentUserString, userList);
+
+        //Shows currently logged in username in a toast
+        //uc.makeInputStringToast(this, currentUserString);
+
+        String id = intent.getStringExtra("id");
+        int userId = uc.stringToInt(id);
+        singleUser = currentUser.getFriendsList().get(userId);
+
+        itemArray = uc.convertItemToString(singleUser, itemArray);
+
         itemList = (ListView)findViewById(R.id.single_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -62,18 +81,8 @@ public class SingleFriendProfile extends ActionBarActivity {
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
 
-        Intent intent = getIntent();
-        /**
-         * getting user id from UserFriends Activity
-         */
-        String id = intent.getStringExtra("id");
-
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        int userId = uc.stringToInt(id);
-        singleUser = userList.get(userId);
         userName = (TextView) findViewById(R.id.single_user_name);
         userEmail = (TextView) findViewById(R.id.single_user_email);
         userCity = (TextView) findViewById(R.id.single_user_city);
@@ -81,18 +90,9 @@ public class SingleFriendProfile extends ActionBarActivity {
         userEmail.setText(singleUser.getUserProfile().getUserContactInformation());
         userCity.setText(singleUser.getUserProfile().getUserCity());
 
-        /***************************************************
-         TODO: add loading item list method.
-         *************************************************/
-        itemArray = uc.convertItemToString(singleUser, itemArray);
-        /***************************************************
-         TODO: add loading item list method.
-         *************************************************/
-
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, itemArray);
         itemList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -118,25 +118,26 @@ public class SingleFriendProfile extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
+        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
     }
     public void userMyTradeSelected(MenuItem menu){
 
-        uc.classIntent(UserTrade.class, activity);
+        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.classIntent(UserFriends.class, activity);
+        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.classIntent(UserProfile.class, activity);
+        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.classIntent(Search.class, activity);
+        uc.passUserToActivity(Search.class, activity, currentUserString);
     }
+
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.classIntent(PreviousBrowsedTrade.class, activity);
+        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
     }
 }
