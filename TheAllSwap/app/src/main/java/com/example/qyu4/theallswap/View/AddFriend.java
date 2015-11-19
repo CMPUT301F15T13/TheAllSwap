@@ -23,7 +23,7 @@ public class AddFriend extends ActionBarActivity {
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
-    private ArrayList<User> resultList = new ArrayList<>();
+    private ArrayList resultList = new ArrayList<>();
     private String currentUserString;
 
     private ListView userSelectionList;
@@ -32,12 +32,7 @@ public class AddFriend extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_friend);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        resultList = uc.convertUserToString(userList, resultList);
-        for(User u: resultList){
-            System.out.println("List: " + u.getUserId());
-        }
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //Track currently logged in user
         userList = uc.loadUserFromFile(this, FILENAME, userList);
@@ -45,15 +40,16 @@ public class AddFriend extends ActionBarActivity {
         currentUserString = intent.getStringExtra("myID");
         currentUser = uc.findUserById(currentUserString, userList);
 
-        //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUserString);
+        //Shows currently logged in username in a toast. Debug
+        //uc.makeInputStringToast(this, currentUserString);
+
+        resultList = uc.convertUserToString(userList, resultList);
 
         userSelectionList = (ListView)findViewById(R.id.lv_add_friend);
         userSelectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Not sure if casting here is a good idea... but lets see for now
                 User selectedUser = userList.get((int)id);
-                uc.addUserAsFriend(currentUser, selectedUser);
+                uc.addUserAsFriend(activity, currentUser, selectedUser);
                 uc.saveInFile(FILENAME, activity, userList);
                 uc.passUserToActivity(UserFriends.class, activity, currentUserString);
             }

@@ -28,7 +28,7 @@ public class UserFriends extends ActionBarActivity {
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
-    private ArrayList<String> resultList = new ArrayList<>();
+    private ArrayList resultList = new ArrayList<>();
     private String currentUserString;
 
     private ListView friendList;
@@ -39,11 +39,6 @@ public class UserFriends extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
 
-        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
-        for(String u: resultList){
-            System.out.println("Friends: " + u);
-        }
-
         //Track currently logged in user
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
         Intent intent = getIntent();
@@ -52,6 +47,8 @@ public class UserFriends extends ActionBarActivity {
 
         //Shows currently logged in username in a toast
         uc.makeInputStringToast(this, currentUserString);
+
+        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
 
         friendList = (ListView)findViewById(R.id.lv_user_friends);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -102,7 +99,7 @@ public class UserFriends extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new ArrayAdapter<String>(activity, R.layout.list_item, resultList);
+        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
