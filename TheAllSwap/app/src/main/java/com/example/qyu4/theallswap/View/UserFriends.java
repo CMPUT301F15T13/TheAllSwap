@@ -37,8 +37,6 @@ public class UserFriends extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
 
-
-
         //Track currently logged in user
         userList = uc.loadUserFromFile(activity, FILENAME, userList);
         Intent intent = getIntent();
@@ -48,11 +46,12 @@ public class UserFriends extends ActionBarActivity {
         //Shows currently logged in username in a toast
         uc.makeInputStringToast(this, currentUserString);
 
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        resultList = uc.convertUserToString(userList, resultList);
+
         friendList = (ListView)findViewById(R.id.lv_user_friends);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: some stuff
-
                 Intent i=new Intent(activity,SingleFriendProfile.class);
                 i.putExtra("id", String.valueOf(position));
                 i.putExtra("myID", currentUser.getUserId());
@@ -68,19 +67,19 @@ public class UserFriends extends ActionBarActivity {
                 /**
                  * call removeUser from controller to delete an user from the userList.
                  */
-                userList = uc.removeUser(userList, position);
+                //userList = uc.removeUser(userList, position);
                 /**
                  * save the new userList to the file to sync.
                  */
-                uc.saveInFile(FILENAME, activity, userList);
+                //uc.saveInFile(FILENAME, activity, userList);
                 /**
                  * call remove item of the result list.
                  */
-                userList = uc.removeItem(userList, position);
+                //userList = uc.removeItem(userList, position);
                 /**
                  * notify adapter changes have been done.
                  */
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
                 //uc.classIntent(PreviousBrowsedTrade.class, activity);
                 return true;
             }
@@ -88,16 +87,7 @@ public class UserFriends extends ActionBarActivity {
     }
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-        resultList = uc.convertUserToString(userList, resultList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
 
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
         friendList.setAdapter(adapter);
