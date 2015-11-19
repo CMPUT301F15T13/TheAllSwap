@@ -71,7 +71,7 @@ public class UserRegister extends Activity implements View.OnClickListener{
             newUser.setUserProfile(newProfile);
             newUserList.add(newUser);
             uc.saveInFile(FILENAME, activity, newUserList);
-            uc.classIntent(UserMainView.class, activity);
+            uc.classIntent(UserLogin.class, activity);
 
         }
     }
