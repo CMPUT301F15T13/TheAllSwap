@@ -279,6 +279,10 @@ public class UserController {
      */
     //Currently unidirectional, should friendship be one sided?
     public void addUserAsFriend(Context context, User currentUser, User otherUser){
+        if(currentUser.equals(otherUser)){
+            makeInputStringToast(context, "Error: Cannot add yourself");
+            return;
+        }
         if(currentUser.getFriendsList().contains(otherUser)){
             makeInputStringToast(context, "Error: " + otherUser.getUserId() + " already a friend");
         }
