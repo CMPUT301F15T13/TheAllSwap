@@ -1,6 +1,7 @@
 package com.example.qyu4.theallswap.Model;
 
 import com.example.qyu4.theallswap.Friends;
+import com.example.qyu4.theallswap.Inventory;
 
 import java.util.ArrayList;
 
@@ -103,6 +104,13 @@ public class User {
      */
     public void addItemToInventory(Item newItem){
         userInventory.add(newItem);
+    }
+
+    /**
+     * add new item to inventory.
+     */
+    public ArrayList<Item> getInventory(){
+        return userInventory;
     }
 
     /**

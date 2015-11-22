@@ -2,30 +2,24 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.Model.Item;
+
 /**
  * Created by lixin1 on 10/5/2015.
  */
 public class PhotographsOfItemsTest extends ActivityInstrumentationTestCase2 {
     public PhotographsOfItemsTest(){
-        super (UserTradingActivity.class);
+        super (Item.class);
     };
 
     public void testAttachPhotogragh(){
         // US06.01.01
-        TradeItem tradeItem = new TradeItem();      // TradeItem has two attributes
-        // ArrayList photograph
-        // String itemName
+        Item tradeItem = new Item();
         Boolean isAttached = true;
-        tradeItem.itemName = "fabulous watch";
+        tradeItem.setItemName("fabulous watch");
 
         try {
-            tradeItem.attachPhotograph("/usr/lixin1/theallswap/drawable/photo.jpg");
-        } catch (IllegalArgumentException e){
-            isAttached = false;
-        }
-
-        try {
-            tradeItem.attachPhotograph();
+            tradeItem.addImage(123);
         } catch (IllegalArgumentException e){
             isAttached = false;
         }
@@ -37,51 +31,44 @@ public class PhotographsOfItemsTest extends ActivityInstrumentationTestCase2 {
 
     public void testViewPhotograph(){
         // US06.02.01
-        TradeItem tradeItem = new TradeItem();      // TradeItem has two attributes
-        // ArrayList photograph
-        // String itemName
-        tradeItem.photograph.add("/usr/lixin1/theallswap/drawable/photo.jpg");
-        tradeItem.itemName = "fabulous watch";
+        Item tradeItem = new Item();
+        tradeItem.addImage(123);
+        tradeItem.setItemName("fabulous watch");
 
-        assertEquals(tradeItem.viewPhotograph().equal("/usr/lixin1/theallswap/drawable/photo.jpg"));
+        assertTrue(tradeItem.getItemImgId().contains(123));
     }
 
     public void testDeletePhotograph(){
         // US06.03.01
-        TradeItem tradeItem = new TradeItem();      // TradeItem has two attributes
-        // ArrayList photograph
-        // String itemName
-        tradeItem.photograph.add("/usr/lixin1/theallswap/drawable/photo.jpg");
-        tradeItem.itemName = "fabulous watch";
+        Item tradeItem = new Item();
+        tradeItem.addImage(123);
+        tradeItem.setItemName("fabulous watch");
 
-        tradeItem.deletePhotograph(0);
-        assertTrue(tradeItem.hasPhotograph("/usr/lixin1/theallswap/drawable/photo.jpg"));
+        tradeItem.removeImage(123);
+        assertFalse(tradeItem.getItemImgId().contains(123));
     }
 
     public void testCheckPhotographSize(){
         // US06.04.01
-        TradeItem tradeItem = new TradeItem();      // TradeItem has two attributes
-        // ArrayList photograph
-        // String itemName
-        tradeItem.itemName = "fabulous watch";
+        Item tradeItem = new Item();
+        tradeItem.addImage(123);
+        tradeItem.setItemName("fabulous watch");
         // Attach a over size photo - photoOverSize
-        tradeItem.photograph.add("/usr/lixin1/theallswap/drawable/photoOverSize.jpg");
-        assertFalse(tradeItem.checkPhotographSize(0));
+        tradeItem.addImage(123);
+        assertFalse(tradeItem.checkImageSize());
     }
 
     public void testDisablePhotographDownload(){
         // US06.05.01
-        TradeItem tradeItem = new TradeItem();      // TradeItem has two attributes
-        // ArrayList photograph
-        // String itemName
-        tradeItem.photograph.add("/usr/lixin1/theallswap/drawable/photo.jpg");
-        tradeItem.itemName = "fabulous watch";
+        Item tradeItem = new Item();
+        tradeItem.addImage(123);
+        tradeItem.setItemName("fabulous watch");
 
-        tradeItem.disablePhotographDownload();
-        isDisabled = true;
+        tradeItem.disableImageDownload();
+        Boolean isDisabled = true;
         try {
-            tradeItem.downloadPhotograph(0);
-        } catch (IllegalAccessException e){
+            tradeItem.downloadImage(0);
+        } catch (IllegalArgumentException e){
             isDisabled = false;
         }
 

@@ -1,5 +1,6 @@
 import com.example.qyu4.theallswap.Inventory;
 import com.example.qyu4.theallswap.Model.Item;
+import com.example.qyu4.theallswap.Model.User;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
@@ -15,19 +16,19 @@ public class InventoryTest {
 	@Test
 	public void testAddItem(){
 		Item myItem = new Item();
-		Inventory myInventory = new Inventory();
-		myInventory.add(myItem);
-		assertTrue(myInventory.getItems.contains(myItem));
+		User myUser = new User();
+		myUser.addItemToInventory(myItem);
+		assertTrue(myUser.getInventory().contains(myItem));
 	}
 	
 	@Test
 	public void testDeleteItem(){
 		Item myItem = new Item();
-		Inventory myInventory = new Inventory();
-		myInventory.add(myItem);
-		assertTrue(myInventory.getItems.contains(myItem));
-		myInventory.remove(myItem);
-		assertFalse(myInventory.getItems.contains(myItem));
+		User myUser = new User();
+		myUser.addItemToInventory(myItem);
+		assertTrue(myUser.getInventory().contains(myItem));
+		myUser.removeItemFromInventory(myItem);
+		assertFalse(myUser.getInventory().contains(myItem));
 	}
 	
 	@Test
@@ -35,22 +36,22 @@ public class InventoryTest {
 		Item myItem1 = new Item();
 		Item myItem2 = new Item();
 		Item myItem3 = new Item();
-		Inventory myInventory = new Inventory();
-		myInventory.add(myItem1);
-		myInventory.add(myItem2);
-		myInventory.add(myItem3);
-		assertEquals(myInventory.getItems.contains(myItem1));
-		assertTrue(myInventory.getItems.contains(myItem2));
-		assertTrue(myInventory.getItems.contains(myItem3));
+		User myUser = new User();
+		myUser.addItemToInventory(myItem1);
+		myUser.addItemToInventory(myItem2);
+		myUser.addItemToInventory(myItem3);
+		assertTrue(myUser.getInventory().contains(myItem1));
+		assertTrue(myUser.getInventory().contains(myItem2));
+		assertTrue(myUser.getInventory().contains(myItem3));
 	}
 	
 	@Test
 	public void testViewMyUnsharedItems(){
 		Item myItem = new Item();
-		Inventory myInventory = new Inventory();
-		myInventory.setOwnership(true);
+		User myUser = new User();
+		myUser.setOwnership(true);
 		myItem.setShared(false);
-		myInventory.add(myItem);
+		myUser.addItemToInventory(myItem);
 		assertTrue(myInventory.getItems.contains(myItem));
 	}
 	
