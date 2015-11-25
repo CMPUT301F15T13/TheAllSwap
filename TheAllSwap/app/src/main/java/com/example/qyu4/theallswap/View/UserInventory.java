@@ -44,7 +44,7 @@ public class UserInventory extends ActionBarActivity {
         currentUser = uc.findUserById(currentUserString, userList);
 
         //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUserString);
+        //uc.makeInputStringToast(this, currentUserString);
 
         resultList = uc.convertItemToString(currentUser, resultList);
 
@@ -53,7 +53,8 @@ public class UserInventory extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i=new Intent(activity,EditSingleItem.class);
                 i.putExtra("id", String.valueOf(position));
-                uc.passValueBetweenActivity(EditSingleItem.class, activity, position);
+                i.putExtra("myID", currentUserString);
+                activity.startActivity(i);
             }
 
 

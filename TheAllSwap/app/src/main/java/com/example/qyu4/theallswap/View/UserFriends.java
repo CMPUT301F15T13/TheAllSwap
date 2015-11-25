@@ -56,7 +56,7 @@ public class UserFriends extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i=new Intent(activity,SingleFriendProfile.class);
                 i.putExtra("id", String.valueOf(position));
-                i.putExtra("myID", currentUser.getUserId());
+                i.putExtra("myID", currentUserString);
                 activity.startActivity(i);
             }
         });
