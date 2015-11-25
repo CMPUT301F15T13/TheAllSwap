@@ -13,7 +13,7 @@
         android:text="@string/my_inventory"
         android:id="@+id/b_my_inventory"
         android:layout_above="@+id/b_my_trade"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -21,7 +21,25 @@
         android:layout_height="wrap_content"
         android:text="@string/my_trade"
         android:id="@+id/b_my_trade"
+        android:layout_above="@+id/b_my_friends"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_friends"
+        android:id="@+id/b_my_friends"
         android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/my_profile"
+        android:id="@+id/b_my_profile"
+        android:layout_below="@+id/b_my_friends"
         android:layout_alignParentEnd="true" />
 
     <Button
@@ -30,6 +48,16 @@
         android:layout_height="wrap_content"
         android:text="@string/search"
         android:id="@+id/b_search"
-        android:layout_below="@+id/b_my_trade"
+        android:layout_below="@+id/b_my_profile"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/log_out"
+        android:id="@+id/b_log_out"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

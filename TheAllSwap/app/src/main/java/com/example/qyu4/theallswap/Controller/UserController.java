@@ -116,7 +116,7 @@ public class UserController {
             userList = gson.fromJson(in, userListType);
 
         } catch (FileNotFoundException e) {
-            userList = new ArrayList<User>();
+            userList = new ArrayList<>();
         }
         return userList;
     }
@@ -292,6 +292,4 @@ public class UserController {
             makeInputStringToast(context, otherUser.getUserId() + " added as friend");
         }
     }
-
-
 }

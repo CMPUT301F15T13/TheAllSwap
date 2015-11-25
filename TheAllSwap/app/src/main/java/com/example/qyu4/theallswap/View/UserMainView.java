@@ -31,7 +31,10 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
     private ArrayList resultList = new ArrayList();
     private Button myInventoryButton;
     private Button myTradeButton;
+    private Button myFriendsButton;
+    private Button myProfileButton;
     private Button mySearchButton;
+    private Button myLogOutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +45,18 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
 
         myInventoryButton = (Button)findViewById(R.id.b_my_inventory);
         myTradeButton = (Button)findViewById(R.id.b_my_trade);
+        myFriendsButton = (Button)findViewById(R.id.b_my_friends);
+        myProfileButton = (Button)findViewById(R.id.b_my_profile);
         mySearchButton = (Button)findViewById(R.id.b_search);
+        myLogOutButton = (Button)findViewById(R.id.b_log_out);
 
         myInventoryButton.setOnClickListener(this);
         myTradeButton.setOnClickListener(this);
+        myFriendsButton.setOnClickListener(this);
+        myProfileButton.setOnClickListener(this);
         mySearchButton.setOnClickListener(this);
+        myLogOutButton.setOnClickListener(this);
+
         System.out.println("Words: This is where the console out is");
     }
     @Override
@@ -74,7 +84,8 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
     public void userMyInventorySelected(MenuItem menu){
         uc.passUserToActivity(UserInventory.class, activity, myID);
     }
-    public void userMyTradeSelected(MenuItem menu){uc.passUserToActivity(UserTrade.class, activity, myID);
+    public void userMyTradeSelected(MenuItem menu){
+        uc.passUserToActivity(UserTrade.class, activity, myID);
     }
     public void userMyFriendsSelected(MenuItem menu){
         uc.passUserToActivity(UserFriends.class, activity, myID);
@@ -99,8 +110,17 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         else if(view.getId()==R.id.b_my_trade){
             uc.passUserToActivity(UserTrade.class, activity, myID);
         }
+        else if(view.getId()==R.id.b_my_friends){
+            uc.passUserToActivity(UserFriends.class, activity, myID);
+        }
+        else if(view.getId()==R.id.b_my_profile){
+            uc.passUserToActivity(UserProfile.class, activity, myID);
+        }
         else if(view.getId()==R.id.b_search){
             uc.passUserToActivity(Search.class, activity, myID);
+        }
+        else if(view.getId()==R.id.b_log_out){
+            uc.passUserToActivity(UserLogin.class, activity, myID);
         }
     }
 

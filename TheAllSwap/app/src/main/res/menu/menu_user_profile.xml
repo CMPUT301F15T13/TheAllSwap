@@ -41,7 +41,7 @@
         />
     <item
         android:id="@+id/action_logout"
-        android:title="@string/logout"
+        android:title="@string/log_out"
         android:orderInCategory="100"
         android:onClick="userLogoutSelected"/>
 </menu>
