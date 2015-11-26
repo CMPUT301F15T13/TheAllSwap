@@ -13,6 +13,7 @@ import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.R;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.RadioButton;
 import android.widget.ArrayAdapter;
@@ -25,118 +26,91 @@ import android.widget.EditText;
  *
  */
 public class AddInventoryItem extends Activity implements View.OnClickListener {
-    private Spinner spinner;
-    private Button newItemSubmitButton;
-    private InventoryController ic = new InventoryController();
     private UserController uc = new UserController();
-    private User currentUser = new User();
-    private ArrayList<User>userList = new ArrayList<User>();
-    private ArrayAdapter<String> adapter;
+    private InventoryController ic = new InventoryController();
     private AddInventoryItem activity = this;
-    private RadioButton isPrivateButton;
-    private RadioButton isNotPrivateButton;
-    private EditText inputItemName;
-    private EditText inputItemQuality;
-    private EditText inputItemQuantity;
-    private EditText inputItemComment;
-    private String itemName;
-    private String itemQuality;
-    private int itemQuantity;
-    private String itemComment;
-    private String itemCategory;
-    private boolean itemPrivacy;
-    private String spinerItemCategory;
-    private String checklistenerScope;
-
-    private static final String[] m={"A", "B", "C", "D", "E", "F", "G", "H", "I", "j"};
+    private ArrayList<User> userList = new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
+    private User currentUser = new User();
+    private Item currentItem = new Item();
+
+    private String itemName;
+    private int itemQuantity;
+    private String itemCategory;
+    private String itemQuality;
+    private String itemComment;
+    private boolean itemPrivacy;
+    private int itemId;
+    private int currentUserId;
+    private String currentUserString;
+
+    private EditText ItemName;
+    private EditText ItemQuantity;
+    private EditText ItemQuality;
+    private EditText ItemComments;
+    private Spinner ItemCategory;
+    private RadioGroup ItemPrivacy;
+
+    private ArrayAdapter<String> categoryAdapter;
+    private static final String[] m={"A", "B", "C", "D", "E", "F", "G", "H", "I", "j"};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_inventory_item);
-        inputItemName = (EditText)findViewById(R.id.new_item_name);
-        inputItemQuality=(EditText)findViewById(R.id.new_item_quality);
-        inputItemComment=(EditText)findViewById(R.id.text_item_comment);
-        inputItemQuantity=(EditText)findViewById(R.id.new_item_quantity);
 
-        /************************************************
-         TODO: spinner adapter starts.
-         ************************************************/
-        spinner = (Spinner) findViewById(R.id.new_item_category_spinner);
+        ItemName = (EditText) findViewById(R.id.new_item_name);
+        ItemQuantity = (EditText) findViewById(R.id.new_item_quantity);
+        ItemQuality = (EditText) findViewById(R.id.new_item_quality);
+        ItemCategory = (Spinner) findViewById(R.id.new_item_category_spinner);
+        ItemPrivacy = (RadioGroup) findViewById(R.id.radioGroup);
+        ItemComments =(EditText) findViewById(R.id.text_item_comment);
 
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
+        //Get current user
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        Intent intent = getIntent();
+        currentUserString = intent.getStringExtra("myID");
+        currentUser = uc.findUserById(currentUserString, userList);
 
-        spinner.setAdapter(adapter);
-
-        spinner.setOnItemSelectedListener(new SpinnerSelectedListener());
-
-        spinner.setVisibility(View.VISIBLE);
-        /************************************************
-         TODO: spinner adapter done.
-         ************************************************/
-
-        /************************************************
-         TODO: submit button starts.
-         ************************************************/
-        newItemSubmitButton = (Button) findViewById(R.id.b_edit_item_submit);
-        newItemSubmitButton.setOnClickListener(new View.OnClickListener() {
+        Button editItemButton = (Button) findViewById(R.id.b_edit_item_submit);
+        editItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                itemName = inputItemName.getText().toString();
-                itemQuality=inputItemQuality.getText().toString();
-                itemQuantity=Integer.parseInt(inputItemQuantity.getText().toString());
-                itemComment=inputItemComment.getText().toString();
-
-                //Track currently logged in use
-                userList = uc.loadUserFromFile(activity, FILENAME, userList);
-                Intent intent = getIntent();
-                String current = intent.getStringExtra("myID");
-                currentUser = uc.findUserById(current, userList);
+                itemName = ItemName.getText().toString();
+                itemQuality = ItemQuality.getText().toString();
+                itemQuantity = Integer.parseInt(ItemQuantity.getText().toString());
+                itemCategory = ItemCategory.getSelectedItem().toString();
+                if(ItemPrivacy.getCheckedRadioButtonId() >0) {
+                    RadioButton rb = (RadioButton) findViewById(ItemPrivacy.getCheckedRadioButtonId());
+                    itemPrivacy = rb.isChecked();
+                } else {
+                    itemPrivacy = false;
+                }
+                itemComment = ItemComments.getText().toString();
 
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
-                uc.makeInputStringToast(activity, itemQuality);
                 ic.addItemToInventory(currentUser, newItem);
                 uc.saveInFile(FILENAME, activity, userList);
-                uc.classIntent(UserInventory.class, activity);
+                uc.passUserToActivity(UserInventory.class, activity, currentUserString);
             }
         });
 
-        /************************************************
-         TODO: submit button done.
-         ************************************************/
-
-        /************************************************
-         TODO: radio button starts.
-         ************************************************/
-        isPrivateButton = (RadioButton) findViewById(R.id.b_new_item_private);
-        isNotPrivateButton = (RadioButton) findViewById(R.id.b_new_item_not_private);
-        isPrivateButton.setOnClickListener(this);
-        isNotPrivateButton.setOnClickListener(this);
-        /************************************************
-         TODO: radio button done.
-
-        inputItemName = (EditText)findViewById(R.id.new_item_name);
-        inputItemQuality=(EditText)findViewById(R.id.new_item_quality);
-        inputItemComment=(EditText)findViewById(R.id.text_item_comment);
-        inputItemQuantity=(EditText)findViewById(R.id.new_item_quantity);
-
-        itemQuality=inputItemQuality.getText().toString();
-        itemQuantity=Integer.parseInt(inputItemQuantity.getText().toString());
-        itemComment=inputItemComment.getText().toString();
-        ************************************************/
+        categoryAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
+        ItemCategory.setAdapter(categoryAdapter);
+        ItemCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
+        ItemCategory.setVisibility(View.VISIBLE);
 
     }
+
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
 
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_inventory_item, menu);
+        getMenuInflater().inflate(R.menu.menu_edit_single_item, menu);
         return true;
     }
 
@@ -154,17 +128,18 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
 
         return super.onOptionsItemSelected(item);
     }
-    class SpinnerSelectedListener implements OnItemSelectedListener {
+
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
 
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                    long arg3) {
-            //TODO: some stuff
             itemCategory = m[arg2];
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
+
     @Override
     public void onClick(View view) {
 
@@ -185,3 +160,8 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
         }
     }
 }
+
+
+
+
+

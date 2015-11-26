@@ -51,7 +51,7 @@ public class UserInventory extends ActionBarActivity {
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i=new Intent(activity,EditSingleItem.class);
+                Intent i=new Intent(activity, ItemProfile.class);
                 i.putExtra("id", String.valueOf(position));
                 i.putExtra("myID", currentUserString);
                 activity.startActivity(i);
@@ -64,22 +64,6 @@ public class UserInventory extends ActionBarActivity {
                 i.putExtra("id", String.valueOf(position));
                 i.putExtra("myID", currentUserString);
                 activity.startActivity(i);
-                /**
-                 * call removeUser from controller to delete an user from the userList.
-                 */
-                //userList = uc.removeUser(userList, position);
-                /**
-                 * save the new userList to the file to sync.
-                 */
-                //uc.saveInFile(FILENAME, activity, userList);
-                /**
-                 * call remove item of the result list.
-                 */
-                //userList = uc.removeItem(resultList, position);
-                /**
-                 * notify adapter changes have been done.
-                 */
-                //adapter.notifyDataSetChanged();
                 return true;
             }
         });

@@ -83,14 +83,15 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
                 itemQuantity = Integer.parseInt(ItemQuantity.getText().toString());
                 itemComment = ItemComments.getText().toString();
                 itemCategory = ItemCategory.getSelectedItem().toString();
-                //itemPrivacy = ItemPrivacy.getFocusedChild();
+                if(ItemPrivacy.getCheckedRadioButtonId() >0) {
+                    RadioButton rb = (RadioButton) findViewById(ItemPrivacy.getCheckedRadioButtonId());
+                    itemPrivacy = rb.isChecked();
+                } else {
+                    itemPrivacy = false;
+                }
 
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
 
-                /************************************************
-                 TODO: to edit current item and save it in the local user list for saving
-                 TODO: later.
-                 ************************************************/
                 userList = ic.editItem(userList, currentUserId, itemId, newItem);
                 uc.saveInFile(FILENAME, activity, userList);
                 uc.passUserToActivity(UserInventory.class, activity, currentUserString);
@@ -101,9 +102,6 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
         ItemCategory.setAdapter(categoryAdapter);
         ItemCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
         ItemCategory.setVisibility(View.VISIBLE);
-        /************************************************
-         TODO: spinner categoryAdapter done.
-         ************************************************/
 
     }
 
@@ -122,7 +120,14 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
         ItemQuantity.setText(String.valueOf(currentItem.getItemQuantity()));
         int pos = categoryAdapter.getPosition(currentItem.getItemCatgory());
         ItemCategory.setSelection(pos);
-        ItemPrivacy.setPressed(currentItem.isPrivate());
+        if(currentItem.isPrivate()){
+            RadioButton rb = (RadioButton) ItemPrivacy.getChildAt(0);
+            rb.setChecked(true);
+        } else {
+            RadioButton rb = (RadioButton) ItemPrivacy.getChildAt(1);
+            rb.setChecked(true);
+        }
+        ItemComments.setText(currentItem.getItemComments());
     }
 
     @Override
