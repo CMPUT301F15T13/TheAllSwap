@@ -56,12 +56,14 @@ public class UserInventory extends ActionBarActivity {
                 i.putExtra("myID", currentUserString);
                 activity.startActivity(i);
             }
-
-
         });
         itemList.setLongClickable(true);
         itemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
+                Intent i=new Intent(activity,EditSingleItem.class);
+                i.putExtra("id", String.valueOf(position));
+                i.putExtra("myID", currentUserString);
+                activity.startActivity(i);
                 /**
                  * call removeUser from controller to delete an user from the userList.
                  */
