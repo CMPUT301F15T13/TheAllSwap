@@ -84,6 +84,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.qyu4.theallswap.View.UserFriends" />
         </activity>
+        <activity
+            android:name=".View.ItemProfile"
+            android:label="@string/title_activity_item_profile"
+            android:parentActivityName=".UserInventory" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="UserInventory" />
+        </activity>
     </application>
 
 </manifest>

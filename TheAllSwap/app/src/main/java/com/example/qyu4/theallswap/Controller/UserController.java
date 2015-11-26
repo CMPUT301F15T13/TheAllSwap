@@ -182,7 +182,8 @@ public class UserController {
      *                  calls toString() method of User class is an override method.
      * @return the result list.
      */
-    public ArrayList<String> convertUserToString(ArrayList<User>userList, ArrayList resultList){
+    public ArrayList<String> convertUserToString(ArrayList<User>userList, ArrayList<String> resultList){
+        resultList.clear();
         for (int i=0; i< userList.size(); i++){
             resultList.add(userList.get(i).toString());
         }
@@ -292,4 +293,11 @@ public class UserController {
             makeInputStringToast(context, otherUser.getUserId() + " added as friend");
         }
     }
+
+    public void removeUserAsFriend(Context context, User currentUser, User otherUser){
+        currentUser.removeFriend(otherUser);
+        makeInputStringToast(context, otherUser.getUserId() + " removed from friends");
+    }
 }
+
+

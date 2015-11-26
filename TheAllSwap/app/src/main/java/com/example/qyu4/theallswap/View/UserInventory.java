@@ -44,39 +44,26 @@ public class UserInventory extends ActionBarActivity {
         currentUser = uc.findUserById(currentUserString, userList);
 
         //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUserString);
+        //uc.makeInputStringToast(this, currentUserString);
 
         resultList = uc.convertItemToString(currentUser, resultList);
 
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i=new Intent(activity,EditSingleItem.class);
+                Intent i=new Intent(activity, ItemProfile.class);
                 i.putExtra("id", String.valueOf(position));
-                uc.passValueBetweenActivity(EditSingleItem.class, activity, position);
+                i.putExtra("myID", currentUserString);
+                activity.startActivity(i);
             }
-
-
         });
         itemList.setLongClickable(true);
         itemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                /**
-                 * call removeUser from controller to delete an user from the userList.
-                 */
-                //userList = uc.removeUser(userList, position);
-                /**
-                 * save the new userList to the file to sync.
-                 */
-                //uc.saveInFile(FILENAME, activity, userList);
-                /**
-                 * call remove item of the result list.
-                 */
-                //userList = uc.removeItem(resultList, position);
-                /**
-                 * notify adapter changes have been done.
-                 */
-                //adapter.notifyDataSetChanged();
+                Intent i=new Intent(activity,EditSingleItem.class);
+                i.putExtra("id", String.valueOf(position));
+                i.putExtra("myID", currentUserString);
+                activity.startActivity(i);
                 return true;
             }
         });

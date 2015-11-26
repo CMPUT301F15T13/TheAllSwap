@@ -30,7 +30,7 @@ public class UserFriends extends ActionBarActivity {
     private ArrayList<User> userList= new ArrayList<User>();
     private static final String FILENAME = "userProfile.txt";
     private ArrayAdapter<User> adapter;
-    private ArrayList resultList = new ArrayList<>();
+    private ArrayList<String> resultList = new ArrayList<>();
 
     private ListView friendList;
     private Button addFriend;
@@ -52,38 +52,33 @@ public class UserFriends extends ActionBarActivity {
         resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
 
         friendList = (ListView)findViewById(R.id.lv_user_friends);
+
+        //Set adapter
+        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
+        friendList.setAdapter(adapter);
+
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i=new Intent(activity,SingleFriendProfile.class);
                 i.putExtra("id", String.valueOf(position));
-                i.putExtra("myID", currentUser.getUserId());
+                i.putExtra("myID", currentUserString);
                 activity.startActivity(i);
+
+                uc.makeInputStringToast(activity, "We're Back");
             }
         });
 
         friendList.setLongClickable(true);
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                //This should maybe prompt for a new menu of options but not delete outright.
-                //Especially right now it deletes the entire user from existence.
-                uc.makeInputStringToast(activity, "Long Click");
-                /**
-                 * call removeUser from controller to delete an user from the userList.
-                 */
-                //userList = uc.removeUser(userList, position);
-                /**
-                 * save the new userList to the file to sync.
-                 */
-                //uc.saveInFile(FILENAME, activity, userList);
-                /**
-                 * call remove item of the result list.
-                 */
-                //userList = uc.removeItem(userList, position);
-                /**
-                 * notify adapter changes have been done.
-                 */
-                //adapter.notifyDataSetChanged();
-                //uc.classIntent(PreviousBrowsedTrade.class, activity);
+                //Long Click removes the user from friends list
+                User selectedUser = currentUser.getFriendsList().get((int)id);
+                uc.removeUserAsFriend(activity, currentUser, selectedUser);
+
+                resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+                adapter.notifyDataSetChanged();
+
+                uc.saveInFile(FILENAME, activity, userList);
                 return true;
             }
         });
@@ -94,16 +89,28 @@ public class UserFriends extends ActionBarActivity {
                 Intent i = new Intent(activity, AddFriend.class);
                 i.putExtra("myID", currentUser.getUserId());
                 activity.startActivity(i);
+                adapter.notifyDataSetChanged();
             }
         });
     }
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
-        friendList.setAdapter(adapter);
+        //userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
         adapter.notifyDataSetChanged();
     }
+    /*
+    @Override
+    protected void onResume() {
+        super.onResume();
+        resultList.clear();
+        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+        adapter.notifyDataSetChanged();
+
+        uc.makeInputStringToast(activity, "onResume");
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -46,12 +46,14 @@ public class AddFriend extends ActionBarActivity {
         resultList = uc.convertUserToString(userList, resultList);
 
         userSelectionList = (ListView)findViewById(R.id.lv_add_friend);
+        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
+
         userSelectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User selectedUser = userList.get((int)id);
                 uc.addUserAsFriend(activity, currentUser, selectedUser);
                 uc.saveInFile(FILENAME, activity, userList);
-                uc.passUserToActivity(UserFriends.class, activity, currentUserString);
+                activity.finish();
             }
         });
     }
@@ -59,7 +61,7 @@ public class AddFriend extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
+
         userSelectionList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

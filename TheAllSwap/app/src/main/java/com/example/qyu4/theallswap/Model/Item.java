@@ -33,7 +33,7 @@ public class Item {
         return itemQuality;
     }
 
-    public boolean isItemPrivacy() {
+    public boolean isPrivate() {
         return itemPrivacy;
     }
 
