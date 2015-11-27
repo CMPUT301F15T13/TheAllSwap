@@ -7,7 +7,7 @@ android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
 tools:context="com.example.qyu4.theallswap.View.UserLogin"
-    android:background="#081212">
+    android:background="#BBCCCC">
 
 <TextView
     android:id="@+id/textView1"
@@ -17,8 +17,7 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="20dp"
     android:text="@string/authentication_required"
-    android:textAppearance="?android:attr/textAppearanceLarge"
-    android:textColor="#fbfbfb" />
+    android:textAppearance="?android:attr/textAppearanceLarge" />
 
 <TextView
     android:id="@+id/textView2"
@@ -29,8 +28,7 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin"
     android:layout_marginTop="75dp"
     android:layout_marginLeft="10dp"
     android:text="@string/user_name"
-    android:textAppearance="?android:attr/textAppearanceMedium"
-    android:textColor="#fbfbfb" />
+    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 <EditText
     android:id="@+id/user_name"
@@ -40,9 +38,7 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin"
     android:layout_marginLeft="35dp"
     android:layout_toRightOf="@+id/textView2"
     android:hint="@string/user_name_hint"
-    android:layout_alignParentEnd="true"
-    android:textColor="#fbfbfb"
-    android:textColorHint="#99fbfbfb">
+    android:layout_alignParentEnd="true">
     <requestFocus />
 </EditText>
 

@@ -80,7 +80,7 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.classIntent(UserLogin.class, activity);
+        activity.finish();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
             uc.classIntent(UserProfile.class, activity);
         }
         else if(view.getId()==R.id.b_log_out){
-            uc.classIntent(UserLogin.class, activity);
+            activity.finish();
         }
     }
 
