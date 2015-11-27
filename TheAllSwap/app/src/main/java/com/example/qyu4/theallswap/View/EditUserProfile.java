@@ -69,6 +69,7 @@ public class EditUserProfile extends ActionBarActivity {
                  */
                 uc.saveInFile(userList.getFilename(), activity, userList);
                 uc.classIntent(UserProfile.class, activity);
+                activity.finish();
             }
         });
     }
