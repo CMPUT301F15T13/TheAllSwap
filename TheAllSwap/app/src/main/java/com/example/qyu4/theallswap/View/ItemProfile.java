@@ -62,7 +62,7 @@ public class ItemProfile extends ActionBarActivity {
         itemId = uc.stringToInt(currentItemString);
         currentItem = currentUser.getUserInventory().get(itemId);
 
-        Button editItemButton = (Button) findViewById(R.id.edit_item_button);
+        Button editItemButton = (Button) findViewById(R.id.edit_profile_button);
         editItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 uc.passValueToActivity(EditSingleItem.class, activity, itemId);
