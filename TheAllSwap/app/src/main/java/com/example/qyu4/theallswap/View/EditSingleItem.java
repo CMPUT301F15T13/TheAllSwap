@@ -64,14 +64,14 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        ItemName = (EditText) findViewById(R.id.new_item_name);
-        ItemQuantity = (EditText) findViewById(R.id.new_item_quantity);
-        ItemQuality = (EditText) findViewById(R.id.new_item_quality);
+        ItemName = (EditText) findViewById(R.id.new_user_name);
+        ItemQuantity = (EditText) findViewById(R.id.new_email);
+        ItemQuality = (EditText) findViewById(R.id.new_city);
         ItemComments =(EditText) findViewById(R.id.text_item_comment);
         ItemCategory = (Spinner) findViewById(R.id.new_item_category_spinner);
         ItemPrivacy = (RadioGroup) findViewById(R.id.radioGroup);
 
-        Button editItemButton = (Button) findViewById(R.id.b_edit_item_submit);
+        Button editItemButton = (Button) findViewById(R.id.b_edit_profile_submit);
         editItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 currentUserId = userList.indexOf(currentUser);

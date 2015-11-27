@@ -27,7 +27,6 @@ public class UserProfile extends ActionBarActivity {
     private UserProfile activity =this;
     private UserController uc = new UserController();
     private UserList userList;
-    private static final String FILENAME = "userProfile.txt";
     private User currentUser;
     private String userName;
     private String userEmail;
@@ -56,7 +55,7 @@ public class UserProfile extends ActionBarActivity {
         editProfileButton = (Button)findViewById(R.id.edit_profile_button);
         editProfileButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                uc.classIntent(EditUserProfile.class, activity);
             }
         });
         /**

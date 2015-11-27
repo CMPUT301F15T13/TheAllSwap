@@ -92,6 +92,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="UserInventory" />
         </activity>
+        <activity
+            android:name=".View.EditUserProfile"
+            android:label="@string/title_activity_edit_user_profile" >
+        </activity>
     </application>
 
 </manifest>

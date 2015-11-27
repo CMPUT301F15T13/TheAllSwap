@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_item_quantity"
-        android:layout_below="@+id/new_item_name"
+        android:layout_below="@+id/new_user_name"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -28,11 +28,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_item_quality"
-        android:layout_below="@+id/new_item_quantity"
+        android:layout_below="@+id/new_email"
         android:layout_alignParentStart="true" />
 
     <Button
-        android:id="@+id/b_edit_item_submit"
+        android:id="@+id/b_edit_profile_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/submit"
@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:text="@string/new_item_category"
         android:id="@+id/textView3"
-        android:layout_below="@+id/new_item_quality"
+        android:layout_below="@+id/new_city"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -99,32 +99,32 @@
             android:layout_alignParentStart="true" />
     </RadioGroup>
     <EditText
-        android:id="@+id/new_item_name"
+        android:id="@+id/new_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_patient_id_label"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/new_item_quantity" />
+        android:layout_alignEnd="@+id/new_email" />
 
     <EditText
-        android:id="@+id/new_item_quantity"
+        android:id="@+id/new_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_user_email"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/new_item_quality">
+        android:layout_alignEnd="@+id/new_city">
     </EditText>
 
     <EditText
-        android:id="@+id/new_item_quality"
+        android:id="@+id/new_city"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:layout_below="@+id/new_user_city"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/b_edit_item_submit" />
+        android:layout_alignEnd="@+id/b_edit_profile_submit" />
 
     <EditText
         android:layout_width="match_parent"

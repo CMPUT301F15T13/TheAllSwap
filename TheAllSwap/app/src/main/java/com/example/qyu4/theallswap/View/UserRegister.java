@@ -11,8 +11,6 @@ import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
-import java.util.ArrayList;
-
 /**
  * User register activity take user input and check the valid id, passwords
  * email, and city by calling controller method in UserController class.
@@ -41,7 +39,7 @@ public class UserRegister extends Activity implements View.OnClickListener{
 
         userList = UserList.getUserList();
 
-        userRegister =(Button) findViewById(R.id.b_edit_item_submit);
+        userRegister =(Button) findViewById(R.id.b_edit_profile_submit);
         userRegister.setOnClickListener(this);
     }
     @Override
@@ -51,11 +49,11 @@ public class UserRegister extends Activity implements View.OnClickListener{
     }
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.b_edit_item_submit){
+        if(view.getId()==R.id.b_edit_profile_submit){
 
-            inputEmail=(EditText)findViewById(R.id.new_item_quantity);
-            inputCity =(EditText)findViewById(R.id.new_item_quality);
-            userName = (EditText)findViewById(R.id.new_item_name);
+            inputEmail=(EditText)findViewById(R.id.new_email);
+            inputCity =(EditText)findViewById(R.id.new_city);
+            userName = (EditText)findViewById(R.id.new_user_name);
 
             String newEmail = inputEmail.getText().toString();
             String newCity  = inputCity.getText().toString();

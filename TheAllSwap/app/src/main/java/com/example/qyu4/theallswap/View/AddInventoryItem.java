@@ -1,7 +1,6 @@
 package com.example.qyu4.theallswap.View;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,12 +12,11 @@ import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
-import android.widget.AdapterView.OnItemSelectedListener;
+
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.RadioButton;
 import android.widget.ArrayAdapter;
-import java.util.ArrayList;
 import android.widget.Button;
 import android.widget.EditText;
 /**
@@ -60,14 +58,14 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        ItemName = (EditText) findViewById(R.id.new_item_name);
-        ItemQuantity = (EditText) findViewById(R.id.new_item_quantity);
-        ItemQuality = (EditText) findViewById(R.id.new_item_quality);
+        ItemName = (EditText) findViewById(R.id.new_user_name);
+        ItemQuantity = (EditText) findViewById(R.id.new_email);
+        ItemQuality = (EditText) findViewById(R.id.new_city);
         ItemCategory = (Spinner) findViewById(R.id.new_item_category_spinner);
         ItemPrivacy = (RadioGroup) findViewById(R.id.radioGroup);
         ItemComments =(EditText) findViewById(R.id.text_item_comment);
 
-        Button editItemButton = (Button) findViewById(R.id.b_edit_item_submit);
+        Button editItemButton = (Button) findViewById(R.id.b_edit_profile_submit);
         editItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 itemName = ItemName.getText().toString();
