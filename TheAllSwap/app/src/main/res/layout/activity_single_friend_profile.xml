@@ -60,6 +60,15 @@
         android:layout_height="wrap_content"
         android:id="@+id/single_inventory"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView12" />
+        android:layout_below="@+id/textView12"
+        android:layout_above="@+id/btn_remove_as_friend" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove as Friend"
+        android:id="@+id/btn_remove_as_friend"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
