@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
@@ -24,46 +25,37 @@ import java.util.ArrayList;
 public class UserInventory extends ActionBarActivity {
     private UserInventory activity = this;
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
+
+    private UserList userList;
+    private User currentUser;
+
     private ArrayAdapter<User> adapter;
     private ListView itemList;
-    private ArrayList resultList = new ArrayList<>();
-    private User currentUser = new User();
-    private String currentUserString;
+    private ArrayList<String> resultList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_inventory);
 
-        //Track currently logged in user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
-
-        //Shows currently logged in username in a toast
-        //uc.makeInputStringToast(this, currentUserString);
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
 
         resultList = uc.convertItemToString(currentUser, resultList);
+        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
 
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
+        itemList.setAdapter(adapter);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i=new Intent(activity, ItemProfile.class);
-                i.putExtra("id", String.valueOf(position));
-                i.putExtra("myID", currentUserString);
-                activity.startActivity(i);
+                uc.passValueToActivity(ItemProfile.class, activity, position);
             }
         });
         itemList.setLongClickable(true);
         itemList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                Intent i=new Intent(activity,EditSingleItem.class);
-                i.putExtra("id", String.valueOf(position));
-                i.putExtra("myID", currentUserString);
-                activity.startActivity(i);
+                uc.passValueToActivity(EditSingleItem.class, activity, position);
+                adapter.notifyDataSetChanged();
                 return true;
             }
         });
@@ -71,9 +63,7 @@ public class UserInventory extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
-        itemList.setAdapter(adapter);
+        resultList = uc.convertItemToString(currentUser, resultList);
         adapter.notifyDataSetChanged();
     }
 
@@ -99,29 +89,29 @@ public class UserInventory extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     public void userAddItemToInventory(MenuItem menu){
-        uc.passUserToActivity(AddInventoryItem.class, activity, currentUserString);
+        uc.classIntent(AddInventoryItem.class, activity);
     }
     public void userMyInventorySelected(MenuItem menu){
-        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+        uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
 
-        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
+        uc.classIntent(UserTrade.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
+        uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.passUserToActivity(Search.class, activity, currentUserString);
+        uc.classIntent(Search.class, activity);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
+        uc.classIntent(UserLogin.class, activity);
     }
 
 

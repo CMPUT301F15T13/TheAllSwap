@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 import java.lang.reflect.Type;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.View.UserInventory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -106,19 +107,20 @@ public class UserController {
      * @param context: current activity.
      * @param fileName: file name.
      */
-    public ArrayList<User> loadUserFromFile(Context context, String fileName, ArrayList<User> userList) {
+    public void loadUsersFromFile(Context context, String fileName, UserList userList) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
             BufferedReader in = new BufferedReader(new InputStreamReader(fis));
             Gson gson = new Gson();
             // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
-            userList = gson.fromJson(in, userListType);
-
+            ArrayList<User> loadedList = gson.fromJson(in, userListType);
+            for(User u : loadedList){
+                userList.add(u);
+            }
         } catch (FileNotFoundException e) {
-            userList = new ArrayList<>();
+
         }
-        return userList;
     }
 
     /**
@@ -197,11 +199,11 @@ public class UserController {
      * @param resultList: an array of item names.
      * @return: an array of item names.
      */
-    public ArrayList convertItemToString(User currentUser, ArrayList resultList){
+    public ArrayList<String> convertItemToString(User currentUser, ArrayList<String> resultList){
+        resultList.clear();
         for (int i=0; i< currentUser.getUserInventory().size(); i++){
             resultList.add(currentUser.getUserInventory().get(i).getItemName());
         }
-
         return resultList;
     }
 
@@ -221,7 +223,7 @@ public class UserController {
      * @param userList: the arrayList that contains all the users.
      * @param position: the index of user to be deleted.
      */
-    public ArrayList<User> removeUser(ArrayList<User>userList, int position){
+    public ArrayList<User> removeUser(ArrayList<User> userList, int position){
         userList.remove(position);
         return userList;
     }
@@ -244,10 +246,9 @@ public class UserController {
      * @param context: current activity.
      * @param userPosition: index of current object.
      */
-    public void passValueBetweenActivity(Class newClass, Context context, int userPosition){
+    public void passValueToActivity(Class newClass, Context context, int userPosition){
         Intent openNewActivity = new Intent(context, newClass);
         openNewActivity.putExtra("id", String.valueOf(userPosition));
-
         context.startActivity(openNewActivity);
     }
 
@@ -257,12 +258,6 @@ public class UserController {
         context.startActivity(openNewActivity);
     }
 
-    //Don't think this is necessary
-    public void passCurrentUsernameBetweenActivity(Class newClass, Context context, String currentUserName){
-        Intent openNewActivity = new Intent(context, newClass);
-        openNewActivity.putExtra("current user", currentUserName);
-        context.startActivity(openNewActivity);
-    }
 
     /**
      * convert a string value to int.

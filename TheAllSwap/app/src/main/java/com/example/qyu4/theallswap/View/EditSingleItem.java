@@ -18,6 +18,7 @@ import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
@@ -31,9 +32,9 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
     private UserController uc = new UserController();
     private InventoryController ic = new InventoryController();
     private EditSingleItem activity = this;
-    private ArrayList<User> userList = new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
-    private User currentUser = new User();
+    private UserList userList;
+    private User currentUser;
+
     private Item currentItem = new Item();
 
     private String itemName;
@@ -60,18 +61,16 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_single_item);
+
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
+
         ItemName = (EditText) findViewById(R.id.new_item_name);
         ItemQuantity = (EditText) findViewById(R.id.new_item_quantity);
         ItemQuality = (EditText) findViewById(R.id.new_item_quality);
         ItemComments =(EditText) findViewById(R.id.text_item_comment);
         ItemCategory = (Spinner) findViewById(R.id.new_item_category_spinner);
         ItemPrivacy = (RadioGroup) findViewById(R.id.radioGroup);
-
-        //Get current user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
 
         Button editItemButton = (Button) findViewById(R.id.b_edit_item_submit);
         editItemButton.setOnClickListener(new View.OnClickListener() {
@@ -83,18 +82,18 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
                 itemQuantity = Integer.parseInt(ItemQuantity.getText().toString());
                 itemComment = ItemComments.getText().toString();
                 itemCategory = ItemCategory.getSelectedItem().toString();
-                if(ItemPrivacy.getCheckedRadioButtonId() >0) {
+                if(ItemPrivacy.getCheckedRadioButtonId() >= 0) {
                     RadioButton rb = (RadioButton) findViewById(ItemPrivacy.getCheckedRadioButtonId());
-                    itemPrivacy = rb.isChecked();
+                    itemPrivacy = rb.getText().toString().equals("Yes");
                 } else {
                     itemPrivacy = false;
                 }
 
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
 
-                userList = ic.editItem(userList, currentUserId, itemId, newItem);
-                uc.saveInFile(FILENAME, activity, userList);
-                uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+                ic.editItem(currentUser, itemId, newItem);
+                uc.saveInFile(userList.getFilename(), activity, userList);
+                activity.finish();
             }
         });
 
@@ -108,12 +107,11 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
     @Override
     protected void onStart() {
         super.onStart();
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
 
-        itemId =uc.stringToInt(id);
+        itemId = uc.stringToInt(id);
         currentItem = currentUser.getUserInventory().get(itemId);
         ItemName.setText(currentItem.getItemName());
         ItemQuality.setText(currentItem.getItemQuality());

@@ -11,6 +11,7 @@ import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.RadioGroup;
@@ -29,10 +30,9 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private UserController uc = new UserController();
     private InventoryController ic = new InventoryController();
     private AddInventoryItem activity = this;
-    private ArrayList<User> userList = new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
-    private User currentUser = new User();
-    private Item currentItem = new Item();
+
+    private UserList userList;
+    private User currentUser;
 
     private String itemName;
     private int itemQuantity;
@@ -40,9 +40,6 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private String itemQuality;
     private String itemComment;
     private boolean itemPrivacy;
-    private int itemId;
-    private int currentUserId;
-    private String currentUserString;
 
     private EditText ItemName;
     private EditText ItemQuantity;
@@ -59,18 +56,15 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_inventory_item);
 
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
+
         ItemName = (EditText) findViewById(R.id.new_item_name);
         ItemQuantity = (EditText) findViewById(R.id.new_item_quantity);
         ItemQuality = (EditText) findViewById(R.id.new_item_quality);
         ItemCategory = (Spinner) findViewById(R.id.new_item_category_spinner);
         ItemPrivacy = (RadioGroup) findViewById(R.id.radioGroup);
         ItemComments =(EditText) findViewById(R.id.text_item_comment);
-
-        //Get current user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
 
         Button editItemButton = (Button) findViewById(R.id.b_edit_item_submit);
         editItemButton.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +73,9 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
                 itemQuality = ItemQuality.getText().toString();
                 itemQuantity = Integer.parseInt(ItemQuantity.getText().toString());
                 itemCategory = ItemCategory.getSelectedItem().toString();
-                if(ItemPrivacy.getCheckedRadioButtonId() >0) {
+                if(ItemPrivacy.getCheckedRadioButtonId() >= 0) {
                     RadioButton rb = (RadioButton) findViewById(ItemPrivacy.getCheckedRadioButtonId());
-                    itemPrivacy = rb.isChecked();
+                    itemPrivacy = rb.getText().toString().equals("Yes");
                 } else {
                     itemPrivacy = false;
                 }
@@ -89,8 +83,8 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
 
                 Item newItem = ic.createNewItem(itemName, itemQuantity, itemQuality, itemCategory, itemPrivacy, itemComment);
                 ic.addItemToInventory(currentUser, newItem);
-                uc.saveInFile(FILENAME, activity, userList);
-                uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+                uc.saveInFile(userList.getFilename(), activity, userList);
+                activity.finish();
             }
         });
 

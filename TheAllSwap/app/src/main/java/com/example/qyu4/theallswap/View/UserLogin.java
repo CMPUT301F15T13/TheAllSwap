@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
@@ -22,9 +23,10 @@ public class UserLogin extends Activity implements View.OnClickListener{
     private Button userLogin;
     private Button userRegister;
     private EditText userName;
+
     private UserController uc= new UserController();
-    private static final String FILENAME = "userProfile.txt";
-    private ArrayList<User> userList = new ArrayList<User>();
+    private UserList userList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,22 +35,15 @@ public class UserLogin extends Activity implements View.OnClickListener{
         userRegister = (Button) findViewById(R.id.b_user_register);
         userRegister.setOnClickListener(this);
         userLogin.setOnClickListener(this);
-
+        userList = UserList.getUserList();
+        uc.loadUsersFromFile(activity, userList.getFilename(), userList);
     }
-
 
     @Override
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        /***************************************************
-         TODO: add loading friends list method
-         TODO: into arrayList user list
-         *************************************************/
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        /***************************************************
-         TODO: Done adding loading friends list method.
-         *************************************************/
+        userList = UserList.getUserList();
 
     }
     @Override
@@ -60,9 +55,8 @@ public class UserLogin extends Activity implements View.OnClickListener{
 
             //TODO: load file and save objects in arrayList.
             if(uc.checkingUserExist(currentUserName, userList)){
-                Intent nextScreen = new Intent(activity, UserMainView.class);
-                nextScreen.putExtra("myID", currentUserName);
-                activity.startActivity(nextScreen);
+                userList.setCurrentUser(uc.findUserById(currentUserName, userList));
+                uc.classIntent(UserMainView.class, activity);
             }else{
                 uc.makeInvalidUserToast(activity);
             }

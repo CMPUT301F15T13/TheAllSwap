@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
@@ -24,23 +25,17 @@ import java.util.ArrayList;
 public class UserProfile extends ActionBarActivity {
     private UserProfile activity =this;
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
+    private UserList userList;
     private static final String FILENAME = "userProfile.txt";
-    private User currentUser = new User();
-    private String currentUserString;
+    private User currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
 
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
-
-        //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUserString);
     }
 
 
@@ -67,25 +62,25 @@ public class UserProfile extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+        uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
-        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
+        uc.classIntent(UserTrade.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
+        uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.passUserToActivity(Search.class, activity, currentUserString);
+        uc.classIntent(Search.class, activity);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
+        uc.classIntent(UserLogin.class, activity);
     }
 
 

@@ -14,6 +14,7 @@ import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
@@ -22,9 +23,8 @@ public class ItemProfile extends ActionBarActivity {
     private UserController uc = new UserController();
     private InventoryController ic = new InventoryController();
     private ItemProfile activity = this;
-    private ArrayList<User> userList = new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
-    private User currentUser = new User();
+    private UserList userList;
+    private User currentUser;
     private Item currentItem = new Item();
 
     private String itemName;
@@ -35,10 +35,8 @@ public class ItemProfile extends ActionBarActivity {
     private String itemPrivacy;
 
     private int itemId;
-    private int currentUserId;
 
     private String currentItemString;
-    private String currentUserString;
 
     //The TextViews that show the actual item's value
     private TextView ItemName;
@@ -61,12 +59,10 @@ public class ItemProfile extends ActionBarActivity {
         ItemPrivacy = (TextView) findViewById(R.id.assigned_privacy);
         ItemComments = (TextView) findViewById(R.id.assigned_comments);
 
-        //Get current user and Item
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
 
+        Intent intent = getIntent();
         currentItemString = intent.getStringExtra("id");
         itemId = uc.stringToInt(currentItemString);
         currentItem = currentUser.getUserInventory().get(itemId);
@@ -74,10 +70,8 @@ public class ItemProfile extends ActionBarActivity {
         Button editItemButton = (Button) findViewById(R.id.edit_item_button);
         editItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent i=new Intent(activity,EditSingleItem.class);
-                i.putExtra("id", currentItemString);
-                i.putExtra("myID", currentUserString);
-                activity.startActivity(i);
+                uc.passValueToActivity(EditSingleItem.class, activity, itemId);
+                activity.finish();
             }
         });
     }
@@ -85,22 +79,18 @@ public class ItemProfile extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ItemName.clearComposingText();
-        ItemName.append(currentItem.getItemName());
-        ItemQuantity.clearComposingText();
-        ItemQuantity.append(Integer.toString(currentItem.getItemQuantity()));
-        ItemQuality.clearComposingText();
-        ItemQuality.append(currentItem.getItemQuality());
-        ItemCategory.clearComposingText();
-        ItemCategory.append(currentItem.getItemCatgory());
-        ItemPrivacy.clearComposingText();
+        ItemName.setText(currentItem.getItemName());
+        ItemQuantity.setText(String.format("%d", currentItem.getItemQuantity()));
+        ItemQuality.setText(currentItem.getItemQuality());
+        ItemCategory.setText(currentItem.getItemCatgory());
         if(currentItem.isPrivate()) {
-            ItemPrivacy.append("Is private");
+            String s = "Is private";
+            ItemPrivacy.setText(s);
         } else {
-            ItemPrivacy.append("Is Public");
+            String s = "Is Public";
+            ItemPrivacy.setText(s);
         }
-        ItemComments.clearComposingText();
-        ItemComments.append(currentItem.getItemComments());
+        ItemComments.setText(currentItem.getItemComments());
 
     }
 }

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
@@ -22,16 +23,14 @@ import java.util.ArrayList;
  *
  */
 public class UserFriends extends ActionBarActivity {
-    private User currentUser;
-    private String currentUserString;
-
     private UserFriends activity = this;
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
+
+    private UserList userList;
+    private User currentUser;
+
     private ArrayAdapter<User> adapter;
     private ArrayList<String> resultList = new ArrayList<>();
-
     private ListView friendList;
     private Button addFriend;
 
@@ -40,14 +39,8 @@ public class UserFriends extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_friends);
 
-        //Track currently logged in user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
-
-        //Shows currently logged in username in a toast
-        //uc.makeInputStringToast(this, currentUserString);
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
 
         resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
 
@@ -59,12 +52,7 @@ public class UserFriends extends ActionBarActivity {
 
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i=new Intent(activity,SingleFriendProfile.class);
-                i.putExtra("id", String.valueOf(position));
-                i.putExtra("myID", currentUserString);
-                activity.startActivity(i);
-
-                uc.makeInputStringToast(activity, "We're Back");
+                uc.passValueToActivity(SingleFriendProfile.class, activity, position);
             }
         });
 
@@ -77,8 +65,7 @@ public class UserFriends extends ActionBarActivity {
 
                 resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
                 adapter.notifyDataSetChanged();
-
-                uc.saveInFile(FILENAME, activity, userList);
+                uc.saveInFile(userList.getFilename(), activity, userList);
                 return true;
             }
         });
@@ -86,9 +73,7 @@ public class UserFriends extends ActionBarActivity {
         addFriend = (Button)findViewById(R.id.btn_add_friend);
         addFriend.setOnClickListener(new AdapterView.OnClickListener() {
             public void onClick(View view) {
-                Intent i = new Intent(activity, AddFriend.class);
-                i.putExtra("myID", currentUser.getUserId());
-                activity.startActivity(i);
+                uc.classIntent(AddFriend.class, activity);
                 adapter.notifyDataSetChanged();
             }
         });
@@ -96,21 +81,9 @@ public class UserFriends extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        //userList = uc.loadUserFromFile(activity, FILENAME, userList);
         resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
         adapter.notifyDataSetChanged();
     }
-    /*
-    @Override
-    protected void onResume() {
-        super.onResume();
-        resultList.clear();
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
-        adapter.notifyDataSetChanged();
-
-        uc.makeInputStringToast(activity, "onResume");
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -135,25 +108,25 @@ public class UserFriends extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+        uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
-        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
+        uc.classIntent(UserTrade.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
+        uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.passUserToActivity(Search.class, activity, currentUserString);
+        uc.classIntent(Search.class, activity);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
+        uc.classIntent(UserLogin.class, activity);
     }
 
 

@@ -1,6 +1,5 @@
 package com.example.qyu4.theallswap.View;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -9,9 +8,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
@@ -24,45 +23,32 @@ import java.util.ArrayList;
 public class PreviousBrowsedTrade extends ActionBarActivity {
     private PreviousBrowsedTrade activity = this;
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
+
+    private UserList userList;
+    private User currentUser;
+
     private ArrayAdapter<User> adapter;
-    private ListView preBrowsedTradeList;
+    private ListView prevBrowsedTradeList;
     private ArrayList resultList = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_previous_browsed_trade);
-        preBrowsedTradeList = (ListView)findViewById(R.id.lv_user_previous);
-        preBrowsedTradeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
+
+        prevBrowsedTradeList = (ListView)findViewById(R.id.lv_user_previous);
+        prevBrowsedTradeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: some stuff
-                uc.makeInvalidUserToast(activity);
             }
 
 
         });
 
-        preBrowsedTradeList.setLongClickable(true);
-        preBrowsedTradeList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        prevBrowsedTradeList.setLongClickable(true);
+        prevBrowsedTradeList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                /**
-                 * call removeUser from controller to delete an user from the userList.
-                 */
-                userList = uc.removeUser(userList, position);
-                /**
-                 * save the new userList to the file to sync.
-                 */
-                uc.saveInFile(FILENAME, activity, userList);
-                /**
-                 * call remove item of the result list.
-                 */
-                userList =uc.removeItem(resultList, position);
-                /**
-                 * notify adapter changes have been done.
-                 */
-                adapter.notifyDataSetChanged();
-                //uc.classIntent(PreviousBrowsedTrade.class, activity);
                 return true;
             }
         });
@@ -71,19 +57,8 @@ public class PreviousBrowsedTrade extends ActionBarActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-        resultList = uc.convertUserToString(userList, resultList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
-
-        preBrowsedTradeList.setAdapter(adapter);
+        prevBrowsedTradeList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
     }

@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
@@ -23,15 +24,10 @@ import java.util.ArrayList;
  *
  */
 public class SingleFriendProfile extends ActionBarActivity {
-
     private SingleFriendProfile activity = this;
     private UserController uc= new UserController();
-    private static final String FILENAME = "userProfile.txt";
-    private ArrayList<User> userList =new ArrayList<User>();
-
-    private String currentUserString;
+    private UserList userList;
     private User currentUser;
-
     private User singleUser = new User();
 
     private TextView userName;
@@ -51,15 +47,10 @@ public class SingleFriendProfile extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_friend_profile);
 
-        //Track currently logged in user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
+
         Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
-
-        //Shows currently logged in username in a toast
-        //uc.makeInputStringToast(this, currentUserString);
-
         String id = intent.getStringExtra("id");
         int userId = uc.stringToInt(id);
         singleUser = currentUser.getFriendsList().get(userId);
@@ -70,9 +61,7 @@ public class SingleFriendProfile extends ActionBarActivity {
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: After I fix this part click on the item current user can start a trade...
-                uc.makeInputStringToast(activity, "You click on the TREASURE!! After I fix this part click on the " +
-                        "item current user can start a trade...");
-
+                uc.passValueToActivity(CreateTrade.class, activity, position);
             }
 
 
@@ -118,26 +107,26 @@ public class SingleFriendProfile extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+        uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
 
-        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
+        uc.classIntent(UserTrade.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
+        uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.passUserToActivity(Search.class, activity, currentUserString);
+        uc.classIntent(Search.class, activity);
     }
 
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
+        uc.classIntent(UserLogin.class, activity);
     }
 }

@@ -43,7 +43,6 @@ public class UserInventoryWithImage extends ListActivity {
     protected void onStart() {
         // TODO Auto-generated method stub
         super.onStart();
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
         User currentUser = userList.get(0);
         /***************************************************
          TODO: add loading friends list method.

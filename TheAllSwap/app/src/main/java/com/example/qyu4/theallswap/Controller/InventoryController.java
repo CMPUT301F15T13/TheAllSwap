@@ -47,15 +47,11 @@ public class InventoryController {
 
     /**
      * edit an item and save it in the current local userList.
-     * @param userList: current User List
-     * @param currentUserId: current User id
      * @param itemId: the index of current item
      * @param newItem: the item that will replace the old one
-     * @return a new user list for the future save to the server
      */
-    public ArrayList<User> editItem(ArrayList<User> userList, int currentUserId, int itemId, Item newItem){
-        userList.get(currentUserId).getUserInventory().set(itemId, newItem);
-        return userList;
+    public void editItem(User currentUser, int itemId, Item newItem){
+        currentUser.getUserInventory().set(itemId, newItem);
     }
 
 

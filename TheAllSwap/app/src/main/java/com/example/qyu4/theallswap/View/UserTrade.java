@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
@@ -24,15 +25,12 @@ import java.util.ArrayList;
  */
 public class UserTrade extends ActionBarActivity {
     private UserTrade activity = this;
+    private UserList userList;
     private User currentUser;
-    private String currentUserString;
 
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
-    private ArrayAdapter<User> adapter;
     private ArrayList resultList = new ArrayList<>();
-
+    private ArrayAdapter<User> adapter;
     private ListView friendList;
 
     @Override
@@ -40,50 +38,23 @@ public class UserTrade extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_trade);
 
-        //Track currently logged in user
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        Intent intent = getIntent();
-        currentUserString = intent.getStringExtra("myID");
-        currentUser = uc.findUserById(currentUserString, userList);
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
 
-        //Shows currently logged in username in a toast
-        //uc.makeInputStringToast(this, currentUserString);
 
         resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
 
         friendList = (ListView)findViewById(R.id.lv_user_trade_item);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(activity, CreateTrade.class);
-                i.putExtra("id", String.valueOf(position));
-                i.putExtra("myID", currentUser.getUserId());
-                activity.startActivity(i);
+                uc.passValueToActivity(CreateTrade.class, activity, position);
             }
         });
 
         friendList.setLongClickable(true);
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
-                //This should maybe prompt for a new menu of options but not delete outright.
-                //Especially right now it deletes the entire user from existence.
                 uc.makeInputStringToast(activity, "Long Click");
-                /**
-                 * call removeUser from controller to delete an user from the userList.
-                 */
-                //userList = uc.removeUser(userList, position);
-                /**
-                 * save the new userList to the file to sync.
-                 */
-                //uc.saveInFile(FILENAME, activity, userList);
-                /**
-                 * call remove item of the result list.
-                 */
-                //userList = uc.removeItem(userList, position);
-                /**
-                 * notify adapter changes have been done.
-                 */
-                //adapter.notifyDataSetChanged();
-                //uc.classIntent(PreviousBrowsedTrade.class, activity);
                 return true;
             }
         });
@@ -119,25 +90,25 @@ public class UserTrade extends ActionBarActivity {
     }
 
     public void userMyInventorySelected(MenuItem menu){
-        uc.passUserToActivity(UserInventory.class, activity, currentUserString);
+        uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
-        uc.passUserToActivity(UserTrade.class, activity, currentUserString);
+        uc.classIntent(UserTrade.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
-        uc.passUserToActivity(UserFriends.class, activity, currentUserString);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userMyProfileSelected(MenuItem menu){
-        uc.passUserToActivity(UserProfile.class, activity, currentUserString);
+        uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.passUserToActivity(Search.class, activity, currentUserString);
+        uc.classIntent(Search.class, activity);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
-        uc.passUserToActivity(PreviousBrowsedTrade.class, activity, currentUserString);
+        uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
     public void userLogoutSelected(MenuItem menu){
-        uc.passUserToActivity(UserLogin.class, activity, currentUserString);
+        uc.classIntent(UserLogin.class, activity);
     }
 
 

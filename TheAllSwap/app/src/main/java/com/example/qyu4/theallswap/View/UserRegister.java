@@ -8,6 +8,7 @@ import android.widget.EditText;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Profile;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ import java.util.ArrayList;
  */
 public class UserRegister extends Activity implements View.OnClickListener{
     private UserRegister activity = this;
-    private static final String FILENAME = "userProfile.txt";
     private UserController uc = new UserController();
+
+    private UserList userList;
+
     private User newUser = new User();
-    private ArrayList<User> newUserList = new ArrayList<User>();
     private Profile newProfile= new Profile();
     private Button userRegister;
     private EditText userName;
@@ -37,21 +39,14 @@ public class UserRegister extends Activity implements View.OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_register);
 
+        userList = UserList.getUserList();
+
         userRegister =(Button) findViewById(R.id.b_edit_item_submit);
         userRegister.setOnClickListener(this);
     }
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-        /***************************************************
-         TODO: add loading friends list method
-         TODO: into arrayList user list
-         *************************************************/
-        newUserList = uc.loadUserFromFile(activity, FILENAME, newUserList);
-        /***************************************************
-         TODO: Done adding loading friends list method.
-         *************************************************/
 
     }
     @Override
@@ -69,11 +64,10 @@ public class UserRegister extends Activity implements View.OnClickListener{
             newProfile.setUserCity(newCity);
             newProfile.setUserContactInformation(newEmail);
             newUser.setUserProfile(newProfile);
-            newUserList.add(newUser);
-            uc.saveInFile(FILENAME, activity, newUserList);
+            userList.add(newUser);
+            uc.saveInFile(userList.getFilename(), activity, userList);
             uc.makeInputStringToast(this, "Registered username: " + userId);
-            uc.classIntent(UserLogin.class, activity);
-
+            activity.finish();
         }
     }
 

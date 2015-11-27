@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
@@ -21,16 +22,23 @@ import java.util.ArrayList;
 public class CreateTrade extends ActionBarActivity {
     private CreateTrade activity = this;
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
+
+    private UserList userList;
+    private User currentUser;
+
     private ArrayAdapter<User> adapter;
     private ListView itemList;
     private ListView itemList2;
     private ArrayList resultList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_trade);
+
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
+
         itemList = (ListView)findViewById(R.id.listView);
         itemList2 = (ListView)findViewById(R.id.listView2);
 
@@ -57,8 +65,8 @@ public class CreateTrade extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        userList = uc.loadUserFromFile(activity, FILENAME, userList);
-        User currentUser = userList.get(0);
+
+
         resultList = uc.convertItemToString(currentUser, resultList);
 
         // TODO? Use spinners instead of lists for clearer selection
