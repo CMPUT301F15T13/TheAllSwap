@@ -47,9 +47,9 @@ public class ItemProfile extends ActionBarActivity {
         setContentView(R.layout.activity_item_profile);
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ItemName = (TextView) findViewById(R.id.assigned_name);
-        ItemQuantity = (TextView) findViewById(R.id.assigned_quantity);
-        ItemQuality = (TextView) findViewById(R.id.assigned_quality);
+        ItemName = (TextView) findViewById(R.id.current_user_name);
+        ItemQuantity = (TextView) findViewById(R.id.current_user_email);
+        ItemQuality = (TextView) findViewById(R.id.current_user_city);
         ItemCategory = (TextView) findViewById(R.id.assigned_category);
         ItemPrivacy = (TextView) findViewById(R.id.assigned_privacy);
         ItemComments = (TextView) findViewById(R.id.assigned_comments);

@@ -1,5 +1,9 @@
 package com.example.qyu4.theallswap.View;
-
+/**
+ * UserProfile class is an activity that showing current user's profile.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
+ *
+ */
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,25 +14,28 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import android.widget.Button;
+import android.widget.TextView;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 import com.example.qyu4.theallswap.Controller.UserController;
 
 import java.util.ArrayList;
-/**
- * UserProfile class is an activity that showing current user's profile.
- * @author qyu4, egsmith, lixin1, ozero, debelang.
- *
- */
+
 public class UserProfile extends ActionBarActivity {
     private UserProfile activity =this;
     private UserController uc = new UserController();
     private UserList userList;
     private static final String FILENAME = "userProfile.txt";
     private User currentUser;
-
+    private String userName;
+    private String userEmail;
+    private String userCity;
+    private Button editProfileButton;
+    private TextView userNameText;
+    private TextView userEmailText;
+    private TextView userCityText;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,31 @@ public class UserProfile extends ActionBarActivity {
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
+        /**
+         * retrieve current user's profiles
+         */
+        userName = currentUser.getUserId();
+        userEmail=currentUser.getUserProfile().getUserContactInformation();
+        userCity= currentUser.getUserProfile().getUserCity();
+
+        /**
+         * Edit button
+         */
+        editProfileButton = (Button)findViewById(R.id.edit_profile_button);
+        editProfileButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+        /**
+         * Text View part
+         */
+        userNameText = (TextView)findViewById(R.id.current_user_name);
+        userNameText.setText(userName);
+        userEmailText = (TextView)findViewById(R.id.current_user_email);
+        userEmailText.setText(userEmail);
+        userCityText = (TextView)findViewById(R.id.current_user_city);
+        userCityText.setText(userCity);
     }
 
 

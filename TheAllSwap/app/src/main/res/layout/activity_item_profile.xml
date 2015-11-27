@@ -20,7 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_item_quantity"
-        android:layout_below="@+id/assigned_name"
+        android:layout_below="@+id/current_user_name"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/new_item_quality"
-        android:layout_below="@+id/assigned_quantity"
+        android:layout_below="@+id/current_user_email"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:text="@string/new_item_category"
         android:id="@+id/textView3"
-        android:layout_below="@+id/assigned_quality"
+        android:layout_below="@+id/current_user_city"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/assigned_name"
+        android:id="@+id/current_user_name"
         android:layout_below="@+id/new_patient_id_label"
         android:layout_alignParentStart="true"
         android:hint="Name" />
@@ -68,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/assigned_quantity"
+        android:id="@+id/current_user_email"
         android:layout_below="@+id/new_user_email"
         android:layout_alignParentStart="true"
         android:hint="A number" />
@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/assigned_quality"
+        android:id="@+id/current_user_city"
         android:layout_below="@+id/new_user_city"
         android:layout_alignParentStart="true"
         android:hint="Quality" />

@@ -20,7 +20,7 @@ android:background="#BBCCCC">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/user_contact_information"
-    android:layout_below="@+id/assigned_name"
+    android:layout_below="@+id/current_user_name"
     android:layout_alignParentStart="true" />
 
 <TextView
@@ -28,14 +28,14 @@ android:background="#BBCCCC">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="@string/user_city"
-    android:layout_below="@+id/assigned_quantity"
+    android:layout_below="@+id/current_user_email"
     android:layout_alignParentStart="true" />
 
     <TextView
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:id="@+id/assigned_name"
+    android:id="@+id/current_user_name"
     android:layout_below="@+id/new_patient_id_label"
     android:layout_alignParentStart="true"
     android:hint="Name" />
@@ -44,7 +44,7 @@ android:background="#BBCCCC">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:id="@+id/assigned_quantity"
+    android:id="@+id/current_user_email"
     android:layout_below="@+id/new_user_email"
     android:layout_alignParentStart="true"
     android:hint="A number"
@@ -54,7 +54,7 @@ android:background="#BBCCCC">
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textAppearance="?android:attr/textAppearanceMedium"
-    android:id="@+id/assigned_quality"
+    android:id="@+id/current_user_city"
     android:layout_below="@+id/new_user_city"
     android:layout_alignParentStart="true"
     android:hint="Quality"
