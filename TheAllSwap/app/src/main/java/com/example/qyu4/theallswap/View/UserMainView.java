@@ -74,7 +74,7 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         uc.classIntent(UserProfile.class, activity);
     }
     public void userSearchSelected(MenuItem menu){
-        uc.classIntent(Search.class, activity);
+        uc.classIntent(UserFriends.class, activity);
     }
     public void userPreviousBrowseSelected(MenuItem menu){
         uc.classIntent(PreviousBrowsedTrade.class, activity);
@@ -98,7 +98,7 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
             uc.classIntent(UserProfile.class, activity);
         }
         else if(view.getId()==R.id.b_search){
-            uc.classIntent(Search.class, activity);
+            uc.classIntent(UserFriends.class, activity);
         }
         else if(view.getId()==R.id.b_log_out){
             uc.classIntent(UserLogin.class, activity);

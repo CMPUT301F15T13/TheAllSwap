@@ -154,6 +154,7 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                    long arg3) {
             itemCategory = m[arg2];
+
         }
 
         public void onNothingSelected(AdapterView<?> arg0) {

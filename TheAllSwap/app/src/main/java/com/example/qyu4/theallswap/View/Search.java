@@ -9,8 +9,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
@@ -25,9 +28,23 @@ import java.util.ArrayList;
 public class Search extends ActionBarActivity {
     private Search activity =this;
     private UserController uc = new UserController();
+    private InventoryController ic = new InventoryController();
+
+    private SearchView SearchBox;
+
+    private ListView itemList;
+    private ArrayAdapter<String> adapter;
+    private ArrayList<String> itemArray = new ArrayList<String>();
 
     private UserList userList;
     private User currentUser;
+    private User singleUser = new User();
+
+    private String itemCategory;
+    private Spinner ItemCategory;
+    private ArrayAdapter<String> categoryAdapter;
+    private static final String[] m={"All", "Weapons", "Gadgets", "Intel", "Identities", "Fine Clothing",
+            "Vehicles", "Bug-out Supplies", "Contacts", "Secret", "Most Secret", "Other"};
 
 
     @Override
@@ -38,17 +55,83 @@ public class Search extends ActionBarActivity {
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        //Shows currently logged in username in a toast
-        uc.makeInputStringToast(this, currentUser.getUserId());
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id");
+        int userId = uc.stringToInt(id);
+        singleUser = currentUser.getFriendsList().get(userId);
+
+        itemArray = ic.showNonPrivateItems(singleUser);
+
+        SearchBox = (SearchView) findViewById(R.id.search_inventory_friend);
+        SearchBox.setOnQueryTextListener(new SearchBoxListener());
+
+        ItemCategory = (Spinner) findViewById(R.id.sp_category_select);
+        categoryAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,m);
+        ItemCategory.setAdapter(categoryAdapter);
+        ItemCategory.setOnItemSelectedListener(new SpinnerSelectedListener());
+        ItemCategory.setVisibility(View.VISIBLE);
+
+        itemList = (ListView)findViewById(R.id.lv_friend_inventory);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item);
+        adapter.addAll(itemArray);
+        itemList.setAdapter(adapter);
+        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int index = currentUser.getFriendsList().indexOf(singleUser);
+                uc.passValueToActivity(CreateTrade.class, activity, index);
+                //activity.finish();
+            }
+        });
+
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter.notifyDataSetChanged();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_user_main_viewing, menu);
         return true;
+    }
+
+    class SearchBoxListener implements SearchView.OnQueryTextListener {
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            itemArray = ic.searchSuggestions(singleUser, newText);
+            adapter.clear();
+            adapter.addAll(itemArray);
+            adapter.notifyDataSetChanged();
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            itemArray = ic.searchSuggestions(singleUser, query);
+            adapter.clear();
+            adapter.addAll(itemArray);
+            adapter.notifyDataSetChanged();
+            return false;
+        }
+    }
+
+    class SpinnerSelectedListener implements AdapterView.OnItemSelectedListener {
+
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                                   long arg3) {
+            itemCategory = m[arg2];
+            itemArray = ic.showItemsInCategory(singleUser, itemCategory);
+            adapter.clear();
+            adapter.addAll(itemArray);
+            adapter.notifyDataSetChanged();
+        }
+
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
     }
 
     @Override
