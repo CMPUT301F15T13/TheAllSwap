@@ -6,8 +6,8 @@
     <string name="repeat_password">Repeat Password</string>
     <string name="title_activity_user_edit_inventory">User Edit Inventory Activity</string>
     <string name="title_activity_user_trading">User Trading Activity</string>
-    <string name="welcome">This is a welcome page</string>
-    <string name="b_temp">Go</string>
+    <string name="welcome">Welcome to the AllSwap</string>
+    <string name="b_temp">Begin</string>
     <string name="title_activity_user_login">User Login</string>
     <string name="authentication_required">Authentication Required</string>
     <string name="user_name">Username:</string>

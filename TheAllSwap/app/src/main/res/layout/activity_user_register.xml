@@ -6,7 +6,8 @@ android:paddingBottom="@dimen/activity_vertical_margin"
 android:paddingLeft="@dimen/activity_horizontal_margin"
 android:paddingRight="@dimen/activity_horizontal_margin"
 android:paddingTop="@dimen/activity_vertical_margin"
-tools:context="com.example.qyu4.theallswap.View.UserRegister" >
+tools:context="com.example.qyu4.theallswap.View.UserRegister"
+    android:background="#081212">
 
     <EditText
         android:id="@+id/new_item_name"
@@ -15,7 +16,10 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
         android:ems="10"
         android:layout_below="@+id/new_patient_id_label"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/new_item_quantity" />
+        android:layout_alignEnd="@+id/new_item_quantity"
+        android:textColor="#fbfbfb"
+        android:hint="username here"
+        android:textColorHint="#99fbfbfb" />
 
     <TextView
         android:id="@+id/new_patient_id_label"
@@ -24,7 +28,8 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
         android:layout_alignLeft="@+id/new_item_name"
         android:layout_alignParentTop="true"
         android:layout_marginTop="24px"
-        android:text="User Name" />
+        android:text="User Name"
+        android:textColor="#fbfbfb" />
 
 
     <TextView
@@ -33,7 +38,8 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
     android:layout_height="wrap_content"
         android:text="Email Adress"
         android:layout_below="@+id/new_item_name"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#fbfbfb" />
 
     <EditText
         android:id="@+id/new_item_quantity"
@@ -42,7 +48,10 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
         android:ems="10"
         android:layout_below="@+id/new_user_email"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/new_item_quality">
+        android:layout_alignEnd="@+id/new_item_quality"
+        android:textColor="#fbfbfb"
+        android:textColorHint="#99fbfbfb"
+        android:hint="email address">
     </EditText>
 
     <TextView
@@ -51,7 +60,8 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
         android:layout_height="wrap_content"
         android:text="City"
         android:layout_below="@+id/new_item_quantity"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:textColor="#fbfbfb" />
 
     <EditText
         android:id="@+id/new_item_quality"
@@ -60,7 +70,10 @@ tools:context="com.example.qyu4.theallswap.View.UserRegister" >
         android:ems="10"
         android:layout_below="@+id/new_user_city"
         android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/b_edit_item_submit" />
+        android:layout_alignEnd="@+id/b_edit_item_submit"
+        android:textColor="#fbfbfb"
+        android:hint="enter city"
+        android:textColorHint="#99fbfbfb" />
 
     <Button
         android:id="@+id/b_edit_item_submit"
