@@ -79,6 +79,7 @@ public class ItemProfile extends ActionBarActivity {
         deleteItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 ic.removeItemFromInventory(currentUser, currentItem);
+                uc.saveInFile(userList.getFilename(), activity, userList);
                 activity.finish();
             }
         });
