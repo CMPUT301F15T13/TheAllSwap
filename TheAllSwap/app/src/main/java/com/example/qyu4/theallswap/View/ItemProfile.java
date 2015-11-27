@@ -50,7 +50,7 @@ public class ItemProfile extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_profile);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ItemName = (TextView) findViewById(R.id.assigned_name);
         ItemQuantity = (TextView) findViewById(R.id.assigned_quantity);
@@ -71,6 +71,14 @@ public class ItemProfile extends ActionBarActivity {
         editItemButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 uc.passValueToActivity(EditSingleItem.class, activity, itemId);
+                activity.finish();
+            }
+        });
+
+        Button deleteItemButton = (Button) findViewById(R.id.remove_item_button);
+        deleteItemButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ic.removeItemFromInventory(currentUser, currentItem);
                 activity.finish();
             }
         });

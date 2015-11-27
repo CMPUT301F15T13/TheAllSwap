@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -82,6 +83,15 @@ public class SingleFriendProfile extends ActionBarActivity {
         adapter = new ArrayAdapter<User>(this, R.layout.list_item, itemArray);
         itemList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        Button removeFriendButton = (Button) findViewById(R.id.btn_remove_as_friend);
+        removeFriendButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                uc.removeUserAsFriend(activity, currentUser, singleUser);
+                activity.finish();
+            }
+        });
+
     }
 
     @Override

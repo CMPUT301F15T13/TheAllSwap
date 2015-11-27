@@ -23,6 +23,10 @@ public class InventoryController {
         currentUser.addItemToInventory(item);
     }
 
+    public void removeItemFromInventory(User currentUser, Item item){
+        currentUser.removeItemFromInventory(item);
+    }
+
     /**
      * create a new item
      * @param itemName: item name
