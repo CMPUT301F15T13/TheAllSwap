@@ -1,8 +1,5 @@
 package com.example.qyu4.theallswap.Model;
 
-import com.example.qyu4.theallswap.View.Search;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +12,9 @@ public class Item {
     private String itemName;
     private int itemQuantity;
     private String itemQuality;
-    private String itemCatgory;
+    private String itemCategory;
     private boolean itemPrivacy;
+    private boolean availability = true;
     private String itemComments;
     private ArrayList<Integer> itemImgId;
 
@@ -36,6 +34,8 @@ public class Item {
     public boolean isPrivate() {
         return itemPrivacy;
     }
+
+    public boolean isAvailable() { return availability;}
 
     public String getItemComments() {
         return itemComments;
@@ -59,6 +59,7 @@ public class Item {
         this.setItemPrivacy(itemPrivacy);
         this.setItemComments(ItemComments);
         this.setItemImgId(itemImgId);
+        this.availability = true;
     }
 
 
@@ -76,7 +77,7 @@ public class Item {
     }
 
     public void setItemCategory(String itemCategory) {
-        this.itemCatgory = itemCategory;
+        this.itemCategory = itemCategory;
     }
 
     public void setItemPrivacy(boolean itemPrivacy) {
@@ -89,6 +90,10 @@ public class Item {
         this.itemImgId = itemImgId;
     }
 
+    public void setAvailability(boolean avail) {
+        availability = avail;
+    }
+
     public void addImage(int addedImage){
         this.itemImgId.add(addedImage);
     }
@@ -98,8 +103,8 @@ public class Item {
         }
     }
 
-    public String getItemCatgory() {
-        return itemCatgory;
+    public String getItemCategory() {
+        return itemCategory;
     }
 
     public boolean checkImageSize() {

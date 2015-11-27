@@ -2,6 +2,7 @@ package com.example.qyu4.theallswap.View;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
 
+import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 public class SingleFriendProfile extends ActionBarActivity {
     private SingleFriendProfile activity = this;
     private UserController uc= new UserController();
+    private InventoryController ic = new InventoryController();
     private UserList userList;
     private User currentUser;
     private User singleUser = new User();
@@ -39,7 +42,7 @@ public class SingleFriendProfile extends ActionBarActivity {
     private String tvUserEmail;
     private String tvUserCity;
 
-    private ArrayList itemArray = new ArrayList();
+    private ArrayList<String> itemArray = new ArrayList<String>();
     private ArrayAdapter<User> adapter;
     private ListView itemList;
 
@@ -56,33 +59,22 @@ public class SingleFriendProfile extends ActionBarActivity {
         int userId = uc.stringToInt(id);
         singleUser = currentUser.getFriendsList().get(userId);
 
-        itemArray = uc.convertItemToString(singleUser, itemArray);
-
-        itemList = (ListView)findViewById(R.id.single_inventory);
-        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: After I fix this part click on the item current user can start a trade...
-                uc.passValueToActivity(CreateTrade.class, activity, position);
-            }
-
-
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         userName = (TextView) findViewById(R.id.single_user_name);
         userEmail = (TextView) findViewById(R.id.single_user_email);
         userCity = (TextView) findViewById(R.id.single_user_city);
-        userName.setText(singleUser.getUserId());
-        userEmail.setText(singleUser.getUserProfile().getUserContactInformation());
-        userCity.setText(singleUser.getUserProfile().getUserCity());
 
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, itemArray);
+        itemArray = ic.showNonPrivateItems(singleUser);
+
+        itemList = (ListView)findViewById(R.id.single_inventory);
+        itemList.getItemAtPosition(0);
+        adapter = new ArrayAdapter<User>(this, R.layout.list_item, (ArrayList) itemArray);
         itemList.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                uc.passValueToActivity(CreateTrade.class, activity, (int) id);
+                activity.finish();
+            }
+        });
 
         Button removeFriendButton = (Button) findViewById(R.id.btn_remove_as_friend);
         removeFriendButton.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +83,16 @@ public class SingleFriendProfile extends ActionBarActivity {
                 activity.finish();
             }
         });
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        userName.setText(singleUser.getUserId());
+        userEmail.setText(singleUser.getUserProfile().getUserContactInformation());
+        userCity.setText(singleUser.getUserProfile().getUserCity());
+
+        adapter.notifyDataSetChanged();
     }
 
     @Override
