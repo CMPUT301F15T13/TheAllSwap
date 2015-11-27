@@ -21,8 +21,6 @@ import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
-import java.util.ArrayList;
-
 /**
  * EditSingleItem class is an activity that edit owner's single item.
  * @author qyu4, egsmith, lixin1, ozero, debelang.
@@ -116,7 +114,7 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
         ItemName.setText(currentItem.getItemName());
         ItemQuality.setText(currentItem.getItemQuality());
         ItemQuantity.setText(String.valueOf(currentItem.getItemQuantity()));
-        int pos = categoryAdapter.getPosition(currentItem.getItemCatgory());
+        int pos = categoryAdapter.getPosition(currentItem.getItemCategory());
         ItemCategory.setSelection(pos);
         if(currentItem.isPrivate()){
             RadioButton rb = (RadioButton) ItemPrivacy.getChildAt(0);

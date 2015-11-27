@@ -58,5 +58,24 @@ public class InventoryController {
         currentUser.getUserInventory().set(itemId, newItem);
     }
 
+    public ArrayList<String> showNonPrivateItems(User friend){
+        ArrayList<String> invList = new ArrayList<>();
+        for(Item i : friend.getInventory()){
+            if(!i.isPrivate() && i.isAvailable()) {
+                invList.add(i.getItemName());
+            }
+        }
+        return invList;
+    }
+
+    public Item getItemByName(String name, User owner){
+        Item item = new Item();
+        for(Item i : owner.getInventory()) {
+            if (name.equals(i.getItemName())) {
+                item = i;
+            }
+        }
+        return item;
+    }
 
 }

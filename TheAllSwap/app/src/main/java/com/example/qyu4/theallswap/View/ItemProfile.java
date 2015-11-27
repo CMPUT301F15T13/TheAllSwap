@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioGroup;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.qyu4.theallswap.Controller.InventoryController;
@@ -16,8 +13,6 @@ import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
-
-import java.util.ArrayList;
 
 public class ItemProfile extends ActionBarActivity {
     private UserController uc = new UserController();
@@ -91,7 +86,7 @@ public class ItemProfile extends ActionBarActivity {
         ItemName.setText(currentItem.getItemName());
         ItemQuantity.setText(String.format("%d", currentItem.getItemQuantity()));
         ItemQuality.setText(currentItem.getItemQuality());
-        ItemCategory.setText(currentItem.getItemCatgory());
+        ItemCategory.setText(currentItem.getItemCategory());
         if(currentItem.isPrivate()) {
             String s = "Is private";
             ItemPrivacy.setText(s);
