@@ -43,7 +43,7 @@ public class SingleFriendProfile extends ActionBarActivity {
     private String tvUserCity;
 
     private ArrayList<String> itemArray = new ArrayList<String>();
-    private ArrayAdapter<User> adapter;
+    private ArrayAdapter<String> adapter;
     private ListView itemList;
 
     @Override
@@ -66,14 +66,21 @@ public class SingleFriendProfile extends ActionBarActivity {
         itemArray = ic.showNonPrivateItems(singleUser);
 
         itemList = (ListView)findViewById(R.id.single_inventory);
-        itemList.getItemAtPosition(0);
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, (ArrayList) itemArray);
+        adapter = new ArrayAdapter<String>(this, R.layout.list_item, (ArrayList) itemArray);
         itemList.setAdapter(adapter);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int index = currentUser.getFriendsList().indexOf(singleUser);
                 uc.passValueToActivity(CreateTrade.class, activity, index);
                 //activity.finish();
+            }
+        });
+
+        Button searchInvButton = (Button) findViewById(R.id.btn_search_inv);
+        searchInvButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                int index = currentUser.getFriendsList().indexOf(singleUser);
+                uc.passValueToActivity(Search.class, activity, index);
             }
         });
 

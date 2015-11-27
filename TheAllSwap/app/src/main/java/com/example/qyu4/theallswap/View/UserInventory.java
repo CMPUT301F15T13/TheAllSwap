@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -43,6 +44,13 @@ public class UserInventory extends ActionBarActivity {
 
         resultList = uc.convertItemToString(currentUser, resultList);
         adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
+
+        Button addItem = (Button)findViewById(R.id.btn_add_item);
+        addItem.setOnClickListener(new AdapterView.OnClickListener() {
+            public void onClick(View view) {
+                uc.classIntent(AddInventoryItem.class, activity);
+            }
+        });
 
         itemList = (ListView)findViewById(R.id.lv_user_inventory);
         itemList.setAdapter(adapter);

@@ -68,6 +68,31 @@ public class InventoryController {
         return invList;
     }
 
+    public ArrayList<String> showItemsInCategory (User friend, String category){
+        ArrayList<String> invList = new ArrayList<>();
+        String all = "All";
+        for(Item i : friend.getInventory()){
+            if(!i.isPrivate() && i.isAvailable()) {
+                if (i.getItemCategory().equals(category) || category.equals(all)){
+                    invList.add(i.getItemName());
+                }
+            }
+        }
+        return invList;
+    }
+
+    public ArrayList<String> searchSuggestions (User friend, String search){
+        ArrayList<String> invList = new ArrayList<>();
+        for(Item i : friend.getInventory()){
+            if(!i.isPrivate() && i.isAvailable()) {
+                if (i.getItemName().contains(search)){
+                    invList.add(i.getItemName());
+                }
+            }
+        }
+        return invList;
+    }
+
     public Item getItemByName(String name, User owner){
         Item item = new Item();
         for(Item i : owner.getInventory()) {
