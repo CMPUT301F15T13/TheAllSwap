@@ -49,7 +49,8 @@ public class AddInventoryItem extends Activity implements View.OnClickListener {
     private RadioGroup ItemPrivacy;
 
     private ArrayAdapter<String> categoryAdapter;
-    private static final String[] m={"A", "B", "C", "D", "E", "F", "G", "H", "I", "j"};
+    private static final String[] m={"Weapons", "Gadgets", "Intel", "Identities", "Fine Clothing",
+            "Vehicles", "Bug-out Supplies", "Contacts", "Secret", "Most Secret", "Other"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 import java.lang.reflect.Type;
+
+import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.View.UserInventory;
@@ -115,6 +117,7 @@ public class UserController {
             // https://google-gson.googlecode.com/svn/trunk/gson/docs/javadocs/com/google/gson/Gson.html, 2015-09-23
             Type userListType = new TypeToken<ArrayList<User>>() {}.getType();
             ArrayList<User> loadedList = gson.fromJson(in, userListType);
+            userList.clear();
             for(User u : loadedList){
                 userList.add(u);
             }
@@ -187,7 +190,7 @@ public class UserController {
     public ArrayList<String> convertUserToString(ArrayList<User>userList, ArrayList<String> resultList){
         resultList.clear();
         for (int i=0; i< userList.size(); i++){
-            resultList.add(userList.get(i).toString());
+            resultList.add(userList.get(i).getUserId());
         }
 
         return resultList;
@@ -201,8 +204,8 @@ public class UserController {
      */
     public ArrayList<String> convertItemToString(User currentUser, ArrayList<String> resultList){
         resultList.clear();
-        for (int i=0; i< currentUser.getUserInventory().size(); i++){
-            resultList.add(currentUser.getUserInventory().get(i).getItemName());
+        for (Item i : currentUser.getUserInventory()){
+            resultList.add(i.getItemName());
         }
         return resultList;
     }
