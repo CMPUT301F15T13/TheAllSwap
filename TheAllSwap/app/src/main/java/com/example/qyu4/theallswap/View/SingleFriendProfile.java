@@ -71,8 +71,9 @@ public class SingleFriendProfile extends ActionBarActivity {
         itemList.setAdapter(adapter);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                uc.passValueToActivity(CreateTrade.class, activity, (int) id);
-                activity.finish();
+                int index = currentUser.getFriendsList().indexOf(singleUser);
+                uc.passValueToActivity(CreateTrade.class, activity, index);
+                //activity.finish();
             }
         });
 

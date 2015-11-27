@@ -25,7 +25,7 @@ public class AddFriend extends ActionBarActivity {
     private UserList userList;
 
     private ArrayAdapter<User> adapter;
-    private ArrayList resultList = new ArrayList<>();
+    private ArrayList<String> resultList = new ArrayList<>();
     private ListView userSelectionList;
 
     @Override
@@ -40,7 +40,8 @@ public class AddFriend extends ActionBarActivity {
         resultList = uc.convertUserToString(userList, resultList);
 
         userSelectionList = (ListView)findViewById(R.id.lv_add_friend);
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, resultList);
+        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
+        userSelectionList.setAdapter(adapter);
 
         userSelectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -55,7 +56,7 @@ public class AddFriend extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        userSelectionList.setAdapter(adapter);
+
         adapter.notifyDataSetChanged();
     }
 

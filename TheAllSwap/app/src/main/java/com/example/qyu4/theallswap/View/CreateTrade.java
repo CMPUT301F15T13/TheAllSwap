@@ -26,10 +26,12 @@ public class CreateTrade extends ActionBarActivity {
     private UserList userList;
     private User currentUser;
 
-    private ArrayAdapter<User> adapter;
-    private ListView itemList;
-    private ListView itemList2;
-    private ArrayList resultList = new ArrayList<>();
+    private ArrayAdapter<User> adapterMine;
+    private ArrayAdapter<User> adapterFriend;
+    private ListView itemListMine;
+    private ListView itemListFriend;
+    private ArrayList<String> resultListMine = new ArrayList<>();
+    private ArrayList<String> resultListFriend = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,15 @@ public class CreateTrade extends ActionBarActivity {
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        itemList = (ListView)findViewById(R.id.listView);
-        itemList2 = (ListView)findViewById(R.id.listView2);
+        //Get friend with whom we are trading
+        Intent intent = getIntent();
+        String friendId = intent.getStringExtra("id");
+        User friend = currentUser.getFriendsList().get(uc.stringToInt(friendId));
 
-        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemListMine = (ListView)findViewById(R.id.listView2);
+        itemListFriend = (ListView)findViewById(R.id.listView);
+
+        itemListMine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = ((TextView) view).getText().toString();
                 Toast.makeText(getApplicationContext(), "Selected: " + selectedItem,
@@ -52,7 +59,7 @@ public class CreateTrade extends ActionBarActivity {
             }
         });
 
-        itemList2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        itemListFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = ((TextView) view).getText().toString();
                 Toast.makeText(getApplicationContext(), "Selected: " + selectedItem,
@@ -60,20 +67,22 @@ public class CreateTrade extends ActionBarActivity {
                 //TODO: Second item selected
             }
         });
+
+        resultListMine = uc.convertItemToString(currentUser, resultListMine);
+        resultListFriend = uc.convertItemToString(friend, resultListFriend);
+
+        // TODO? Use spinners instead of lists for clearer selection
+        adapterMine = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultListMine);
+        adapterFriend = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultListFriend);
+        itemListMine.setAdapter(adapterMine);
+        itemListFriend.setAdapter(adapterFriend);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
-
-        resultList = uc.convertItemToString(currentUser, resultList);
-
-        // TODO? Use spinners instead of lists for clearer selection
-        adapter = new ArrayAdapter<User>(this, R.layout.list_item, resultList);
-        itemList.setAdapter(adapter);
-        itemList2.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        adapterMine.notifyDataSetChanged();
+        adapterFriend.notifyDataSetChanged();
     }
 
     @Override
@@ -98,3 +107,4 @@ public class CreateTrade extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 }
+
