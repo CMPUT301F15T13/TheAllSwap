@@ -28,14 +28,12 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         Button myTradeButton = (Button)findViewById(R.id.b_my_trade);
         Button myFriendsButton = (Button)findViewById(R.id.b_my_friends);
         Button myProfileButton = (Button)findViewById(R.id.b_my_profile);
-        Button mySearchButton = (Button)findViewById(R.id.b_search);
         Button myLogOutButton = (Button)findViewById(R.id.b_log_out);
 
         myInventoryButton.setOnClickListener(this);
         myTradeButton.setOnClickListener(this);
         myFriendsButton.setOnClickListener(this);
         myProfileButton.setOnClickListener(this);
-        mySearchButton.setOnClickListener(this);
         myLogOutButton.setOnClickListener(this);
 
     }
@@ -73,9 +71,11 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
     public void userMyProfileSelected(MenuItem menu){
         uc.classIntent(UserProfile.class, activity);
     }
+
     public void userSearchSelected(MenuItem menu){
         uc.classIntent(UserFriends.class, activity);
     }
+
     public void userPreviousBrowseSelected(MenuItem menu){
         uc.classIntent(PreviousBrowsedTrade.class, activity);
     }
@@ -96,9 +96,6 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         }
         else if(view.getId()==R.id.b_my_profile){
             uc.classIntent(UserProfile.class, activity);
-        }
-        else if(view.getId()==R.id.b_search){
-            uc.classIntent(UserFriends.class, activity);
         }
         else if(view.getId()==R.id.b_log_out){
             uc.classIntent(UserLogin.class, activity);

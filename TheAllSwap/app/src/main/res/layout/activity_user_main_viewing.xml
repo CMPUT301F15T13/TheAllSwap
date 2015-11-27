@@ -46,15 +46,6 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/search"
-        android:id="@+id/b_search"
-        android:layout_below="@+id/b_my_profile"
-        android:layout_alignParentEnd="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:text="@string/log_out"
         android:id="@+id/b_log_out"
         android:layout_alignParentBottom="true"
