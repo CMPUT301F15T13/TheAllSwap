@@ -50,8 +50,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
         String friendId = intent.getStringExtra("id");
         User friend = currentUser.getFriendsList().get(uc.stringToInt(friendId));
 
-        itemListMine = (ListView)findViewById(R.id.listView2);
-        itemListFriend = (ListView)findViewById(R.id.listView);
+        itemListMine = (ListView)findViewById(R.id.lv_your_items);
+        itemListFriend = (ListView)findViewById(R.id.lv_friends_items);
 
         itemListMine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,6 +83,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
 
         Button offerTradeButton = (Button)findViewById(R.id.b_offer_trade);
         offerTradeButton.setOnClickListener(this);
+        Button resetSelectionButton = (Button)findViewById(R.id.b_reset_selection);
+        resetSelectionButton.setOnClickListener(this);
     }
 
     @Override
@@ -119,12 +121,18 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
         if(view.getId()==R.id.b_offer_trade){
             if(mySelectedItem == null || friendsSelectedItem == null) {
                 Toast.makeText(getApplicationContext(), "Select the two items you wish to be traded",
-                        Toast.LENGTH_LONG).show();
+                        Toast.LENGTH_SHORT).show();
             }
             else{
                 Toast.makeText(getApplicationContext(), "Offered to trade " + mySelectedItem +
                         " for " + friendsSelectedItem, Toast.LENGTH_LONG).show();
             }
+        }
+        else if(view.getId()==R.id.b_reset_selection) {
+            mySelectedItem = null;
+            friendsSelectedItem = null;
+            Toast.makeText(getApplicationContext(), "Selection has been reset",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }
