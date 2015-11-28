@@ -68,10 +68,17 @@ public class EditUserProfile extends ActionBarActivity {
                  * save changes
                  */
                 uc.saveInFile(userList.getFilename(), activity, userList);
-                uc.classIntent(UserProfile.class, activity);
                 activity.finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userNameEdit.setText(currentUser.getUserId());
+        userEmailEdit.setText(currentUser.getUserProfile().getUserContactInformation());
+        userCityEdit.setText(currentUser.getUserProfile().getUserCity());
     }
 
     @Override

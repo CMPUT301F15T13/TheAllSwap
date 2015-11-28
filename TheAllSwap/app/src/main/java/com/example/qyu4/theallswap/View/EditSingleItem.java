@@ -125,6 +125,7 @@ public class EditSingleItem extends ActionBarActivity implements View.OnClickLis
             rb.setChecked(true);
         }
         ItemComments.setText(currentItem.getItemComments());
+
     }
 
     @Override
