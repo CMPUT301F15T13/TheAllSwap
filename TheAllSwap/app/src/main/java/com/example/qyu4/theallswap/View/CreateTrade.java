@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +20,7 @@ import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
 
-public class CreateTrade extends ActionBarActivity {
+public class CreateTrade extends ActionBarActivity implements View.OnClickListener {
     private CreateTrade activity = this;
     private UserController uc = new UserController();
 
@@ -32,6 +33,9 @@ public class CreateTrade extends ActionBarActivity {
     private ListView itemListFriend;
     private ArrayList<String> resultListMine = new ArrayList<>();
     private ArrayList<String> resultListFriend = new ArrayList<>();
+
+    private String mySelectedItem;
+    private String friendsSelectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +55,8 @@ public class CreateTrade extends ActionBarActivity {
 
         itemListMine.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = ((TextView) view).getText().toString();
-                Toast.makeText(getApplicationContext(), "Selected: " + selectedItem,
+                mySelectedItem = ((TextView) view).getText().toString();
+                Toast.makeText(getApplicationContext(), "Selected: " + mySelectedItem,
                         Toast.LENGTH_SHORT).show();
 
                 //TODO: First item selected
@@ -61,8 +65,8 @@ public class CreateTrade extends ActionBarActivity {
 
         itemListFriend.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selectedItem = ((TextView) view).getText().toString();
-                Toast.makeText(getApplicationContext(), "Selected: " + selectedItem,
+                friendsSelectedItem = ((TextView) view).getText().toString();
+                Toast.makeText(getApplicationContext(), "Selected: " + friendsSelectedItem,
                         Toast.LENGTH_SHORT).show();
                 //TODO: Second item selected
             }
@@ -76,6 +80,9 @@ public class CreateTrade extends ActionBarActivity {
         adapterFriend = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultListFriend);
         itemListMine.setAdapter(adapterMine);
         itemListFriend.setAdapter(adapterFriend);
+
+        Button offerTradeButton = (Button)findViewById(R.id.b_offer_trade);
+        offerTradeButton.setOnClickListener(this);
     }
 
     @Override
@@ -105,6 +112,20 @@ public class CreateTrade extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId()==R.id.b_offer_trade){
+            if(mySelectedItem == null || friendsSelectedItem == null) {
+                Toast.makeText(getApplicationContext(), "Select the two items you wish to be traded",
+                        Toast.LENGTH_LONG).show();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Offered to trade " + mySelectedItem +
+                        " for " + friendsSelectedItem, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
 

@@ -96,6 +96,10 @@
             android:name=".View.EditUserProfile"
             android:label="@string/title_activity_edit_user_profile" >
         </activity>
+        <activity
+            android:name=".View.UserTradesHub"
+            android:label="@string/title_activity_user_trades_hub" >
+        </activity>
     </application>
 
 </manifest>
