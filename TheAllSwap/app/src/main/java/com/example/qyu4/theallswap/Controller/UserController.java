@@ -10,6 +10,7 @@ import android.widget.Toast;
 import java.lang.reflect.Type;
 
 import com.example.qyu4.theallswap.Model.Item;
+import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.View.UserInventory;
@@ -34,20 +35,6 @@ import java.util.Objects;
  * Created by qyu4 on 10/24/15.
  */
 public class UserController {
-    /**
-     * Checking if two input passwords are equal.
-     * @param firstPassword: user input first password.
-     * @param secondPassword: user input second password.
-     * @return: boolean indicating if two passwords are equal.
-     */
-    public boolean registerNewUserPasswordCheck(String firstPassword, String secondPassword){
-        if (firstPassword.equals(secondPassword)){
-
-            return true;
-        }else {
-            return false;
-        }
-    }
 
     /**
      * make text when user input two passwords are not equal.
@@ -76,7 +63,6 @@ public class UserController {
      * @param userArrayList: the class type that will be saved in the file.
      */
     public void saveInFile(String FileName, Context context, ArrayList<User> userArrayList) {
-
             try {
                 FileOutputStream fos = context.openFileOutput(FileName, 0);
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
@@ -92,6 +78,8 @@ public class UserController {
                 throw new RuntimeException(e);
             }
         }
+
+
 
     /**
      * Intent method between activities.

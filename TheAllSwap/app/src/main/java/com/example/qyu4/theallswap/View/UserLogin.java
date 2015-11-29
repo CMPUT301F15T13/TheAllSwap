@@ -7,7 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.qyu4.theallswap.Controller.TradeController;
 import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.Trade;
+import com.example.qyu4.theallswap.Model.TradeList;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
@@ -24,8 +27,10 @@ public class UserLogin extends Activity implements View.OnClickListener{
     private Button userRegister;
     private EditText userName;
 
-    private UserController uc= new UserController();
+    private UserController uc = new UserController();
     private UserList userList;
+    private TradeController tc = new TradeController();
+    private TradeList tradeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,8 @@ public class UserLogin extends Activity implements View.OnClickListener{
         userLogin.setOnClickListener(this);
         userList = UserList.getUserList();
         uc.loadUsersFromFile(activity, userList.getFilename(), userList);
+        tradeList = TradeList.getTradeList();
+        tc.loadTradesFromFile(activity, tradeList.getFilename(), tradeList);
     }
 
     @Override

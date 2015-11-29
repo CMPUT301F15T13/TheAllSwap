@@ -14,8 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.InventoryController;
+import com.example.qyu4.theallswap.Controller.TradeController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Trade;
+import com.example.qyu4.theallswap.Model.TradeList;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
@@ -26,8 +28,10 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
     private CreateTrade activity = this;
     private UserController uc = new UserController();
     private InventoryController ic = new InventoryController();
+    private TradeController tc = new TradeController();
 
     private UserList userList;
+    private TradeList tradeList;
     private User currentUser;
 
     private ArrayAdapter<User> adapterMine;
@@ -50,6 +54,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
         userId = currentUser.toString();
+
+        tradeList = TradeList.getTradeList();
 
         //Get friend with whom we are trading
         Intent intent = getIntent();
@@ -128,6 +134,9 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
             }
             else {
                 Trade trade = new Trade(friendId, friendsSelectedItem, userId, mySelectedItem);
+                tradeList.add(trade);
+                tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
+
                 Toast.makeText(getApplicationContext(), "Offered to trade " + mySelectedItem +
                         " for " + friendsSelectedItem, Toast.LENGTH_LONG).show();
                 activity.finish();
