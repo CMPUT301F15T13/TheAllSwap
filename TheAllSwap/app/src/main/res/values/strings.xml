@@ -157,5 +157,6 @@
     <string name="view_pending_trades">View Pending Trades</string>
     <string name="view_completed_trades">View Completed Trades</string>
     <string name="title_activity_pending_trades">PendingTrades</string>
+    <string name="title_activity_completed_trades">CompletedTrades</string>
 
 </resources>

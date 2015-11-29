@@ -8,18 +8,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.TradeController;
-import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.TradeList;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
 
-public class PendingTrades extends ActionBarActivity {
-    private PendingTrades activity = this;
+public class CompletedTrades extends ActionBarActivity {
+    CompletedTrades activity = this;
     private TradeController tc = new TradeController();
 
     private TradeList tradeList;
@@ -33,7 +31,7 @@ public class PendingTrades extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pending_trades);
+        setContentView(R.layout.activity_completed_trades);
 
         tradeList = TradeList.getTradeList();
 
@@ -42,26 +40,20 @@ public class PendingTrades extends ActionBarActivity {
         //Unfiltered list of all trades:
         resultList = tc.convertTradeToString(tradeList, resultList);
 
-        //Filtered for pending trades of the current user TODO: Make this work!
+        //Filtered for pending trades of the current user TODO: Make this work for completed trades
         //resultList = tc.getPendingTrades(userList.getCurrentUser(), tradeList);
 
-        tradeListView = (ListView)findViewById(R.id.lv_pending_trades);
+        tradeListView = (ListView)findViewById(R.id.lv_completed_trades);
 
         //Set adapter
         adapter = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultList);
         tradeListView.setAdapter(adapter);
-
-        tradeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: Ask to accept/decline if owner or cancel if borrower
-            }
-        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_pending_trades, menu);
+        getMenuInflater().inflate(R.menu.menu_completed_trades, menu);
         return true;
     }
 

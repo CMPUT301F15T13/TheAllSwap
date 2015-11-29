@@ -104,6 +104,10 @@
             android:name=".View.PendingTrades"
             android:label="@string/title_activity_pending_trades" >
         </activity>
+        <activity
+            android:name=".View.CompletedTrades"
+            android:label="@string/title_activity_completed_trades" >
+        </activity>
     </application>
 
 </manifest>
