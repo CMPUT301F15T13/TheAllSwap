@@ -4,15 +4,29 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.R;
 
-public class UserTradesHub extends ActionBarActivity {
+public class UserTradesHub extends ActionBarActivity implements View.OnClickListener {
+
+    private UserTradesHub activity = this;
+    private UserController uc = new UserController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_trades_hub);
+
+        Button startNewTradeButton = (Button)findViewById(R.id.b_start_new_trade);
+        Button viewPendingTradesButton = (Button)findViewById(R.id.b_view_pending_trades);
+        Button viewCompletedTradesButton = (Button)findViewById(R.id.b_view_completed_trades);
+
+        startNewTradeButton.setOnClickListener(this);
+        viewPendingTradesButton.setOnClickListener(this);
+        viewCompletedTradesButton.setOnClickListener(this);
     }
 
     @Override
@@ -35,5 +49,12 @@ public class UserTradesHub extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.b_start_new_trade) {
+            uc.classIntent(UserTrade.class, activity);
+        }
     }
 }

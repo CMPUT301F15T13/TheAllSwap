@@ -58,8 +58,6 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
                 mySelectedItem = ((TextView) view).getText().toString();
                 Toast.makeText(getApplicationContext(), "Selected: " + mySelectedItem,
                         Toast.LENGTH_SHORT).show();
-
-                //TODO: First item selected
             }
         });
 
@@ -68,16 +66,14 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
                 friendsSelectedItem = ((TextView) view).getText().toString();
                 Toast.makeText(getApplicationContext(), "Selected: " + friendsSelectedItem,
                         Toast.LENGTH_SHORT).show();
-                //TODO: Second item selected
             }
         });
 
         resultListMine = uc.convertItemToString(currentUser, resultListMine);
         resultListFriend = uc.convertItemToString(friend, resultListFriend);
 
-        // TODO? Use spinners instead of lists for clearer selection
-        adapterMine = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultListMine);
-        adapterFriend = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultListFriend);
+        adapterMine = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultListMine);
+        adapterFriend = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultListFriend);
         itemListMine.setAdapter(adapterMine);
         itemListFriend.setAdapter(adapterFriend);
 

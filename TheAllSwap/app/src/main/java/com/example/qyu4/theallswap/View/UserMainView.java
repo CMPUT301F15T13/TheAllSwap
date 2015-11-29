@@ -89,7 +89,7 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
             uc.classIntent(UserInventory.class, activity);
         }
         else if(view.getId()==R.id.b_my_trade){
-            uc.classIntent(UserTrade.class, activity);
+            uc.classIntent(UserTradesHub.class, activity);
         }
         else if(view.getId()==R.id.b_my_friends){
             uc.classIntent(UserFriends.class, activity);

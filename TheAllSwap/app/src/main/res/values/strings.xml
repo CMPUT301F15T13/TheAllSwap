@@ -153,5 +153,8 @@
     <string name="friends_items">Friend\'s Items</string>
     <string name="offer_trade">Offer Trade</string>
     <string name="reset_selection">Reset Selection</string>
+    <string name="start_new_trade">Start New Trade</string>
+    <string name="view_pending_trades">View Pending Trades</string>
+    <string name="view_completed_trades">View Completed Trades</string>
 
 </resources>
