@@ -43,7 +43,8 @@ public class PendingTrades extends ActionBarActivity {
         //resultList = tc.convertTradeToString(tradeList, resultList);
 
         //Filtered for pending trades of the current user
-        resultList = tc.getPendingTrades(userList.getCurrentUser().getUserId(), tradeList);
+        final String userId = userList.getCurrentUser().getUserId();
+        resultList = tc.getPendingTrades(userId, tradeList);
 
         tradeListView = (ListView)findViewById(R.id.lv_pending_trades);
 
@@ -54,6 +55,15 @@ public class PendingTrades extends ActionBarActivity {
         tradeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: Ask to accept/decline if owner or cancel if borrower
+                String item = tradeListView.getItemAtPosition(position).toString();
+                int index = tc.getIndexOfTrade(item, tradeList);
+                Trade trade = tradeList.get(index);
+                if(trade.getBorrowerId().equals(userId)) {
+                    Toast.makeText(getApplicationContext(), "Borrower", Toast.LENGTH_SHORT).show();
+                }
+                else if(trade.getOwnerId().equals(userId)) {
+                    Toast.makeText(getApplicationContext(), "Owner", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

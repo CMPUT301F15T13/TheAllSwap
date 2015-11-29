@@ -109,4 +109,15 @@ public class TradeController {
 
         return resultList;
     }
+
+    public int getIndexOfTrade(String tradeString, ArrayList<Trade> tradeList) {
+        for (int i=0; i< tradeList.size(); i++){
+            Trade trade = tradeList.get(i);
+            if (tradeString.equals(trade.getBorrowerId()+ "'s " + trade.getBorrowerItem() + " for "
+                    +trade.getOwnerId() + "'s " + trade.getOwnerItem())) {
+                return tradeList.indexOf(trade);
+            }
+        }
+        throw new IndexOutOfBoundsException();
+    }
 }
