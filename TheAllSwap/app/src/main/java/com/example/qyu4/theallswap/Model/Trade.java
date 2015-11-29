@@ -13,6 +13,7 @@ public class Trade {
     private String ownerItem;
     private String borrowerItem;
     private boolean ownerAcceptedTrade = false;
+    private boolean borrowerRetractedTrade = false;
     private boolean tradePending = true;
 
     public Trade() {
@@ -88,5 +89,13 @@ public class Trade {
 
     public void setTradePending(boolean tradePending) {
         this.tradePending = tradePending;
+    }
+
+    public boolean isBorrowerRetractedTrade() {
+        return borrowerRetractedTrade;
+    }
+
+    public void setBorrowerRetractedTrade(boolean borrowerRetractedTrade) {
+        this.borrowerRetractedTrade = borrowerRetractedTrade;
     }
 }

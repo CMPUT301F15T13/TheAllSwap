@@ -104,6 +104,7 @@ public class PendingTrades extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         tradeList.getCurrentTrade().setOwnerAcceptedTrade(true);
                         tradeList.getCurrentTrade().setTradePending(false);
+                        tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
                         Toast.makeText(getApplicationContext(),
                                 "Offer Accepted! Please contact the borrower to arrange the trade",
                                 Toast.LENGTH_LONG).show();
@@ -116,6 +117,7 @@ public class PendingTrades extends ActionBarActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         tradeList.getCurrentTrade().setOwnerAcceptedTrade(false);
                         tradeList.getCurrentTrade().setTradePending(false);
+                        tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
                         Toast.makeText(getApplicationContext(), "Offer Declined.",
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
@@ -139,8 +141,9 @@ public class PendingTrades extends ActionBarActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tradeList.getCurrentTrade().setOwnerAcceptedTrade(false);
+                        tradeList.getCurrentTrade().setBorrowerRetractedTrade(true);
                         tradeList.getCurrentTrade().setTradePending(false);
+                        tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
                         Toast.makeText(getApplicationContext(), "Offer Retracted.",
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
