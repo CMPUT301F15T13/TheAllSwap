@@ -156,5 +156,6 @@
     <string name="start_new_trade">Start New Trade</string>
     <string name="view_pending_trades">View Pending Trades</string>
     <string name="view_completed_trades">View Completed Trades</string>
+    <string name="title_activity_pending_trades">PendingTrades</string>
 
 </resources>

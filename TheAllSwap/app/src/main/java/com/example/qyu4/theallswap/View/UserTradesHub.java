@@ -56,5 +56,8 @@ public class UserTradesHub extends ActionBarActivity implements View.OnClickList
         if (view.getId() == R.id.b_start_new_trade) {
             uc.classIntent(UserTrade.class, activity);
         }
+        if (view.getId() == R.id.b_view_pending_trades) {
+            uc.classIntent(PendingTrades.class, activity);
+        }
     }
 }

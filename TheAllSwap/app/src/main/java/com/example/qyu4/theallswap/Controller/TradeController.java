@@ -57,4 +57,39 @@ public class TradeController {
 
         }
     }
+
+    public ArrayList<String> getPendingTrades(User currentUser, TradeList tradeList) {
+        ArrayList<Trade> pendingTradeList = new ArrayList<>();
+
+        for(Trade trade : tradeList){
+            if(trade.isTradePending()){
+                if(trade.getOwnerId().equals(currentUser.getUserId())
+                        || trade.getBorrowerId().equals(currentUser.getUserId())){
+                    pendingTradeList.add(trade);
+                }
+            }
+        }
+
+        ArrayList<String> resultList = new ArrayList<>();
+        resultList = convertTradeToString(pendingTradeList, resultList);
+        return resultList;
+    }
+    /**
+     * convert the Trade object list to a useful information arrayList.
+     * @param tradeList: the TradeList has all Trade objects.
+     * @param resultList: an arrayList has all the trade information. It calls toString()
+     *                  method of Trade class as an override method.
+     * @return the result list.
+     */
+    public ArrayList<String> convertTradeToString(ArrayList<Trade> tradeList,
+                                                  ArrayList<String> resultList){
+        resultList.clear();
+        for (int i=0; i< tradeList.size(); i++){
+            Trade trade = tradeList.get(i);
+            resultList.add(trade.getBorrowerId()+ "'s " + trade.getBorrowerItem() + " for "
+                    +trade.getOwnerId() + "'s " + trade.getOwnerItem());
+        }
+
+        return resultList;
+    }
 }

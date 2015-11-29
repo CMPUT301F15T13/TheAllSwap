@@ -56,4 +56,37 @@ public class Trade {
     private void requestDeclined(){
         //TODO: cancel the deal
     }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+
+    public String getBorrowerId() {
+        return borrowerId;
+    }
+
+    public String getOwnerItem() {
+        return ownerItem;
+    }
+
+    public String getBorrowerItem() {
+        return borrowerItem;
+    }
+
+    public boolean isOwnerAcceptedTrade() {
+        return ownerAcceptedTrade;
+    }
+
+    public void setOwnerAcceptedTrade(boolean ownerAcceptedTrade) {
+        this.ownerAcceptedTrade = ownerAcceptedTrade;
+    }
+
+    public boolean isTradePending() {
+        return tradePending;
+    }
+
+    public void setTradePending(boolean tradePending) {
+        this.tradePending = tradePending;
+    }
 }

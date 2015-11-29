@@ -100,6 +100,10 @@
             android:name=".View.UserTradesHub"
             android:label="@string/title_activity_user_trades_hub" >
         </activity>
+        <activity
+            android:name=".View.PendingTrades"
+            android:label="@string/title_activity_pending_trades" >
+        </activity>
     </application>
 
 </manifest>

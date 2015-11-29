@@ -42,7 +42,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
     private ArrayList<String> resultListFriend = new ArrayList<>();
 
     private String friendId;
-    private String userId;
+    private String friendIdString;
+    private String userIdString;
     private String mySelectedItem;
     private String friendsSelectedItem;
 
@@ -53,13 +54,14 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
 
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
-        userId = currentUser.toString();
+        userIdString = currentUser.getUserId().toString();
 
         tradeList = TradeList.getTradeList();
 
         //Get friend with whom we are trading
         Intent intent = getIntent();
         friendId = intent.getStringExtra("id");
+        friendIdString = userList.get(Integer.parseInt(friendId)).getUserId().toString();
         User friend = currentUser.getFriendsList().get(uc.stringToInt(friendId));
 
         itemListMine = (ListView)findViewById(R.id.lv_your_items);
@@ -133,7 +135,7 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
                         Toast.LENGTH_SHORT).show();
             }
             else {
-                Trade trade = new Trade(friendId, friendsSelectedItem, userId, mySelectedItem);
+                Trade trade = new Trade(friendIdString, friendsSelectedItem, userIdString, mySelectedItem);
                 tradeList.add(trade);
                 tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
 
