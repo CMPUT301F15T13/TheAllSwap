@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 public class CreateTrade extends ActionBarActivity implements View.OnClickListener {
     private CreateTrade activity = this;
     private UserController uc = new UserController();
+    private InventoryController ic = new InventoryController();
 
     private UserList userList;
     private User currentUser;
@@ -70,7 +72,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
         });
 
         resultListMine = uc.convertItemToString(currentUser, resultListMine);
-        resultListFriend = uc.convertItemToString(friend, resultListFriend);
+        //resultListFriend = uc.convertItemToString(friend, resultListFriend);
+        resultListFriend = ic.showNonPrivateItems(friend);
 
         adapterMine = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultListMine);
         adapterFriend = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultListFriend);
