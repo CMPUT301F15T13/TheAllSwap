@@ -24,7 +24,7 @@ public class PendingTrades extends ActionBarActivity {
 
     private TradeList tradeList;
     //private Trade currentTrade;
-    private UserList userList;
+    private UserList userList = UserList.getUserList();
 
     private ArrayAdapter<String> adapter;
     private ArrayList<String> resultList = new ArrayList<>();
@@ -39,11 +39,11 @@ public class PendingTrades extends ActionBarActivity {
 
         //currentTrade = tradeList.getCurrentTrade();
 
-        //Unfiltered list of all trades:
-        resultList = tc.convertTradeToString(tradeList, resultList);
+        //Unfiltered list of all trades
+        //resultList = tc.convertTradeToString(tradeList, resultList);
 
-        //Filtered for pending trades of the current user TODO: Make this work!
-        //resultList = tc.getPendingTrades(userList.getCurrentUser(), tradeList);
+        //Filtered for pending trades of the current user
+        resultList = tc.getPendingTrades(userList.getCurrentUser().getUserId(), tradeList);
 
         tradeListView = (ListView)findViewById(R.id.lv_pending_trades);
 

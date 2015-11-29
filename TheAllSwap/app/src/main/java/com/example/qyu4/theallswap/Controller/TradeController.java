@@ -58,13 +58,13 @@ public class TradeController {
         }
     }
 
-    public ArrayList<String> getPendingTrades(User currentUser, TradeList tradeList) {
+    public ArrayList<String> getPendingTrades(String userId, TradeList tradeList) {
         ArrayList<Trade> pendingTradeList = new ArrayList<>();
 
         for(Trade trade : tradeList){
             if(trade.isTradePending()){
-                if(trade.getOwnerId().equals(currentUser.getUserId())
-                        || trade.getBorrowerId().equals(currentUser.getUserId())){
+                if(trade.getOwnerId().equals(userId)
+                        || trade.getBorrowerId().equals(userId)){
                     pendingTradeList.add(trade);
                 }
             }
