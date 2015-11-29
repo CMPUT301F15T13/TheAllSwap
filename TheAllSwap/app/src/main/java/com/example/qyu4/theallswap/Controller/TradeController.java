@@ -74,6 +74,23 @@ public class TradeController {
         resultList = convertTradeToString(pendingTradeList, resultList);
         return resultList;
     }
+
+    public ArrayList<String> getCompletedTrades(String userId, TradeList tradeList) {
+        ArrayList<Trade> pendingTradeList = new ArrayList<>();
+
+        for(Trade trade : tradeList){
+            if(!trade.isTradePending()){
+                if(trade.getOwnerId().equals(userId)
+                        || trade.getBorrowerId().equals(userId)){
+                    pendingTradeList.add(trade);
+                }
+            }
+        }
+
+        ArrayList<String> resultList = new ArrayList<>();
+        resultList = convertTradeToString(pendingTradeList, resultList);
+        return resultList;
+    }
     /**
      * convert the Trade object list to a useful information arrayList.
      * @param tradeList: the TradeList has all Trade objects.

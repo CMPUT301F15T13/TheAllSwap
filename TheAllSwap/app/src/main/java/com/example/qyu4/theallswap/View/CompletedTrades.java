@@ -22,7 +22,7 @@ public class CompletedTrades extends ActionBarActivity {
 
     private TradeList tradeList;
     //private Trade currentTrade;
-    private UserList userList;
+    private UserList userList = UserList.getUserList();
 
     private ArrayAdapter<String> adapter;
     private ArrayList<String> resultList = new ArrayList<>();
@@ -38,10 +38,10 @@ public class CompletedTrades extends ActionBarActivity {
         //currentTrade = tradeList.getCurrentTrade();
 
         //Unfiltered list of all trades:
-        resultList = tc.convertTradeToString(tradeList, resultList);
+        //resultList = tc.convertTradeToString(tradeList, resultList);
 
-        //Filtered for pending trades of the current user TODO: Make this work for completed trades
-        //resultList = tc.getPendingTrades(userList.getCurrentUser(), tradeList);
+        //Filtered for completed trades of the current user
+        resultList = tc.getCompletedTrades(userList.getCurrentUser().getUserId(), tradeList);
 
         tradeListView = (ListView)findViewById(R.id.lv_completed_trades);
 
