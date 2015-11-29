@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.TradeList;
-import com.example.qyu4.theallswap.Model.User;
-import com.example.qyu4.theallswap.Model.UserList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

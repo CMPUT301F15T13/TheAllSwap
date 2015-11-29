@@ -1,5 +1,7 @@
 package com.example.qyu4.theallswap.View;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -23,7 +25,6 @@ public class PendingTrades extends ActionBarActivity {
     private TradeController tc = new TradeController();
 
     private TradeList tradeList;
-    //private Trade currentTrade;
     private UserList userList = UserList.getUserList();
 
     private ArrayAdapter<String> adapter;
@@ -58,11 +59,15 @@ public class PendingTrades extends ActionBarActivity {
                 String item = tradeListView.getItemAtPosition(position).toString();
                 int index = tc.getIndexOfTrade(item, tradeList);
                 Trade trade = tradeList.get(index);
+                tradeList.setCurrentTrade(trade);
                 if(trade.getBorrowerId().equals(userId)) {
-                    Toast.makeText(getApplicationContext(), "Borrower", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Borrower", Toast.LENGTH_SHORT).show();
+                    buildRetractDialog("Would you like to retract this trade offer?");
+
                 }
                 else if(trade.getOwnerId().equals(userId)) {
-                    Toast.makeText(getApplicationContext(), "Owner", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Owner", Toast.LENGTH_SHORT).show();
+                    buildAccorDecDialog("Would you like to Accept or Decline this trade offer?");
                 }
             }
         });
@@ -88,5 +93,66 @@ public class PendingTrades extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void buildAccorDecDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(PendingTrades.this);
+        builder.setMessage(message);
+        builder.setPositiveButton(R.string.dialog_accept,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tradeList.getCurrentTrade().setOwnerAcceptedTrade(true);
+                        tradeList.getCurrentTrade().setTradePending(false);
+                        Toast.makeText(getApplicationContext(),
+                                "Offer Accepted! Please contact the borrower to arrange the trade",
+                                Toast.LENGTH_LONG).show();
+                        dialog.dismiss();
+                    }
+                });
+        builder.setNegativeButton(R.string.dialog_decline,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tradeList.getCurrentTrade().setOwnerAcceptedTrade(false);
+                        tradeList.getCurrentTrade().setTradePending(false);
+                        Toast.makeText(getApplicationContext(), "Offer Declined.",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+
+        builder.setNeutralButton(R.string.dialog_cancel,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+    }
+
+    public void buildRetractDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(PendingTrades.this);
+        builder.setMessage(message);
+        builder.setPositiveButton(R.string.dialog_yes,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tradeList.getCurrentTrade().setOwnerAcceptedTrade(false);
+                        tradeList.getCurrentTrade().setTradePending(false);
+                        Toast.makeText(getApplicationContext(), "Offer Retracted.",
+                                Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+        builder.setNegativeButton(R.string.dialog_no,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
     }
 }
