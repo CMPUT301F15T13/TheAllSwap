@@ -130,6 +130,7 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
                 Trade trade = new Trade(friendId, friendsSelectedItem, userId, mySelectedItem);
                 Toast.makeText(getApplicationContext(), "Offered to trade " + mySelectedItem +
                         " for " + friendsSelectedItem, Toast.LENGTH_LONG).show();
+                activity.finish();
             }
         }
         else if(view.getId()==R.id.b_reset_selection) {
