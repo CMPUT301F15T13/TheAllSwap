@@ -11,10 +11,10 @@ import java.util.ArrayList;
 public class User {
     private String userId;
 
-    private ArrayList<Item> userInventory= new ArrayList<Item>();
-    private ArrayList<User> userFriendList = new ArrayList<User>();
-    private ArrayList<Trade> userRequestTradeList = new ArrayList<Trade>();
-    private ArrayList<Trade> userOfferTradeList = new ArrayList<Trade>();
+    private ArrayList<Item> userInventory= new ArrayList<>();
+    private ArrayList<User> userFriendList = new ArrayList<>();
+    //private ArrayList<Trade> userRequestTradeList = new ArrayList<>();
+    //private ArrayList<Trade> userOfferTradeList = new ArrayList<>();
 
     public Profile getUserProfile() {
         return userProfile;
@@ -33,8 +33,8 @@ public class User {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();
         this.userFriendList = new ArrayList<User>();
-        this.userRequestTradeList = new ArrayList<Trade>();
-        this.userOfferTradeList = new ArrayList<Trade>();
+        //this.userRequestTradeList = new ArrayList<Trade>();
+        //this.userOfferTradeList = new ArrayList<Trade>();
         this.userProfile.setUserCity(null);
         this.userProfile.setUserContactInformation(null);
     }
@@ -44,8 +44,8 @@ public class User {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();
         this.userFriendList = new ArrayList<User>();
-        this.userRequestTradeList = new ArrayList<Trade>();
-        this.userOfferTradeList = new ArrayList<Trade>();
+        //this.userRequestTradeList = new ArrayList<Trade>();
+        //this.userOfferTradeList = new ArrayList<Trade>();
         this.userProfile.setUserCity(null);
         this.userProfile.setUserContactInformation(null);
     }

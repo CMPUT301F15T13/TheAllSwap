@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
@@ -36,6 +37,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
     private ArrayList<String> resultListMine = new ArrayList<>();
     private ArrayList<String> resultListFriend = new ArrayList<>();
 
+    private String friendId;
+    private String userId;
     private String mySelectedItem;
     private String friendsSelectedItem;
 
@@ -46,10 +49,11 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
 
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
+        userId = currentUser.toString();
 
         //Get friend with whom we are trading
         Intent intent = getIntent();
-        String friendId = intent.getStringExtra("id");
+        friendId = intent.getStringExtra("id");
         User friend = currentUser.getFriendsList().get(uc.stringToInt(friendId));
 
         itemListMine = (ListView)findViewById(R.id.lv_your_items);
@@ -81,8 +85,8 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
         itemListFriend.setAdapter(adapterFriend);
 
         Button offerTradeButton = (Button)findViewById(R.id.b_offer_trade);
-        offerTradeButton.setOnClickListener(this);
         Button resetSelectionButton = (Button)findViewById(R.id.b_reset_selection);
+        offerTradeButton.setOnClickListener(this);
         resetSelectionButton.setOnClickListener(this);
     }
 
@@ -117,12 +121,13 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if(view.getId()==R.id.b_offer_trade){
+        if(view.getId()==R.id.b_offer_trade) {
             if(mySelectedItem == null || friendsSelectedItem == null) {
                 Toast.makeText(getApplicationContext(), "Select the two items you wish to be traded",
                         Toast.LENGTH_SHORT).show();
             }
-            else{
+            else {
+                Trade trade = new Trade(friendId, friendsSelectedItem, userId, mySelectedItem);
                 Toast.makeText(getApplicationContext(), "Offered to trade " + mySelectedItem +
                         " for " + friendsSelectedItem, Toast.LENGTH_LONG).show();
             }
