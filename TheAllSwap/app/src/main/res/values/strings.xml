@@ -164,5 +164,6 @@
     <string name="dialog_decline">Decline</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="title_activity_top_traders">TopTraders</string>
+    <string name="view_top_traders">View Top Traders</string>
 
 </resources>
