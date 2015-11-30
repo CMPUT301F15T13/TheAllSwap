@@ -55,6 +55,15 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin">
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:id="@+id/b_user_register"
+        android:layout_below="@+id/textView8"
+        android:layout_alignEnd="@+id/b_user_login" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/or"
+        android:id="@+id/textView8"
         android:layout_below="@+id/b_user_login"
         android:layout_centerHorizontal="true" />
 
