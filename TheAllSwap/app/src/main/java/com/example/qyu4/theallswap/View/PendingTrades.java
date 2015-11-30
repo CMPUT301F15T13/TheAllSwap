@@ -110,12 +110,8 @@ public class PendingTrades extends ActionBarActivity {
                         userList.getCurrentUser().incrementSuccessfulTrades();
                         // ... and borrower
                         String borrowerId = currentTrade.getBorrowerId();
-                        ArrayList<User> friendsList = userList.getCurrentUser().getFriendsList();
-                        for(User user : friendsList) {
-                            if(user.getUserId().equals(borrowerId)) {
-                                user.incrementSuccessfulTrades();
-                            }
-                        }
+                        //ArrayList<User> friendsList = userList.getCurrentUser().getFriendsList();
+                        uc.incrBorrowerSuccTrades(borrowerId, userList);
                         // Save the trade and the successfulTrades increments
                         tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
                         uc.saveInFile(userList.getFilename(), activity, userList);

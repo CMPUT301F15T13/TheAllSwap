@@ -284,6 +284,14 @@ public class UserController {
         currentUser.removeFriend(otherUser);
         makeInputStringToast(context, otherUser.getUserId() + " removed from friends");
     }
+
+    public void incrBorrowerSuccTrades(String borrowerId, ArrayList<User> userList) {
+        for(User user : userList) {
+            if(user.getUserId().equals(borrowerId)) {
+                user.incrementSuccessfulTrades();
+            }
+        }
+    }
 }
 
 
