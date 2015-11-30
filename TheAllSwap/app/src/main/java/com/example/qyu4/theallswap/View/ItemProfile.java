@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -102,7 +103,6 @@ public class ItemProfile extends ActionBarActivity {
             }
         });
 
-
     }
 
     @Override
@@ -127,7 +127,7 @@ public class ItemProfile extends ActionBarActivity {
         ItemComments.setText(currentItem.getItemComments());
 
         if (!"".equals(imgDecodableString)) {
-            Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
             imgDecodableString = currentItem.getItemImgId();
             ImageView imgView = (ImageView) findViewById(R.id.imgView);
             imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
@@ -162,13 +162,26 @@ public class ItemProfile extends ActionBarActivity {
         imgAble = true;
         displayImage();
     }
+    public void userDeleteImage(MenuItem menu){
+        deleteImage();
+    }
 
     public void displayImage(){
-        Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
         ImageView imgView = (ImageView) findViewById(R.id.imgView);
         imgView.setVisibility(View.VISIBLE);
     }
 
+    public void deleteImage(){
+
+        currentItem.setItemImgId("");
+        ic.editItem(currentUser, itemId, currentItem);
+        uc.saveInFile(userList.getFilename(), activity, userList);
+
+        imgDecodableString = currentItem.getItemImgId();
+        ImageView imgView = (ImageView) findViewById(R.id.imgView);
+        imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+    }
 
     public void loadImageFromGallery(View view){
         Intent galleryIntent = new Intent(Intent.ACTION_PICK,
