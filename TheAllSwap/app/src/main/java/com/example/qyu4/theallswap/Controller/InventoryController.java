@@ -103,4 +103,8 @@ public class InventoryController {
         return item;
     }
 
+    public void uploadImagetoItem(int imgId) {
+
+    };
+
 }
