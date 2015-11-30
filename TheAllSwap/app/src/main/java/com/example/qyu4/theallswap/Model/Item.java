@@ -1,5 +1,7 @@
 package com.example.qyu4.theallswap.Model;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 
 /**
@@ -17,6 +19,7 @@ public class Item {
     private boolean availability = true;
     private String itemComments;
     private String itemImgId;
+    private Bitmap itemImgBitMap;
 
 
     public String getItemName() {
@@ -50,7 +53,7 @@ public class Item {
     public Item(){}
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
-                String ItemComments, String itemImgId) {
+                String ItemComments, String itemImgId, Bitmap setItemImgBitMap) {
 
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
@@ -59,6 +62,7 @@ public class Item {
         this.setItemPrivacy(itemPrivacy);
         this.setItemComments(ItemComments);
         this.setItemImgId(itemImgId);
+        this.setItemImgBitMap(itemImgBitMap);
         this.availability = true;
     }
 
@@ -95,8 +99,7 @@ public class Item {
         this.itemImgId = addedImage;
     }
 
-    public void removeImage(int removedImage) {
-    }
+    public void setItemImgBitMap(Bitmap addedBitMap) { this.itemImgBitMap = addedBitMap;}
 
     public String getItemCategory() {
         return itemCategory;

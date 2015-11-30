@@ -2,6 +2,7 @@ package com.example.qyu4.theallswap.View;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
@@ -173,7 +174,7 @@ public class ItemProfile extends ActionBarActivity {
     }
 
     public void deleteImage(){
-
+        currentItem.setItemImgBitMap(null);
         currentItem.setItemImgId("");
         ic.editItem(currentUser, itemId, currentItem);
         uc.saveInFile(userList.getFilename(), activity, userList);
@@ -197,35 +198,34 @@ public class ItemProfile extends ActionBarActivity {
                 // Get the Image from data
 
                 Uri selectedImage = data.getData();
-                String[] filePathColumn = {MediaStore.Images.Media.DATA};
-
-                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn,
-                        null, null, null);
-                cursor.moveToFirst();
-
-                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                imgDecodableString = cursor.getString(columnIndex);
 
 
+                Bitmap bitmap = null;
+                bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+
+                if (bitmap.getByteCount() <= 65536) {
 
 
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn,
+                            null, null, null);
+                    cursor.moveToFirst();
 
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    imgDecodableString = cursor.getString(columnIndex);
 
-                currentItem.setItemImgId(imgDecodableString);
-                ic.editItem(currentUser, itemId, currentItem);
-                uc.saveInFile(userList.getFilename(), activity, userList);
+                    currentItem.setItemImgBitMap(bitmap);
+                    currentItem.setItemImgId(imgDecodableString);
+                    ic.editItem(currentUser, itemId, currentItem);
+                    uc.saveInFile(userList.getFilename(), activity, userList);
 
-
-
-
-
-
-
-
-                cursor.close();
-                ImageView imgView = (ImageView) findViewById(R.id.imgView);
-                imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                    cursor.close();
+                    ImageView imgView = (ImageView) findViewById(R.id.imgView);
+                    imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+                } else {
+                    Toast.makeText(this, "Image too large", Toast.LENGTH_SHORT).show();
+                }
             } else {
                 Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_SHORT).show();
             }
