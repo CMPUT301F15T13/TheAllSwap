@@ -13,16 +13,20 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.TradeController;
+import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.TradeList;
+import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class PendingTrades extends ActionBarActivity {
     private PendingTrades activity = this;
     private TradeController tc = new TradeController();
+    private UserController uc = new UserController();
 
     private TradeList tradeList;
     private UserList userList = UserList.getUserList();
@@ -31,6 +35,8 @@ public class PendingTrades extends ActionBarActivity {
     private ArrayList<String> resultList = new ArrayList<>();
     private ListView tradeListView;
 
+    final String userId = userList.getCurrentUser().getUserId();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +44,10 @@ public class PendingTrades extends ActionBarActivity {
 
         tradeList = TradeList.getTradeList();
 
-        //currentTrade = tradeList.getCurrentTrade();
-
         //Unfiltered list of all trades
         //resultList = tc.convertTradeToString(tradeList, resultList);
 
         //Filtered for pending trades of the current user
-        final String userId = userList.getCurrentUser().getUserId();
         resultList = tc.getPendingTrades(userId, tradeList);
 
         tradeListView = (ListView)findViewById(R.id.lv_pending_trades);
@@ -60,11 +63,10 @@ public class PendingTrades extends ActionBarActivity {
                 int index = tc.getIndexOfTrade(item, tradeList);
                 Trade trade = tradeList.get(index);
                 tradeList.setCurrentTrade(trade);
-                if(trade.getBorrowerId().equals(userId)) {
+                if (trade.getBorrowerId().equals(userId)) {
                     buildRetractDialog("Would you like to retract this trade offer?");
 
-                }
-                else if(trade.getOwnerId().equals(userId)) {
+                } else if (trade.getOwnerId().equals(userId)) {
                     buildAccorDecDialog("Would you like to Accept or Decline this trade offer?");
                 }
             }
@@ -100,13 +102,28 @@ public class PendingTrades extends ActionBarActivity {
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        tradeList.getCurrentTrade().setOwnerAcceptedTrade(true);
-                        tradeList.getCurrentTrade().setTradePending(false);
+                        // Update the trade
+                        Trade currentTrade = tradeList.getCurrentTrade();
+                        currentTrade.setOwnerAcceptedTrade(true);
+                        currentTrade.setTradePending(false);
+                        // Update the successful trade score of both owner...
+                        userList.getCurrentUser().incrementSuccessfulTrades();
+                        // ... and borrower
+                        String borrowerId = currentTrade.getBorrowerId();
+                        ArrayList<User> friendsList = userList.getCurrentUser().getFriendsList();
+                        for(User user : friendsList) {
+                            if(user.getUserId().equals(borrowerId)) {
+                                user.incrementSuccessfulTrades();
+                            }
+                        }
+                        // Save the trade and the successfulTrades increments
                         tc.saveTradeInFile(tradeList.getFilename(), activity, tradeList);
+                        uc.saveInFile(userList.getFilename(), activity, userList);
                         Toast.makeText(getApplicationContext(),
                                 "Offer Accepted! Please contact the borrower to arrange the trade",
                                 Toast.LENGTH_LONG).show();
                         dialog.dismiss();
+                        activity.finish();
                     }
                 });
         builder.setNegativeButton(R.string.dialog_decline,
@@ -119,6 +136,7 @@ public class PendingTrades extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(), "Offer Declined.",
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        activity.finish();
                     }
                 });
 
@@ -145,6 +163,7 @@ public class PendingTrades extends ActionBarActivity {
                         Toast.makeText(getApplicationContext(), "Offer Retracted.",
                                 Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
+                        activity.finish();
                     }
                 });
         builder.setNegativeButton(R.string.dialog_no,

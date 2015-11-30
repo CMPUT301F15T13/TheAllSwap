@@ -13,8 +13,6 @@ public class User {
 
     private ArrayList<Item> userInventory= new ArrayList<>();
     private ArrayList<User> userFriendList = new ArrayList<>();
-    //private ArrayList<Trade> userRequestTradeList = new ArrayList<>();
-    //private ArrayList<Trade> userOfferTradeList = new ArrayList<>();
 
     public Profile getUserProfile() {
         return userProfile;
@@ -26,6 +24,8 @@ public class User {
 
     private Profile userProfile;
 
+    private int successfulTrades = 0;
+
     public User(){}
 
     //This constructor breaks for some reason
@@ -33,8 +33,6 @@ public class User {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();
         this.userFriendList = new ArrayList<User>();
-        //this.userRequestTradeList = new ArrayList<Trade>();
-        //this.userOfferTradeList = new ArrayList<Trade>();
         this.userProfile.setUserCity(null);
         this.userProfile.setUserContactInformation(null);
     }
@@ -44,8 +42,6 @@ public class User {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();
         this.userFriendList = new ArrayList<User>();
-        //this.userRequestTradeList = new ArrayList<Trade>();
-        //this.userOfferTradeList = new ArrayList<Trade>();
         this.userProfile.setUserCity(null);
         this.userProfile.setUserContactInformation(null);
     }
@@ -157,5 +153,13 @@ public class User {
 
     public ArrayList<Item> getUserInventory() {
         return userInventory;
+    }
+
+    public int getSuccessfulTrades() {
+        return successfulTrades;
+    }
+
+    public void incrementSuccessfulTrades() {
+        successfulTrades++;
     }
 }
