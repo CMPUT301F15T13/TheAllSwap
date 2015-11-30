@@ -19,8 +19,8 @@
     <string name="log_in">Log In</string>
     <string name="log_out">Log Out</string>
     <string name="register">Register</string>
-    <string name="title_activity_user_register">User Register</string>
-    <string name="title_activity_user_main_viewing">UserMainViewing</string>
+    <string name="title_activity_user_register">Register User</string>
+    <string name="title_activity_user_main_viewing">Main Menu</string>
     <string name="my_inventory">My Inventory</string>
     <string name="my_trade">My Trade</string>
     <string name="my_friends">My Friends</string>
@@ -28,10 +28,10 @@
     <string name="search">Search</string>
     <string name="previous_browse">Previous Browse</string>
     <string name="dash_line">-----------------------------------------------</string>
-    <string name="title_activity_user_inventory">UserInventory</string>
-    <string name="title_activity_user_trade">UserTrade</string>
-    <string name="title_activity_user_friends">UserFriends</string>
-    <string name="title_activity_user_profile">UserProfile</string>
+    <string name="title_activity_user_inventory">My Inventory</string>
+    <string name="title_activity_user_trade">My Trade</string>
+    <string name="title_activity_user_friends">My Friends</string>
+    <string name="title_activity_user_profile">My Profile</string>
     <string name="title_activity_search">Search</string>
     <string name="title_activity_previous_browsed_trade">Previous Browsed Trade</string>
     <string name="add_item">Add Item</string>
@@ -45,17 +45,17 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="new_item_comment">Item Comment:</string>
-    <string name="title_activity_single_friend_profile">Single Friend Profile</string>
+    <string name="title_activity_single_friend_profile">Friend\'s Profile</string>
     <string name="user_contact_information">User Contact Information:</string>
     <string name="user_city">User City:</string>
     <string name="user_inventory">User Inventory:</string>
-    <string name="title_activity_testing">TestingActivity</string>
+    <string name="title_activity_testing">Testing Activity</string>
     <string name="title_activity_edit_single_item">Edit Single Item</string>
-    <string name="title_activity_user_inventory_with_image">UserInventoryWithImage</string>
+    <string name="title_activity_user_inventory_with_image">User Inventory With Image</string>
     <string name="title_activity_create_trade">Create Trade</string>
     <string name="friends">Friends</string>
     <string name="add_friend">Add a Friend</string>
-    <string name="title_activity_scrolling">ScrollingActivity</string>
+    <string name="title_activity_scrolling">Scrolling Activity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 
@@ -145,10 +145,10 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
-    <string name="title_activity_add_friend">AddFriend</string>
-    <string name="title_activity_item_profile">ItemProfile</string>
+    <string name="title_activity_add_friend">Add Friend</string>
+    <string name="title_activity_item_profile">Item Profile</string>
     <string name="title_activity_edit_user_profile">Edit User Profile</string>
-    <string name="title_activity_user_trades_hub">UserTradesHub</string>
+    <string name="title_activity_user_trades_hub">User Trade Hub</string>
     <string name="your_items">Your Items</string>
     <string name="friends_items">Friend\'s Items</string>
     <string name="offer_trade">Offer Trade</string>
@@ -156,14 +156,14 @@
     <string name="start_new_trade">Start New Trade</string>
     <string name="view_pending_trades">View Pending Trades</string>
     <string name="view_completed_trades">View Completed Trades</string>
-    <string name="title_activity_pending_trades">PendingTrades</string>
-    <string name="title_activity_completed_trades">CompletedTrades</string>
+    <string name="title_activity_pending_trades">Pending Trades</string>
+    <string name="title_activity_completed_trades">Completed Trades</string>
     <string name="dialog_yes">Yes</string>
     <string name="dialog_no">No</string>
     <string name="dialog_accept">Accept</string>
     <string name="dialog_decline">Decline</string>
     <string name="dialog_cancel">Cancel</string>
-    <string name="title_activity_top_traders">TopTraders</string>
+    <string name="title_activity_top_traders">Top Traders</string>
     <string name="view_top_traders">View Top Traders</string>
 
 </resources>

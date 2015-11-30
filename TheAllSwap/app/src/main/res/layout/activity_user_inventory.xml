@@ -14,7 +14,8 @@ tools:context="com.example.qyu4.theallswap.View.UserInventory">
         android:layout_above="@+id/btn_add_item" />
 
     <Button
-        android:layout_width="wrap_content"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Item"
         android:id="@+id/btn_add_item"
