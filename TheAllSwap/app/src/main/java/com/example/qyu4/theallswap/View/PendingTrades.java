@@ -61,12 +61,10 @@ public class PendingTrades extends ActionBarActivity {
                 Trade trade = tradeList.get(index);
                 tradeList.setCurrentTrade(trade);
                 if(trade.getBorrowerId().equals(userId)) {
-                    //Toast.makeText(getApplicationContext(), "Borrower", Toast.LENGTH_SHORT).show();
                     buildRetractDialog("Would you like to retract this trade offer?");
 
                 }
                 else if(trade.getOwnerId().equals(userId)) {
-                    //Toast.makeText(getApplicationContext(), "Owner", Toast.LENGTH_SHORT).show();
                     buildAccorDecDialog("Would you like to Accept or Decline this trade offer?");
                 }
             }

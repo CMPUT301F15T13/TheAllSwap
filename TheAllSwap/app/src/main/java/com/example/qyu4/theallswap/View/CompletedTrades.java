@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.TradeController;
+import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.TradeList;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
@@ -21,7 +23,6 @@ public class CompletedTrades extends ActionBarActivity {
     private TradeController tc = new TradeController();
 
     private TradeList tradeList;
-    //private Trade currentTrade;
     private UserList userList = UserList.getUserList();
 
     private ArrayAdapter<String> adapter;
@@ -35,19 +36,41 @@ public class CompletedTrades extends ActionBarActivity {
 
         tradeList = TradeList.getTradeList();
 
-        //currentTrade = tradeList.getCurrentTrade();
-
         //Unfiltered list of all trades:
         //resultList = tc.convertTradeToString(tradeList, resultList);
 
         //Filtered for completed trades of the current user
-        resultList = tc.getCompletedTrades(userList.getCurrentUser().getUserId(), tradeList);
+        final String userId = userList.getCurrentUser().getUserId();
+        resultList = tc.getCompletedTrades(userId, tradeList);
 
         tradeListView = (ListView)findViewById(R.id.lv_completed_trades);
 
         //Set adapter
         adapter = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultList);
         tradeListView.setAdapter(adapter);
+
+        tradeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO: Ask to accept/decline if owner or cancel if borrower
+                String item = tradeListView.getItemAtPosition(position).toString();
+                int index = tc.getIndexOfTrade(item, tradeList);
+                Trade trade = tradeList.get(index);
+                tradeList.setCurrentTrade(trade);
+
+                if(tradeList.getCurrentTrade().isOwnerAcceptedTrade()) {
+                    Toast.makeText(getApplicationContext(), "Trade was accepted by owner",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else if(tradeList.getCurrentTrade().isBorrowerRetractedTrade()) {
+                    Toast.makeText(getApplicationContext(), "Trade was retracted by borrower",
+                            Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getApplicationContext(), "Trade was declined by owner",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override
