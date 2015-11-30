@@ -108,6 +108,10 @@
             android:name=".View.CompletedTrades"
             android:label="@string/title_activity_completed_trades" >
         </activity>
+        <activity
+            android:name=".View.TopTraders"
+            android:label="@string/title_activity_top_traders" >
+        </activity>
     </application>
 
 </manifest>
