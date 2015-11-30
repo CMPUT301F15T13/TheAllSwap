@@ -112,6 +112,10 @@
             android:name=".View.TopTraders"
             android:label="@string/title_activity_top_traders" >
         </activity>
+        <activity
+            android:name=".View.TestingEs"
+            android:label="@string/title_activity_testing_es" >
+        </activity>
     </application>
 
 </manifest>
