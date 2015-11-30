@@ -96,6 +96,10 @@ public class UserInventory extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void curreyImage(MenuItem menu){
+        uc.classIntent(UserInventoryWithImage.class, activity);
+    }
     public void userAddItemToInventory(MenuItem menu){
         uc.classIntent(AddInventoryItem.class, activity);
     }
