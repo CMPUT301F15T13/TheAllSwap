@@ -41,9 +41,9 @@ public class UserLogin extends Activity implements View.OnClickListener{
         userRegister.setOnClickListener(this);
         userLogin.setOnClickListener(this);
         userList = UserList.getUserList();
-        uc.loadUsersFromFile(activity, userList.getFilename(), userList);
         tradeList = TradeList.getTradeList();
         tc.loadTradesFromFile(activity, tradeList.getFilename(), tradeList);
+        //uc.loadUsersFromFile(activity, userList.getFilename(), userList);
     }
 
     @Override
@@ -59,6 +59,7 @@ public class UserLogin extends Activity implements View.OnClickListener{
 
             userName = (EditText) findViewById(R.id.user_name);
             String currentUserName = userName.getText().toString();
+            uc.loadUsersFromFile(activity, userList.getFilename(), userList);
 
             //TODO: load file and save objects in arrayList.
             if(uc.checkingUserExist(currentUserName, userList)){

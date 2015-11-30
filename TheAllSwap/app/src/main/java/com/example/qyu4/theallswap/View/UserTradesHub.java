@@ -23,10 +23,12 @@ public class UserTradesHub extends ActionBarActivity implements View.OnClickList
         Button startNewTradeButton = (Button)findViewById(R.id.b_start_new_trade);
         Button viewPendingTradesButton = (Button)findViewById(R.id.b_view_pending_trades);
         Button viewCompletedTradesButton = (Button)findViewById(R.id.b_view_completed_trades);
+        Button viewTopTradersButton = (Button)findViewById(R.id.b_view_top_traders);
 
         startNewTradeButton.setOnClickListener(this);
         viewPendingTradesButton.setOnClickListener(this);
         viewCompletedTradesButton.setOnClickListener(this);
+        viewTopTradersButton.setOnClickListener(this);
     }
 
     @Override
@@ -61,6 +63,9 @@ public class UserTradesHub extends ActionBarActivity implements View.OnClickList
         }
         if (view.getId() == R.id.b_view_completed_trades) {
             uc.classIntent(CompletedTrades.class, activity);
+        }
+        if (view.getId() == R.id.b_view_top_traders) {
+            uc.classIntent(TopTraders.class, activity);
         }
     }
 }
