@@ -1,11 +1,18 @@
 package com.example.qyu4.theallswap.View;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
@@ -40,6 +47,9 @@ public class ItemProfile extends ActionBarActivity {
     private TextView ItemComments;
     private TextView ItemCategory;
     private TextView ItemPrivacy;
+
+    private static int RESULT_LOAD_IMG = 1;
+    String imgDecodableString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +88,13 @@ public class ItemProfile extends ActionBarActivity {
                 activity.finish();
             }
         });
+
+        Button uploadImageButton = (Button)findViewById(R.id.load_picture_button);
+        uploadImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                loadImageFromGallery(v);
+            }
+        });
     }
 
     @Override
@@ -96,5 +113,39 @@ public class ItemProfile extends ActionBarActivity {
         }
         ItemComments.setText(currentItem.getItemComments());
 
+    }
+
+    public void loadImageFromGallery(View view){
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+    }
+
+    protected void onActivityResult (int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
+
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn,
+                        null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+                ImageView imgView = (ImageView) findViewById(R.id.imgView);
+                imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+            } else {
+                Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 }
