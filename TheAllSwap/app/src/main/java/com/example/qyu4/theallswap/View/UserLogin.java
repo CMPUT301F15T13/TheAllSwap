@@ -62,6 +62,7 @@ public class UserLogin extends Activity implements View.OnClickListener{
 
             //TODO: load file and save objects in arrayList.
             if(uc.checkingUserExist(currentUserName, userList)){
+                uc.loadUsersFromFile(activity, userList.getFilename(), userList);
                 userList.setCurrentUser(uc.findUserById(currentUserName, userList));
                 uc.classIntent(UserMainView.class, activity);
             }else{
