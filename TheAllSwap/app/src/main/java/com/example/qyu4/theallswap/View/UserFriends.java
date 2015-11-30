@@ -29,7 +29,7 @@ public class UserFriends extends ActionBarActivity {
     private UserList userList;
     private User currentUser;
 
-    private ArrayAdapter<User> adapter;
+    private ArrayAdapter<String> adapter;
     private ArrayList<String> resultList = new ArrayList<>();
     private ListView friendList;
     private Button addFriend;
@@ -42,12 +42,12 @@ public class UserFriends extends ActionBarActivity {
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+        resultList = currentUser.getFriendsList();
 
         friendList = (ListView)findViewById(R.id.lv_user_friends);
 
         //Set adapter
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
+        adapter = new ArrayAdapter<String>(activity, R.layout.list_item, (ArrayList) resultList);
         friendList.setAdapter(adapter);
 
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -60,10 +60,10 @@ public class UserFriends extends ActionBarActivity {
         friendList.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> parent, View v, int position, long id) {
                 //Long Click removes the user from friends list
-                User selectedUser = currentUser.getFriendsList().get((int)id);
+                String selectedUser = friendList.getSelectedItem().toString();
                 uc.removeUserAsFriend(activity, currentUser, selectedUser);
 
-                resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+                resultList = currentUser.getFriendsList();
                 adapter.notifyDataSetChanged();
                 uc.saveInFile(userList.getFilename(), activity, userList);
                 return true;
@@ -81,7 +81,7 @@ public class UserFriends extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+        resultList = currentUser.getFriendsList();
         adapter.notifyDataSetChanged();
     }
 

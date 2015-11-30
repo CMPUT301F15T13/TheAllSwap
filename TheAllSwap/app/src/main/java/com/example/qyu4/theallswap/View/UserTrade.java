@@ -42,7 +42,7 @@ public class UserTrade extends ActionBarActivity {
         currentUser = userList.getCurrentUser();
 
 
-        resultList = uc.convertUserToString(currentUser.getFriendsList(), resultList);
+        resultList = currentUser.getFriendsList();
 
         friendList = (ListView)findViewById(R.id.lv_user_trade_item);
         friendList.setOnItemClickListener(new AdapterView.OnItemClickListener() {

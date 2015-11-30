@@ -9,7 +9,7 @@ public class User {
     private String userId;
 
     private ArrayList<Item> userInventory= new ArrayList<>();
-    private ArrayList<User> userFriendList = new ArrayList<>();
+    private ArrayList<String> userFriendList = new ArrayList<>();
 
     public Profile getUserProfile() {
         return userProfile;
@@ -29,7 +29,7 @@ public class User {
     public User(String userId) {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();
-        this.userFriendList = new ArrayList<User>();
+        this.userFriendList = new ArrayList<>();
         this.userProfile.setUserCity(null);
         this.userProfile.setUserContactInformation(null);
     }
@@ -38,12 +38,12 @@ public class User {
     public User(String userId, String userEmail, String userCity) {
         this.userId = userId;
         this.userInventory = new ArrayList<Item>();
-        this.userFriendList = new ArrayList<User>();
+        this.userFriendList = new ArrayList<>();
         this.userProfile.setUserCity(null);
         this.userProfile.setUserContactInformation(null);
     }
 
-    public ArrayList<User> getFriendsList(){
+    public ArrayList<String> getFriendsList(){
         return userFriendList;
     }
 
@@ -79,7 +79,7 @@ public class User {
      * add new Friend to friend list.
      * @param newFriend: generate friend name from user input.
      */
-    public void addFriend(User newFriend){
+    public void addFriend(String newFriend){
         userFriendList.add(newFriend);
     }
 
@@ -87,7 +87,7 @@ public class User {
      * remove a friend from friend list.
      * @param friendToRemove: friend user id to remove from friend list.
      */
-    public void removeFriend(User friendToRemove){
+    public void removeFriend(String friendToRemove){
         userFriendList.remove(userFriendList.indexOf(friendToRemove));
     }
 
@@ -159,4 +159,6 @@ public class User {
     public void incrementSuccessfulTrades() {
         successfulTrades++;
     }
+
+
 }
