@@ -16,7 +16,7 @@ public class Item {
     private boolean itemPrivacy;
     private boolean availability = true;
     private String itemComments;
-    private ArrayList<Integer> itemImgId;
+    private String itemImgId;
 
 
     public String getItemName() {
@@ -41,7 +41,7 @@ public class Item {
         return itemComments;
     }
 
-    public ArrayList<Integer> getItemImgId(){
+    public String getItemImgId(){
         return itemImgId;
     }
 
@@ -50,7 +50,7 @@ public class Item {
     public Item(){}
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
-                String ItemComments, ArrayList<Integer> itemImgId) {
+                String ItemComments, String itemImgId) {
 
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
@@ -86,21 +86,16 @@ public class Item {
     public void setItemComments(String itemComments) {
         this.itemComments = itemComments;
     }
-    public void setItemImgId(ArrayList<Integer> itemImgId) {
-        this.itemImgId = itemImgId;
-    }
 
     public void setAvailability(boolean avail) {
         availability = avail;
     }
 
-    public void addImage(int addedImage){
-        this.itemImgId.add(addedImage);
+    public void setItemImgId(String addedImage){
+        this.itemImgId = addedImage;
     }
+
     public void removeImage(int removedImage) {
-        if (this.itemImgId.contains(removedImage)) {
-            this.itemImgId.remove(removedImage);
-        }
     }
 
     public String getItemCategory() {

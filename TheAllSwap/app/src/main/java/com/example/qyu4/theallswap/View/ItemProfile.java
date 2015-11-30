@@ -117,7 +117,7 @@ public class ItemProfile extends ActionBarActivity {
             imgView.setVisibility(View.INVISIBLE);
         }
 
-        if(currentItem.isPrivate()) {
+        if (currentItem.isPrivate()) {
             String s = "Is private";
             ItemPrivacy.setText(s);
         } else {
@@ -125,6 +125,13 @@ public class ItemProfile extends ActionBarActivity {
             ItemPrivacy.setText(s);
         }
         ItemComments.setText(currentItem.getItemComments());
+
+        if (!"".equals(imgDecodableString)) {
+            Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
+            imgDecodableString = currentItem.getItemImgId();
+            ImageView imgView = (ImageView) findViewById(R.id.imgView);
+            imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+        }
 
     }
 
@@ -157,6 +164,7 @@ public class ItemProfile extends ActionBarActivity {
     }
 
     public void displayImage(){
+        Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
         ImageView imgView = (ImageView) findViewById(R.id.imgView);
         imgView.setVisibility(View.VISIBLE);
     }
@@ -184,6 +192,24 @@ public class ItemProfile extends ActionBarActivity {
 
                 int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                 imgDecodableString = cursor.getString(columnIndex);
+
+
+
+
+
+
+
+                currentItem.setItemImgId(imgDecodableString);
+                ic.editItem(currentUser, itemId, currentItem);
+                uc.saveInFile(userList.getFilename(), activity, userList);
+
+
+
+
+
+
+
+
                 cursor.close();
                 ImageView imgView = (ImageView) findViewById(R.id.imgView);
                 imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
