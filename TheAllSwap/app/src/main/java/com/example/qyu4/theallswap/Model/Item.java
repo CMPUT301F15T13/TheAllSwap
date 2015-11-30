@@ -1,5 +1,7 @@
 package com.example.qyu4.theallswap.Model;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 
 /**
@@ -16,7 +18,8 @@ public class Item {
     private boolean itemPrivacy;
     private boolean availability = true;
     private String itemComments;
-    private ArrayList<Integer> itemImgId;
+    private String itemImgId;
+    private Bitmap itemImgBitMap;
 
 
     public String getItemName() {
@@ -41,7 +44,7 @@ public class Item {
         return itemComments;
     }
 
-    public ArrayList<Integer> getItemImgId(){
+    public String getItemImgId(){
         return itemImgId;
     }
 
@@ -50,7 +53,7 @@ public class Item {
     public Item(){}
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
-                String ItemComments, ArrayList<Integer> itemImgId) {
+                String ItemComments, String itemImgId, Bitmap setItemImgBitMap) {
 
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
@@ -59,6 +62,7 @@ public class Item {
         this.setItemPrivacy(itemPrivacy);
         this.setItemComments(ItemComments);
         this.setItemImgId(itemImgId);
+        this.setItemImgBitMap(itemImgBitMap);
         this.availability = true;
     }
 
@@ -86,22 +90,16 @@ public class Item {
     public void setItemComments(String itemComments) {
         this.itemComments = itemComments;
     }
-    public void setItemImgId(ArrayList<Integer> itemImgId) {
-        this.itemImgId = itemImgId;
-    }
 
     public void setAvailability(boolean avail) {
         availability = avail;
     }
 
-    public void addImage(int addedImage){
-        this.itemImgId.add(addedImage);
+    public void setItemImgId(String addedImage){
+        this.itemImgId = addedImage;
     }
-    public void removeImage(int removedImage) {
-        if (this.itemImgId.contains(removedImage)) {
-            this.itemImgId.remove(removedImage);
-        }
-    }
+
+    public void setItemImgBitMap(Bitmap addedBitMap) { this.itemImgBitMap = addedBitMap;}
 
     public String getItemCategory() {
         return itemCategory;

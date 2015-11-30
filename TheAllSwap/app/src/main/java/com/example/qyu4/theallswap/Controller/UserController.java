@@ -266,23 +266,23 @@ public class UserController {
      * @param otherUser: User to be added as a friend.
      */
     //Currently unidirectional, should friendship be one sided?
-    public void addUserAsFriend(Context context, User currentUser, User otherUser){
-        if(currentUser.equals(otherUser)){
+    public void addUserAsFriend(Context context, User currentUser, String otherUser){
+        if(currentUser.getUserId().equals(otherUser)){
             makeInputStringToast(context, "Error: Cannot add yourself");
             return;
         }
         if(currentUser.getFriendsList().contains(otherUser)){
-            makeInputStringToast(context, "Error: " + otherUser.getUserId() + " already a friend");
+            makeInputStringToast(context, "Error: " + otherUser + " already a friend");
         }
         else {
             currentUser.addFriend(otherUser);
-            makeInputStringToast(context, otherUser.getUserId() + " added as friend");
+            makeInputStringToast(context, otherUser + " added as friend");
         }
     }
 
-    public void removeUserAsFriend(Context context, User currentUser, User otherUser){
+    public void removeUserAsFriend(Context context, User currentUser, String otherUser){
         currentUser.removeFriend(otherUser);
-        makeInputStringToast(context, otherUser.getUserId() + " removed from friends");
+        makeInputStringToast(context, otherUser + " removed from friends");
     }
 
     public void incrBorrowerSuccTrades(String borrowerId, ArrayList<User> userList) {

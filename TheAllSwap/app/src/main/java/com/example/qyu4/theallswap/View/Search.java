@@ -58,7 +58,7 @@ public class Search extends ActionBarActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         int userId = uc.stringToInt(id);
-        singleUser = currentUser.getFriendsList().get(userId);
+        singleUser = userList.getUserFromId(userList.get(userId).getUserId());
 
         itemArray = ic.showNonPrivateItems(singleUser);
 

@@ -54,15 +54,16 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
 
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
-        userIdString = currentUser.getUserId().toString();
+        userIdString = currentUser.getUserId();
 
         tradeList = TradeList.getTradeList();
 
         //Get friend with whom we are trading
         Intent intent = getIntent();
         friendId = intent.getStringExtra("id");
-        friendIdString = userList.get(Integer.parseInt(friendId)).getUserId().toString();
-        User friend = currentUser.getFriendsList().get(uc.stringToInt(friendId));
+        //friendIdString = userList.get(Integer.parseInt(friendId)).getUserId();
+        User friend = userList.getUserFromId(currentUser.getFriendsList().get(uc.stringToInt(friendId)));
+        friendIdString = friend.getUserId();
 
         itemListMine = (ListView)findViewById(R.id.lv_your_items);
         itemListFriend = (ListView)findViewById(R.id.lv_friends_items);
