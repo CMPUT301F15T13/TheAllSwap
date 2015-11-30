@@ -1,11 +1,20 @@
 package com.example.qyu4.theallswap.View;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.BitmapFactory;
+import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
@@ -40,6 +49,12 @@ public class ItemProfile extends ActionBarActivity {
     private TextView ItemComments;
     private TextView ItemCategory;
     private TextView ItemPrivacy;
+    private ImageView imgView;
+
+    private Boolean imgAble = false;
+
+    private static int RESULT_LOAD_IMG = 1;
+    String imgDecodableString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +68,7 @@ public class ItemProfile extends ActionBarActivity {
         ItemCategory = (TextView) findViewById(R.id.assigned_category);
         ItemPrivacy = (TextView) findViewById(R.id.assigned_privacy);
         ItemComments = (TextView) findViewById(R.id.assigned_comments);
+        imgView = (ImageView) findViewById(R.id.imgView);
 
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
@@ -78,6 +94,15 @@ public class ItemProfile extends ActionBarActivity {
                 activity.finish();
             }
         });
+
+        Button uploadImageButton = (Button)findViewById(R.id.load_picture_button);
+        uploadImageButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                loadImageFromGallery(v);
+            }
+        });
+
+
     }
 
     @Override
@@ -87,6 +112,11 @@ public class ItemProfile extends ActionBarActivity {
         ItemQuantity.setText(String.format("%d", currentItem.getItemQuantity()));
         ItemQuality.setText(currentItem.getItemQuality());
         ItemCategory.setText(currentItem.getItemCategory());
+
+        if (imgAble == false) {
+            imgView.setVisibility(View.INVISIBLE);
+        }
+
         if(currentItem.isPrivate()) {
             String s = "Is private";
             ItemPrivacy.setText(s);
@@ -96,5 +126,73 @@ public class ItemProfile extends ActionBarActivity {
         }
         ItemComments.setText(currentItem.getItemComments());
 
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_item_profile, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void userDisplayImage(MenuItem menu){
+        imgAble = true;
+        displayImage();
+    }
+
+    public void displayImage(){
+        ImageView imgView = (ImageView) findViewById(R.id.imgView);
+        imgView.setVisibility(View.VISIBLE);
+    }
+
+
+    public void loadImageFromGallery(View view){
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
+    }
+
+    protected void onActivityResult (int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        try {
+            if (requestCode == RESULT_LOAD_IMG && resultCode == RESULT_OK
+                    && null != data) {
+                // Get the Image from data
+
+                Uri selectedImage = data.getData();
+                String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+                Cursor cursor = getContentResolver().query(selectedImage, filePathColumn,
+                        null, null, null);
+                cursor.moveToFirst();
+
+                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                imgDecodableString = cursor.getString(columnIndex);
+                cursor.close();
+                ImageView imgView = (ImageView) findViewById(R.id.imgView);
+                imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+            } else {
+                Toast.makeText(this, "You haven't picked Image", Toast.LENGTH_SHORT).show();
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        }
     }
 }

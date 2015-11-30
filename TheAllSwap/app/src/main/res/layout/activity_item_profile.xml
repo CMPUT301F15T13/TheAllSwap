@@ -125,5 +125,24 @@
         android:layout_toEndOf="@+id/edit_profile_button"
         android:layout_marginLeft="20dp" />
 
+    <ImageView
+        android:layout_width="50pt"
+        android:layout_height="50pt"
+        android:layout_weight="1"
+        android:id="@+id/imgView"
+        android:background="@android:drawable/ic_menu_gallery"
+        android:layout_above="@+id/edit_profile_button"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:id="@+id/load_picture_button"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/remove_item_button"
+        android:layout_toEndOf="@+id/remove_item_button" />
+
+
 
 </RelativeLayout>

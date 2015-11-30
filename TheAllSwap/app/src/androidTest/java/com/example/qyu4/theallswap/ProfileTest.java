@@ -2,13 +2,15 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.View.UserProfile;
+
 /**
  * Created by ozero. Test file is skeletal.
  */
 public class ProfileTest extends ActivityInstrumentationTestCase2 {
 
     public ProfileTest() {
-        super(UserProfileActivity.class);
+        super(UserProfile.class);
     }
 
     public void testCreateProfile() {
