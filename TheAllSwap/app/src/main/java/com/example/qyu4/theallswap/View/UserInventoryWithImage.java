@@ -94,9 +94,6 @@ public class UserInventoryWithImage extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void userDisableImage(MenuItem menu){
-        uc.classIntent(UserInventory.class, activity);
-    }
     public void userAddItemToInventory(MenuItem menu){
         uc.classIntent(AddInventoryItem.class, activity);
     }

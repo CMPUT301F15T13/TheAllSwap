@@ -126,8 +126,8 @@
         android:layout_marginLeft="20dp" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50pt"
+        android:layout_height="50pt"
         android:layout_weight="1"
         android:id="@+id/imgView"
         android:background="@android:drawable/ic_menu_gallery"
