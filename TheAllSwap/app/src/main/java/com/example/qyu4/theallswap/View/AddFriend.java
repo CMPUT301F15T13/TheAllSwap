@@ -24,7 +24,7 @@ public class AddFriend extends ActionBarActivity {
     private User currentUser;
     private UserList userList;
 
-    private ArrayAdapter<User> adapter;
+    private ArrayAdapter<String> adapter;
     private ArrayList<String> resultList = new ArrayList<>();
     private ListView userSelectionList;
 
@@ -35,18 +35,23 @@ public class AddFriend extends ActionBarActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         userList = UserList.getUserList();
+        //ArrayList<String> userList2 = new ArrayList<>();
+        resultList.clear();
+        for(User user : userList) {
+            resultList.add(user.getUserId());
+        }
         currentUser = userList.getCurrentUser();
 
-        resultList = uc.convertUserToString(userList, resultList);
+        //resultList = uc.convertUserToString(userList, resultList);
 
         userSelectionList = (ListView)findViewById(R.id.lv_add_friend);
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
+        adapter = new ArrayAdapter<String>(activity, R.layout.list_item, (ArrayList) resultList);
         userSelectionList.setAdapter(adapter);
 
         userSelectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User selectedUser = userList.get((int)id);
-                uc.addUserAsFriend(activity, currentUser, selectedUser);
+                uc.addUserAsFriend(activity, currentUser, selectedUser.getUserId());
                 uc.saveInFile(userList.getFilename(), activity, userList);
                 activity.finish();
             }

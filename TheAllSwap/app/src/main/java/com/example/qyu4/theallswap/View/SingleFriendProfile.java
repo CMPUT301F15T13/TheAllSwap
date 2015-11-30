@@ -32,7 +32,7 @@ public class SingleFriendProfile extends ActionBarActivity {
     private InventoryController ic = new InventoryController();
     private UserList userList;
     private User currentUser;
-    private User singleUser = new User();
+    private String singleUser;
 
     private TextView userName;
     private TextView userEmail;
@@ -63,7 +63,7 @@ public class SingleFriendProfile extends ActionBarActivity {
         userEmail = (TextView) findViewById(R.id.single_user_email);
         userCity = (TextView) findViewById(R.id.single_user_city);
 
-        itemArray = ic.showNonPrivateItems(singleUser);
+        itemArray = ic.showNonPrivateItems(userList.getUserFromId(singleUser));
 
         itemList = (ListView)findViewById(R.id.single_inventory);
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, (ArrayList) itemArray);
@@ -96,9 +96,10 @@ public class SingleFriendProfile extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        userName.setText(singleUser.getUserId());
-        userEmail.setText(singleUser.getUserProfile().getUserContactInformation());
-        userCity.setText(singleUser.getUserProfile().getUserCity());
+        User selectedUser = userList.getUserFromId(singleUser);
+        userName.setText(singleUser);
+        userEmail.setText(selectedUser.getUserProfile().getUserContactInformation());
+        userCity.setText(selectedUser.getUserProfile().getUserCity());
 
         adapter.notifyDataSetChanged();
     }

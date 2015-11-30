@@ -33,4 +33,12 @@ public class UserList extends ArrayList<User> {
         currentUser = current;
     }
 
+    public User getUserFromId(String friend) {
+        for(User user : instance) {
+            if(user.getUserId().equals(friend)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }
