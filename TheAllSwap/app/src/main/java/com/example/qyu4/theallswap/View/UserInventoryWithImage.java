@@ -9,23 +9,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.qyu4.theallswap.Controller.UserController;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
 
 import java.util.ArrayList;
 
 public class UserInventoryWithImage extends ListActivity {
-
     private UserInventoryWithImage activity = this;
     private UserController uc = new UserController();
-    private ArrayList<User> userList= new ArrayList<User>();
-    private static final String FILENAME = "userProfile.txt";
-    private ArrayAdapter<User> adapter;
+
+    private UserList userList;
+    private User currentUser;
+
+    private ArrayAdapter<String> adapter;
     private ListView itemList;
-    private ArrayList resultList = new ArrayList<>();
+    private ArrayList<String> resultList = new ArrayList<>();
+
 
     private String[] itemname = {
             "111",
@@ -37,23 +41,21 @@ public class UserInventoryWithImage extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_inventory_with_image);
+
+        userList = UserList.getUserList();
+        currentUser = userList.getCurrentUser();
+
+        resultList = uc.convertItemToString(currentUser, resultList);
+
+        adapter = new ArrayAdapter<String>(activity, R.layout.list_item_image, R.id.itemName, resultList);
+
     }
 
     @Override
     protected void onStart() {
-        // TODO Auto-generated method stub
         super.onStart();
-        User currentUser = userList.get(0);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
         resultList = uc.convertItemToString(currentUser, resultList);
-        /***************************************************
-         TODO: add loading friends list method.
-         *************************************************/
-
-        this.setListAdapter(new ArrayAdapter<String>(this, R.layout.list_item_image,
-                R.id.itemName, resultList));
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -77,7 +79,9 @@ public class UserInventoryWithImage extends ListActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
+    public void userDisableImage(MenuItem menu){
+        uc.classIntent(UserInventory.class, activity);
+    }
     public void userAddItemToInventory(MenuItem menu){
         uc.classIntent(AddInventoryItem.class, activity);
     }
