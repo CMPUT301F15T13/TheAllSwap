@@ -32,7 +32,7 @@
         android:text="@string/view_completed_trades"
         android:id="@+id/b_view_completed_trades"
         android:layout_below="@+id/b_view_pending_trades"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -41,5 +41,5 @@
         android:text="@string/view_top_traders"
         android:id="@+id/b_view_top_traders"
         android:layout_below="@+id/b_view_completed_trades"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
