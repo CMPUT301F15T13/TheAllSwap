@@ -1,6 +1,20 @@
+/*
+ * Copyright 2015 Alexander Ozero, Qiang Yu, Eric Smith, Lixin Jin, Daniel Belanger
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.qyu4.theallswap.View;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -24,7 +38,7 @@ public class AddFriend extends ActionBarActivity {
     private User currentUser;
     private UserList userList;
 
-    private ArrayAdapter<User> adapter;
+    private ArrayAdapter<String> adapter;
     private ArrayList<String> resultList = new ArrayList<>();
     private ListView userSelectionList;
 
@@ -35,18 +49,23 @@ public class AddFriend extends ActionBarActivity {
         //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         userList = UserList.getUserList();
+        //ArrayList<String> userList2 = new ArrayList<>();
+        resultList.clear();
+        for(User user : userList) {
+            resultList.add(user.getUserId());
+        }
         currentUser = userList.getCurrentUser();
 
-        resultList = uc.convertUserToString(userList, resultList);
+        //resultList = uc.convertUserToString(userList, resultList);
 
         userSelectionList = (ListView)findViewById(R.id.lv_add_friend);
-        adapter = new ArrayAdapter<User>(activity, R.layout.list_item, (ArrayList) resultList);
+        adapter = new ArrayAdapter<String>(activity, R.layout.list_item, (ArrayList) resultList);
         userSelectionList.setAdapter(adapter);
 
         userSelectionList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 User selectedUser = userList.get((int)id);
-                uc.addUserAsFriend(activity, currentUser, selectedUser);
+                uc.addUserAsFriend(activity, currentUser, selectedUser.getUserId());
                 uc.saveInFile(userList.getFilename(), activity, userList);
                 activity.finish();
             }

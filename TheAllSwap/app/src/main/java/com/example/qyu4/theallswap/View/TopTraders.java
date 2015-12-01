@@ -19,37 +19,50 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
+import com.example.qyu4.theallswap.Model.UserSuccessfulTradesComparator;
 import com.example.qyu4.theallswap.R;
 
-public class UserTradesHub extends ActionBarActivity implements View.OnClickListener {
+import java.util.ArrayList;
+import java.util.Collections;
 
-    private UserTradesHub activity = this;
+public class TopTraders extends ActionBarActivity {
+
+    private TopTraders activity = this;
     private UserController uc = new UserController();
+    private ArrayList<String> topTradersList = new ArrayList<>();
+    private UserList userList = UserList.getUserList();
+    private ArrayAdapter<String> adapter;
+    private ListView topUsersListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_trades_hub);
+        setContentView(R.layout.activity_top_traders);
 
-        Button startNewTradeButton = (Button)findViewById(R.id.b_start_new_trade);
-        Button viewPendingTradesButton = (Button)findViewById(R.id.b_view_pending_trades);
-        Button viewCompletedTradesButton = (Button)findViewById(R.id.b_view_completed_trades);
-        Button viewTopTradersButton = (Button)findViewById(R.id.b_view_top_traders);
+        // Sort users by successful trades, then add their IDs to a list
+        Collections.sort(userList, new UserSuccessfulTradesComparator());
 
-        startNewTradeButton.setOnClickListener(this);
-        viewPendingTradesButton.setOnClickListener(this);
-        viewCompletedTradesButton.setOnClickListener(this);
-        viewTopTradersButton.setOnClickListener(this);
+        for(User user : userList) {
+            topTradersList.add(user.getUserId()+" - "+Integer.toString(user.getSuccessfulTrades()));
+        }
+
+        topUsersListView = (ListView)findViewById(R.id.lv_top_traders);
+
+        //Set adapter
+        adapter = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) topTradersList);
+        topUsersListView.setAdapter(adapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_user_trades_hub, menu);
+        getMenuInflater().inflate(R.menu.menu_top_traders, menu);
         return true;
     }
 
@@ -68,19 +81,5 @@ public class UserTradesHub extends ActionBarActivity implements View.OnClickList
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.b_start_new_trade) {
-            uc.classIntent(UserTrade.class, activity);
-        }
-        if (view.getId() == R.id.b_view_pending_trades) {
-            uc.classIntent(PendingTrades.class, activity);
-        }
-        if (view.getId() == R.id.b_view_completed_trades) {
-            uc.classIntent(CompletedTrades.class, activity);
-        }
-        if (view.getId() == R.id.b_view_top_traders) {
-            uc.classIntent(TopTraders.class, activity);
-        }
-    }
+
 }

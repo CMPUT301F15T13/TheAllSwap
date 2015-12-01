@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Alexander Ozero, Qiang Yu, Eric Smith, Lixin Jin, Daniel Belanger
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.qyu4.theallswap.Controller;
 
 
@@ -266,23 +281,31 @@ public class UserController {
      * @param otherUser: User to be added as a friend.
      */
     //Currently unidirectional, should friendship be one sided?
-    public void addUserAsFriend(Context context, User currentUser, User otherUser){
-        if(currentUser.equals(otherUser)){
+    public void addUserAsFriend(Context context, User currentUser, String otherUser){
+        if(currentUser.getUserId().equals(otherUser)){
             makeInputStringToast(context, "Error: Cannot add yourself");
             return;
         }
         if(currentUser.getFriendsList().contains(otherUser)){
-            makeInputStringToast(context, "Error: " + otherUser.getUserId() + " already a friend");
+            makeInputStringToast(context, "Error: " + otherUser + " already a friend");
         }
         else {
             currentUser.addFriend(otherUser);
-            makeInputStringToast(context, otherUser.getUserId() + " added as friend");
+            makeInputStringToast(context, otherUser + " added as friend");
         }
     }
 
-    public void removeUserAsFriend(Context context, User currentUser, User otherUser){
+    public void removeUserAsFriend(Context context, User currentUser, String otherUser){
         currentUser.removeFriend(otherUser);
-        makeInputStringToast(context, otherUser.getUserId() + " removed from friends");
+        makeInputStringToast(context, otherUser + " removed from friends");
+    }
+
+    public void incrBorrowerSuccTrades(String borrowerId, ArrayList<User> userList) {
+        for(User user : userList) {
+            if(user.getUserId().equals(borrowerId)) {
+                user.incrementSuccessfulTrades();
+            }
+        }
     }
 }
 

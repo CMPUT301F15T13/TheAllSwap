@@ -1,3 +1,18 @@
+/*
+ * Copyright 2015 Alexander Ozero, Qiang Yu, Eric Smith, Lixin Jin, Daniel Belanger
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.qyu4.theallswap.View;
 
 import android.content.Context;
@@ -32,7 +47,7 @@ public class SingleFriendProfile extends ActionBarActivity {
     private InventoryController ic = new InventoryController();
     private UserList userList;
     private User currentUser;
-    private User singleUser = new User();
+    private String singleUser;
 
     private TextView userName;
     private TextView userEmail;
@@ -63,7 +78,7 @@ public class SingleFriendProfile extends ActionBarActivity {
         userEmail = (TextView) findViewById(R.id.single_user_email);
         userCity = (TextView) findViewById(R.id.single_user_city);
 
-        itemArray = ic.showNonPrivateItems(singleUser);
+        itemArray = ic.showNonPrivateItems(userList.getUserFromId(singleUser));
 
         itemList = (ListView)findViewById(R.id.single_inventory);
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, (ArrayList) itemArray);
@@ -96,9 +111,10 @@ public class SingleFriendProfile extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        userName.setText(singleUser.getUserId());
-        userEmail.setText(singleUser.getUserProfile().getUserContactInformation());
-        userCity.setText(singleUser.getUserProfile().getUserCity());
+        User selectedUser = userList.getUserFromId(singleUser);
+        userName.setText(singleUser);
+        userEmail.setText(selectedUser.getUserProfile().getUserContactInformation());
+        userCity.setText(selectedUser.getUserProfile().getUserCity());
 
         adapter.notifyDataSetChanged();
     }

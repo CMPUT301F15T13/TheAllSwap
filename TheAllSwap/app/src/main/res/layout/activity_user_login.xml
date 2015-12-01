@@ -44,18 +44,27 @@ tools:context="com.example.qyu4.theallswap.View.UserLogin">
 
     <Button
     android:id="@+id/b_user_login"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:text="@string/log_in"
         android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/textView1" />
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register"
         android:id="@+id/b_user_register"
-        android:layout_alignTop="@+id/b_user_login"
-        android:layout_alignEnd="@+id/textView1" />
+        android:layout_below="@+id/textView8"
+        android:layout_alignEnd="@+id/b_user_login" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/or"
+        android:id="@+id/textView8"
+        android:layout_below="@+id/b_user_login"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

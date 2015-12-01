@@ -10,10 +10,9 @@
         android:id="@+id/new_patient_id_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/new_user_name"
+        android:text="@string/new_item_name"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="24px"
-        android:text="@string/new_item_name" />
+        android:layout_alignParentStart="true" />
 
 
     <TextView
@@ -35,12 +34,11 @@
 
     <Button
         android:id="@+id/b_edit_profile_submit"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/submit"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/text_item_comment" />
+        android:layout_alignParentStart="true" />
 
     <Spinner
         android:id="@+id/new_item_category_spinner"
@@ -90,6 +88,14 @@
             android:id="@+id/b_new_item_not_private"
             android:checked="false" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_item_comment"
+            android:id="@+id/textView5"
+            android:layout_below="@+id/radioGroup"
+            android:layout_alignParentStart="true" />
+
     </RadioGroup>
 
     <EditText
@@ -127,14 +133,6 @@
         android:layout_below="@+id/radioGroup"
         android:layout_alignEnd="@+id/radioGroup"
         android:layout_toEndOf="@+id/old_item_category"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/new_item_comment"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/radioGroup"
         android:layout_alignParentStart="true" />
 
     <TextView
