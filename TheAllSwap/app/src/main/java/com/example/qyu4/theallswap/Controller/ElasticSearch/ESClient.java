@@ -123,6 +123,9 @@ public class ESClient {
             System.out.println(status);
             /**
              * this line has some error in the original code i cant fix.
+             * the program does not recognise getEntityContent() method
+             * After I look up in the HttpResponse manual list find getEntity method.
+             * String json = getEntityContent(response);
              */
             String json = response.getEntity().toString();
 

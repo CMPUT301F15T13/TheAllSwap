@@ -165,6 +165,9 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="title_activity_top_traders">Top Traders</string>
     <string name="view_top_traders">View Top Traders</string>
+
+    <string name="title_activity_testing_es">TestingEs</string>
+
     <string name="or">Or</string>
 
-</resources>
+</resources>    
