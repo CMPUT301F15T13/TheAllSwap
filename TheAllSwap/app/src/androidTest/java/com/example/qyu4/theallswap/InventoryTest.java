@@ -1,5 +1,7 @@
+package com.example.qyu4.theallswap;
 import com.example.qyu4.theallswap.Inventory;
 import com.example.qyu4.theallswap.Model.Item;
+import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.User;
 
 import static junit.framework.Assert.assertEquals;
@@ -49,44 +51,44 @@ public class InventoryTest {
 	public void testViewMyUnsharedItems(){
 		Item myItem = new Item();
 		User myUser = new User();
-		myUser.setOwnership(true);
-		myItem.setShared(false);
 		myUser.addItemToInventory(myItem);
-		assertTrue(myInventory.getItems.contains(myItem));
+		assertTrue(myUser.getInventory().contains(myItem));
 	}
 	
 	@Test
 	public void testAddPrivateItemsToTrade(){
+		User myUser = new User("Isaac");
+		User otherUser = new User("Frank");
 		Item myItem = new Item();
-		Inventory myInventory = new Inventory();
-		myInventory.setOwnership(true);
-		myItem.setShared(false);
-		myInventory.add(myItem);
+		myItem.setItemName("Pumpkin");
+		Item theirItem = new Item();
+		theirItem.setItemName("Lightbulb");
+		myUser.addItemToInventory(myItem);
 		
-		Transaction myOffer = new Transaction();
-		myOffer.add(myInventory.getItem(myItem));
-		assertTrue(myOffer.getItems.contains(myItem));
+		Trade myOffer = new Trade("Isaac", "Pumpkin", "Frank", "Lightbulb");
+
+		assertTrue(myOffer.getOwnerItem() == "Pumpkin");
 	}
 
 	@Test
 	public void testViewUnsharedItemsNotMine() {
+		User notMe = new User();
 		Item item = new Item();
-		Inventory notMyInventory = new Inventory();
-		notMyInventory.setOwnership(false);
-		item.setShared(false);
-		notMyInventory.add(item);
-		assertFalse(notMyInventory.getItems.contains(item));
+		item.setItemPrivacy(false);
+		notMe.addItemToInventory(item);
+		assertFalse(notMe.getInventory().contains(item));
 	}
 	
 	@Test
 	public void testEditItem(){
 		final int quantity = 1;
-		Item myItem = new Item(quantity);
-		Inventory myInventory = new Inventory();
-		myInventory.add(myItem);
+		Item myItem = new Item();
+		myItem.setItemQuantity(quantity);
+		User user = new User();
+		user.addItemToInventory(myItem);
 		final int value = 6;
-		myInventory.getItem(myItem).setQuantity(value);
-		assertEquals(myInventory.getItem(myItem).getQuantity(), value);
+		myItem.setItemQuantity(value);
+		assertEquals(myItem.getItemQuantity(), value);
 		
 	}
 	
@@ -95,8 +97,8 @@ public class InventoryTest {
 		Item myItem = new Item();
 		Inventory myInventory = new Inventory();
 		ArrayList<String> allowedCatagories = new ArrayList<String>();	
-		assertTrue(allowedCatagories.contains(myItem.getCatagory()));
-		myItem.setCatagory("somethingNotInList"); 
-		assertFalse(allowedCatagories.contains(myItem.getCatagory()));
+		assertTrue(allowedCatagories.contains(myItem.getItemCategory()));
+		myItem.setItemCategory("somethingNotInList");
+		assertFalse(allowedCatagories.contains(myItem.getItemCategory()));
 	}
 }

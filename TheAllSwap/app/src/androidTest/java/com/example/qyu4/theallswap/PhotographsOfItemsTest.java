@@ -19,7 +19,7 @@ public class PhotographsOfItemsTest extends ActivityInstrumentationTestCase2 {
         tradeItem.setItemName("fabulous watch");
 
         try {
-            tradeItem.addImage(123);
+            tradeItem.setItemImgId("123");
         } catch (IllegalArgumentException e){
             isAttached = false;
         }
@@ -32,36 +32,36 @@ public class PhotographsOfItemsTest extends ActivityInstrumentationTestCase2 {
     public void testViewPhotograph(){
         // US06.02.01
         Item tradeItem = new Item();
-        tradeItem.addImage(123);
+        tradeItem.setItemImgId("123");
         tradeItem.setItemName("fabulous watch");
 
-        assertTrue(tradeItem.getItemImgId().contains(123));
+        assertTrue(tradeItem.getItemImgId()=="123");
     }
 
-    public void testDeletePhotograph(){
+    public void testRemovePhotograph(){
         // US06.03.01
         Item tradeItem = new Item();
-        tradeItem.addImage(123);
+        tradeItem.setItemImgId("123");
         tradeItem.setItemName("fabulous watch");
 
-        tradeItem.removeImage(123);
-        assertFalse(tradeItem.getItemImgId().contains(123));
+        tradeItem.setItemImgId("321");
+        assertFalse(tradeItem.getItemImgId() != "123");
     }
 
     public void testCheckPhotographSize(){
         // US06.04.01
         Item tradeItem = new Item();
-        tradeItem.addImage(123);
+        tradeItem.setItemImgId("123");
         tradeItem.setItemName("fabulous watch");
         // Attach a over size photo - photoOverSize
-        tradeItem.addImage(123);
+        tradeItem.setItemImgId("123");
         assertFalse(tradeItem.checkImageSize());
     }
 
     public void testDisablePhotographDownload(){
         // US06.05.01
         Item tradeItem = new Item();
-        tradeItem.addImage(123);
+        tradeItem.setItemImgId("123");
         tradeItem.setItemName("fabulous watch");
 
         tradeItem.disableImageDownload();
