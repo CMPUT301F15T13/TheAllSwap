@@ -14,4 +14,9 @@
         android:title="Delete Image"
         android:orderInCategory="100"
         android:onClick="userDeleteImage"/>
+    <item
+        android:id="@+id/action_download_switch"
+        android:title="Download switch"
+        android:orderInCategory="100"
+        android:onClick="userDownloadSwitch"/>
 </menu>

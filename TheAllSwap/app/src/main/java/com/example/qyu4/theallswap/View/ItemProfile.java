@@ -189,6 +189,18 @@ public class ItemProfile extends ActionBarActivity {
         deleteImage();
     }
 
+    public void userDownloadSwitch(MenuItem menu) {switchDownload();}
+
+    public void switchDownload(){
+        if (currentItem.getItemDownload() == true) {
+            currentItem.setItemDownload(false);
+            Toast.makeText(this, "The download function is disabled.", Toast.LENGTH_SHORT).show();
+        } else {
+            currentItem.setItemDownload(true);
+            Toast.makeText(this, "The download function is abled.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     public void displayImage(){
         //Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
         ImageView imgView = (ImageView) findViewById(R.id.imgView);
