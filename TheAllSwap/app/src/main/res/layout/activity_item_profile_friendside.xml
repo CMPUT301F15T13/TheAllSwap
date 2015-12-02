@@ -1,18 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.qyu4.theallswap.View.ItemProfile">
-
+<?xml version="1.0" encoding="utf-8"?>
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
         android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        tools:context="com.example.qyu4.theallswap.View.ItemProfile">
+        tools:context="com.example.qyu4.theallswap.View.ItemProfileFriendSide">
 
         <TextView
             android:id="@+id/new_patient_id_label"
@@ -116,45 +109,23 @@
             android:layout_alignParentStart="true"
             android:hint="Some comments" />
 
-        <Button
+    <ImageView
+        android:layout_width="50pt"
+        android:layout_height="50pt"
+        android:layout_weight="1"
+        android:id="@+id/imgView"
+        android:background="@android:drawable/ic_menu_gallery"
+        android:layout_below="@+id/assigned_comments"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="90dp" />
+
+    <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Item"
-            android:id="@+id/edit_profile_button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete Item"
-            android:id="@+id/remove_item_button"
-            android:layout_alignBottom="@+id/edit_profile_button"
-            android:layout_toEndOf="@+id/edit_profile_button"
-            android:layout_marginLeft="20dp" />
-
-        <ImageView
-            android:layout_width="50pt"
-            android:layout_height="50pt"
-            android:layout_weight="1"
-            android:id="@+id/imgView"
-            android:background="@android:drawable/ic_menu_gallery"
-            android:layout_above="@+id/edit_profile_button"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Upload Image"
-            android:id="@+id/load_picture_button"
+            android:text="Download Image"
+            android:id="@+id/download_picture_button"
             android:layout_marginLeft="20dp"
-            android:layout_above="@+id/remove_item_button"
-            android:layout_toEndOf="@+id/remove_item_button" />
-
-
+        android:layout_alignBottom="@+id/imgView"
+        android:layout_toEndOf="@+id/textView4" />
 
     </RelativeLayout>
-
-
-
-</RelativeLayout>
