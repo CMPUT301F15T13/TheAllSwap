@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.qyu4.theallswap.View.ItemProfileFriendSide">
+
+    <item
+        android:id="@+id/action_display_image"
+        android:title="Display Image"
+        android:orderInCategory="100"
+        android:onClick="userDisplayImage"/>
+</menu>
