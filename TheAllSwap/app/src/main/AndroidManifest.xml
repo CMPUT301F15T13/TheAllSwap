@@ -116,6 +116,10 @@
             android:name=".View.TestingEs"
             android:label="@string/title_activity_testing_es" >
         </activity>
+        <activity
+            android:name=".View.SingleUserFullInventory"
+            android:label="@string/title_activity_single_user_full_inventory" >
+        </activity>
     </application>
 
 </manifest>

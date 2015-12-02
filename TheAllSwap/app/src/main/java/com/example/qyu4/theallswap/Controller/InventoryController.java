@@ -20,6 +20,7 @@ import android.content.Intent;
 
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserList;
 
 import java.util.ArrayList;
 
@@ -73,35 +74,52 @@ public class InventoryController {
         currentUser.getUserInventory().set(itemId, newItem);
     }
 
-    public ArrayList<String> showNonPrivateItems(User friend){
-        ArrayList<String> invList = new ArrayList<>();
-        for(Item i : friend.getInventory()){
-            if(!i.isPrivate() && i.isAvailable()) {
-                invList.add(i.getItemName());
-            }
-        }
-        return invList;
-    }
+    public ArrayList<Item> showAllNonPrivateItems(){
+        ArrayList<Item> invList = new ArrayList<>();
+        UserList userList = UserList.getUserList();
+        User currentUser = userList.getCurrentUser();
+        for(User u : userList) {
+            if(currentUser.getFriendsList().contains(u.getUserId())) {
+                for (Item i : u.getInventory()) {
+                    if (!i.isPrivate() && i.isAvailable()) {
+                        invList.add(i);
 
-    public ArrayList<String> showItemsInCategory (User friend, String category){
-        ArrayList<String> invList = new ArrayList<>();
-        String all = "All";
-        for(Item i : friend.getInventory()){
-            if(!i.isPrivate() && i.isAvailable()) {
-                if (i.getItemCategory().equals(category) || category.equals(all)){
-                    invList.add(i.getItemName());
+                    }
                 }
             }
         }
         return invList;
     }
 
-    public ArrayList<String> searchSuggestions (User friend, String search){
-        ArrayList<String> invList = new ArrayList<>();
+    public ArrayList<Item> showNonPrivateItems(User friend){
+        ArrayList<Item> invList = new ArrayList<>();
         for(Item i : friend.getInventory()){
             if(!i.isPrivate() && i.isAvailable()) {
+                invList.add(i);
+            }
+        }
+        return invList;
+    }
+
+    public ArrayList<Item> showItemsInCategory (ArrayList<Item> items, String category){
+        ArrayList<Item> invList = new ArrayList<>();
+        String all = "All";
+        for(Item i : items){
+            if(!i.isPrivate() && i.isAvailable()) {
+                if (i.getItemCategory().equals(category) || category.equals(all)){
+                    invList.add(i);
+                }
+            }
+        }
+        return invList;
+    }
+
+    public ArrayList<Item> searchSuggestions (ArrayList<Item> items, String search){
+        ArrayList<Item> invList = new ArrayList<>();
+        for(Item i : items){
+            if(!i.isPrivate() && i.isAvailable()) {
                 if (i.getItemName().contains(search)){
-                    invList.add(i.getItemName());
+                    invList.add(i);
                 }
             }
         }

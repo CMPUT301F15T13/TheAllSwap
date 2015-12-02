@@ -31,6 +31,7 @@ import android.widget.ArrayAdapter;
 
 import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
 import com.example.qyu4.theallswap.R;
@@ -78,7 +79,10 @@ public class SingleFriendProfile extends ActionBarActivity {
         userEmail = (TextView) findViewById(R.id.single_user_email);
         userCity = (TextView) findViewById(R.id.single_user_city);
 
-        itemArray = ic.showNonPrivateItems(userList.getUserFromId(singleUser));
+        ArrayList<Item> items = ic.showNonPrivateItems(userList.getUserFromId(singleUser));
+        for(Item i : items) {
+            itemArray.add(i.getItemName());
+        }
 
         itemList = (ListView)findViewById(R.id.single_inventory);
         adapter = new ArrayAdapter<String>(this, R.layout.list_item, (ArrayList) itemArray);
@@ -95,7 +99,7 @@ public class SingleFriendProfile extends ActionBarActivity {
         searchInvButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 int index = currentUser.getFriendsList().indexOf(singleUser);
-                uc.passValueToActivity(Search.class, activity, index);
+                uc.passValueToActivity(SingleUserFullInventory.class, activity, index);
             }
         });
 

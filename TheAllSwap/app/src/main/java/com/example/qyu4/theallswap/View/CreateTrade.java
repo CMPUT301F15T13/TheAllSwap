@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Controller.TradeController;
 import com.example.qyu4.theallswap.Controller.UserController;
+import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.TradeList;
 import com.example.qyu4.theallswap.Model.User;
@@ -101,7 +102,11 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
 
         resultListMine = uc.convertItemToString(currentUser, resultListMine);
         //resultListFriend = uc.convertItemToString(friend, resultListFriend);
-        resultListFriend = ic.showNonPrivateItems(friend);
+        ArrayList<Item> items = ic.showNonPrivateItems(friend);
+        for(Item i : items) {
+            resultListFriend.add(i.getItemName());
+        }
+
 
         adapterMine = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultListMine);
         adapterFriend = new ArrayAdapter<>(activity, R.layout.list_item, (ArrayList) resultListFriend);

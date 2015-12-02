@@ -41,8 +41,8 @@ import java.util.ArrayList;
  * @author qyu4, egsmith, lixin1, ozero, debelang.
  *
  */
-public class Search extends ActionBarActivity {
-    private Search activity =this;
+public class SingleUserFullInventory extends ActionBarActivity {
+    private SingleUserFullInventory activity =this;
     private UserController uc = new UserController();
     private InventoryController ic = new InventoryController();
 
@@ -67,20 +67,18 @@ public class Search extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search);
+        setContentView(R.layout.activity_single_search);
 
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        /*
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         int userId = uc.stringToInt(id);
         singleUser = userList.getUserFromId(userList.get(userId).getUserId());
-         */
 
         //itemArray = ic.showNonPrivateItems(singleUser);
-        itemArray = ic.showAllNonPrivateItems();
+        itemArray = ic.showNonPrivateItems(singleUser);
         for(Item i : itemArray) {
             itemStringArray.add(i.getItemName());
         }
@@ -100,16 +98,7 @@ public class Search extends ActionBarActivity {
         itemList.setAdapter(adapter);
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String selected = itemStringArray.get(position);
-                User friend = new User();
-                for(String username : currentUser.getFriendsList()) {
-                        friend = uc.findUserById(username, userList);
-                        for(Item i : friend.getInventory()){
-                            if(i.getItemName().equals(selected))
-                                break;
-                        }
-                }
-                int index = currentUser.getFriendsList().indexOf(friend.getUserId());
+                int index = currentUser.getFriendsList().indexOf(singleUser.getUserId());
                 if(index > 0)
                     uc.passValueToActivity(CreateTrade.class, activity, index);
                 //activity.finish();
@@ -135,7 +124,7 @@ public class Search extends ActionBarActivity {
     class SearchBoxListener implements SearchView.OnQueryTextListener {
         @Override
         public boolean onQueryTextChange(String newText) {
-            itemArray = ic.searchSuggestions(ic.showAllNonPrivateItems(), newText);
+            itemArray = ic.searchSuggestions(ic.showNonPrivateItems(singleUser), newText);
             itemStringArray.clear();
             for(Item i : itemArray) {
                 itemStringArray.add(i.getItemName());
@@ -148,7 +137,7 @@ public class Search extends ActionBarActivity {
 
         @Override
         public boolean onQueryTextSubmit(String query) {
-            itemArray = ic.searchSuggestions(ic.showAllNonPrivateItems(), query);
+            itemArray = ic.searchSuggestions(ic.showNonPrivateItems(singleUser), query);
             itemStringArray.clear();
             for(Item i : itemArray) {
                 itemStringArray.add(i.getItemName());
@@ -165,7 +154,7 @@ public class Search extends ActionBarActivity {
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                                    long arg3) {
             itemCategory = m[arg2];
-            itemArray = ic.showItemsInCategory(ic.showAllNonPrivateItems(), itemCategory);
+            itemArray = ic.showItemsInCategory(ic.showNonPrivateItems(singleUser), itemCategory);
             itemStringArray.clear();
             for(Item i : itemArray) {
                 itemStringArray.add(i.getItemName());

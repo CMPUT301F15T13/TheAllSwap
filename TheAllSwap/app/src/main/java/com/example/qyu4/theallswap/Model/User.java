@@ -84,10 +84,7 @@ public class User {
      * @param friend: friend to check if in list
      */
     public boolean isFriend(User friend) {
-        if(userFriendList.contains(friend)){
-            return true;
-        }
-        return false;
+        return userFriendList.contains(friend.getUserId());
     }
 
     /**

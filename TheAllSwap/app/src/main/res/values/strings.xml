@@ -22,10 +22,10 @@
     <string name="title_activity_user_register">Register User</string>
     <string name="title_activity_user_main_viewing">Main Menu</string>
     <string name="my_inventory">My Inventory</string>
-    <string name="my_trade">My Trade</string>
-    <string name="my_friends">My Friends</string>
+    <string name="my_trade">Trade Hub</string>
+    <string name="my_friends">Friends</string>
     <string name="my_profile">My Profile</string>
-    <string name="search">Search</string>
+    <string name="search">Find Items</string>
     <string name="previous_browse">Previous Browse</string>
     <string name="dash_line">-----------------------------------------------</string>
     <string name="title_activity_user_inventory">My Inventory</string>
@@ -169,5 +169,6 @@
     <string name="title_activity_testing_es">TestingEs</string>
 
     <string name="or">Or</string>
+    <string name="title_activity_single_user_full_inventory">SingleUserFullInventory</string>
 
 </resources>    

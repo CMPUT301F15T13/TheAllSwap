@@ -40,16 +40,19 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         setContentView(R.layout.activity_user_main_viewing);
 
         Button myInventoryButton = (Button)findViewById(R.id.b_my_inventory);
-        Button myTradeButton = (Button)findViewById(R.id.b_my_trade);
-        Button myFriendsButton = (Button)findViewById(R.id.b_my_friends);
+        Button TradeHubButton = (Button)findViewById(R.id.b_my_trade);
+        Button FriendsButton = (Button)findViewById(R.id.b_my_friends);
         Button myProfileButton = (Button)findViewById(R.id.b_my_profile);
+        Button allSearch = (Button)findViewById(R.id.b_all_search);
         Button myLogOutButton = (Button)findViewById(R.id.b_log_out);
 
+
         myInventoryButton.setOnClickListener(this);
-        myTradeButton.setOnClickListener(this);
-        myFriendsButton.setOnClickListener(this);
+        TradeHubButton.setOnClickListener(this);
+        FriendsButton.setOnClickListener(this);
         myProfileButton.setOnClickListener(this);
         myLogOutButton.setOnClickListener(this);
+        allSearch.setOnClickListener(this);
 
     }
     @Override
@@ -78,7 +81,7 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         uc.classIntent(UserInventory.class, activity);
     }
     public void userMyTradeSelected(MenuItem menu){
-        uc.classIntent(UserTrade.class, activity);
+        uc.classIntent(UserTradesHub.class, activity);
     }
     public void userMyFriendsSelected(MenuItem menu){
         uc.classIntent(UserFriends.class, activity);
@@ -114,6 +117,9 @@ public class UserMainView extends ActionBarActivity implements View.OnClickListe
         }
         else if(view.getId()==R.id.b_log_out){
             activity.finish();
+        }
+        else if(view.getId()==R.id.b_all_search){
+            uc.classIntent(Search.class, activity);
         }
     }
 
