@@ -110,8 +110,9 @@ public class Search extends ActionBarActivity {
                         }
                 }
                 int index = currentUser.getFriendsList().indexOf(friend.getUserId());
-                if(index > 0)
-                    uc.passValueToActivity(CreateTrade.class, activity, index);
+                //if(index >= 0) {
+                uc.passValueToActivity(CreateTrade.class, activity, index);
+                //}
                 //activity.finish();
             }
         });
