@@ -61,8 +61,8 @@ public class UserProfile extends ActionBarActivity {
          * retrieve current user's profiles
          */
         userName = currentUser.getUserId();
-        userEmail=currentUser.getUserProfile().getUserContactInformation();
-        userCity= currentUser.getUserProfile().getUserCity();
+        userEmail= currentUser.getUserProfile().getUserContactInformation();
+        userCity = currentUser.getUserProfile().getUserCity();
 
         /**
          * Edit button
@@ -81,6 +81,17 @@ public class UserProfile extends ActionBarActivity {
         userEmailText = (TextView)findViewById(R.id.current_user_email);
         userEmailText.setText(userEmail);
         userCityText = (TextView)findViewById(R.id.current_user_city);
+        userCityText.setText(userCity);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        userName = currentUser.getUserId();
+        userEmail= currentUser.getUserProfile().getUserContactInformation();
+        userCity = currentUser.getUserProfile().getUserCity();
+        userNameText.setText(userName);
+        userEmailText.setText(userEmail);
         userCityText.setText(userCity);
     }
 
