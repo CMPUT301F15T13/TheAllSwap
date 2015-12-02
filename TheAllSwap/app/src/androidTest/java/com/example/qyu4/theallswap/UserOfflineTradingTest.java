@@ -16,7 +16,7 @@ public class UserOfflineTradingTest extends ActivityInstrumentationTestCase2 {
     /**
      * testCreateTradeOffline is related to use cases #3
      **/
-    public void testCreateTradeOffline(){
+    /*public void testCreateTradeOffline(){
         ArrayList<Trade> tradeList = new ArrayList<Trade>();
         //TODO: creating item offline;
         Trade tradeOffline = new Trade("offline Trade", "offer item description");
@@ -29,7 +29,7 @@ public class UserOfflineTradingTest extends ActivityInstrumentationTestCase2 {
     /**
      * testCreateTradeOfflinePushed is related to use cases #4
      **/
-    public void testCreateTradeOfflinePushed(){
+    /*public void testCreateTradeOfflinePushed(){
         InternetConnection ic = new InternetConnection();
         ic.setInternet(false);
         assertTrue(testIsOffline());
@@ -60,7 +60,7 @@ public class UserOfflineTradingTest extends ActivityInstrumentationTestCase2 {
     public boolean testIsOnline(){
         boolean canConnect = NetworkConnector.tryConnect(); 
         return true;
-    }
+    }*/
 
 
 }

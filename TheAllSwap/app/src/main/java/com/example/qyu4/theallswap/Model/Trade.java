@@ -69,7 +69,7 @@ public class Trade {
     /**
      * 'owner' cancels the deal. Set ownerAcceptedTrade and tradePending to false
      */
-    private void requestDeclined(){
+    public void requestDeclined(){
         //TODO: cancel the deal
     }
 
