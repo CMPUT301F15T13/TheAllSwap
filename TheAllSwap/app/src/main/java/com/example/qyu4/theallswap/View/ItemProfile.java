@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
@@ -72,6 +73,7 @@ public class ItemProfile extends ActionBarActivity {
 
     private static int RESULT_LOAD_IMG = 1;
     String imgDecodableString;
+    Bitmap itemBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,9 +146,14 @@ public class ItemProfile extends ActionBarActivity {
 
         if (!"".equals(imgDecodableString)) {
             //Toast.makeText(this, imgDecodableString, Toast.LENGTH_SHORT).show();
-            imgDecodableString = currentItem.getItemImgId();
+            //imgDecodableString = currentItem.getItemImgId();
+            itemBitmap = currentItem.getItemImgBitMap();
+
+
+            //Toast.makeText(this, itemBitmap.toString(), Toast.LENGTH_SHORT).show();
             ImageView imgView = (ImageView) findViewById(R.id.imgView);
-            imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+            imgView.setImageBitmap(itemBitmap);
+            //imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
         }
 
     }
@@ -230,7 +237,6 @@ public class ItemProfile extends ActionBarActivity {
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     imgDecodableString = cursor.getString(columnIndex);
 
-                    currentItem.setItemImgBitMap(bitmap);
                     currentItem.setItemImgId(imgDecodableString);
                     ic.editItem(currentUser, itemId, currentItem);
                     uc.saveInFile(userList.getFilename(), activity, userList);
@@ -238,6 +244,13 @@ public class ItemProfile extends ActionBarActivity {
                     cursor.close();
                     ImageView imgView = (ImageView) findViewById(R.id.imgView);
                     imgView.setImageBitmap(BitmapFactory.decodeFile(imgDecodableString));
+
+
+
+                    itemBitmap = ((BitmapDrawable)imgView.getDrawable()).getBitmap();
+                    currentItem.setItemImgBitMap(itemBitmap);
+
+
                 } else {
                     Toast.makeText(this, "Image too large", Toast.LENGTH_SHORT).show();
                 }
