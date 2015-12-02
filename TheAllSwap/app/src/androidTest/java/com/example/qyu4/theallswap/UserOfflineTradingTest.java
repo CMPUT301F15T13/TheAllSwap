@@ -2,12 +2,16 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.Model.Trade;
+
+import java.util.ArrayList;
+
 /**
  * Created by qyu4 on 10/7/15.
  */
 public class UserOfflineTradingTest extends ActivityInstrumentationTestCase2 {
     UserOfflineTradingTest(){
-        super(UserTradingActivity.class);
+        super(Trade.class);
     }
     /**
      * testCreateTradeOffline is related to use cases #3

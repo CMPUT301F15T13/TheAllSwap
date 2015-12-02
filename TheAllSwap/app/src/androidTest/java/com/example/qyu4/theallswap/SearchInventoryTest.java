@@ -2,12 +2,14 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.Model.Trade;
+
 /**
  * Created by ozero. Test file is skeletal.
  */
 public class SearchInventoryTest extends ActivityInstrumentationTestCase2 {
     public SearchInventoryTest() {
-        super(UserTradingActivity.class); // Temporary
+        super(Trade.class); // Temporary
     }
 
     public void testSearchInvByQuery() {

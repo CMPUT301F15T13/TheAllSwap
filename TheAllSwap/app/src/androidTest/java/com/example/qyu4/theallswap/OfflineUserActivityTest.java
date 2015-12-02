@@ -2,6 +2,10 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.Model.Item;
+
+import java.util.ArrayList;
+
 /**
  * Created by qyu4 on 10/7/15.
  * this is the test file for testing user offline activities.

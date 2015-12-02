@@ -2,17 +2,23 @@ package com.example.qyu4.theallswap;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.qyu4.theallswap.Model.Item;
+import com.example.qyu4.theallswap.Model.Trade;
+import com.example.qyu4.theallswap.View.UserInventory;
+import com.example.qyu4.theallswap.Model.User;
+
 /**
  * Created by debelang on 10/9/15.
  */
 public class TradeItemsTest extends ActivityInstrumentationTestCase2 {
-    public TradeItemsTest(){super(UserTradingActivity.class);}
+    public TradeItemsTest(){
+        super(Trade.class);}
 
     //tests the hasItem function for itemCollection. ItemCollections are all the items owned by a user
     public void testhasItem(){
+        User user = new User("Carl");
         Item item = new Item();
-        ItemCollection itemCollection = new ItemCollection();
-        itemCollection.addItem(item);
+        user.addItemToInventory(item);
         assertTrue(itemCollection.hasItem(item));
     }
 
