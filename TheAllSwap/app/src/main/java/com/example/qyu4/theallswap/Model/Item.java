@@ -63,6 +63,8 @@ public class Item {
         return itemImgId;
     }
 
+    public Bitmap getItemImgBitMap() { return itemImgBitMap; }
+
 
 
     public Item(){}
