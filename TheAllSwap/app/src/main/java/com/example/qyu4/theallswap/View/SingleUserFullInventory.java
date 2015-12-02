@@ -75,7 +75,7 @@ public class SingleUserFullInventory extends ActionBarActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
         int userId = uc.stringToInt(id);
-        singleUser = userList.getUserFromId(userList.get(userId).getUserId());
+        singleUser = userList.getUserFromId(currentUser.getFriendsList().get(userId));
 
         //itemArray = ic.showNonPrivateItems(singleUser);
         itemArray = ic.showNonPrivateItems(singleUser);
@@ -99,8 +99,9 @@ public class SingleUserFullInventory extends ActionBarActivity {
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int index = currentUser.getFriendsList().indexOf(singleUser.getUserId());
-                if(index > 0)
+                if(index >= 0) {
                     uc.passValueToActivity(CreateTrade.class, activity, index);
+                }
                 //activity.finish();
             }
         });
