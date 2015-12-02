@@ -35,6 +35,7 @@ public class Item {
     private String itemComments;
     private String itemImgId;
     private Bitmap itemImgBitMap;
+    private boolean itemDownload = false;
 
 
     public String getItemName() {
@@ -65,12 +66,14 @@ public class Item {
 
     public Bitmap getItemImgBitMap() { return itemImgBitMap; }
 
+    public boolean getItemDownload() { return itemDownload; }
+
 
 
     public Item(){}
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivacy,
-                String ItemComments, String itemImgId, Bitmap setItemImgBitMap) {
+                String ItemComments, String itemImgId, Bitmap setItemImgBitMap, boolean itemDownload) {
 
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
@@ -118,22 +121,10 @@ public class Item {
 
     public void setItemImgBitMap(Bitmap addedBitMap) { this.itemImgBitMap = addedBitMap;}
 
+    public void setItemDownload(boolean ableDownload) { this.itemDownload = ableDownload;}
+
     public String getItemCategory() {
         return itemCategory;
-    }
-
-    public boolean checkImageSize() {
-        // Do Something
-        return true;
-    }
-
-    public void disableImageDownload() {
-        // Do Something
-    }
-
-    public Integer downloadImage(Integer image){
-        return image;
-        // Do Something
     }
 
 }
