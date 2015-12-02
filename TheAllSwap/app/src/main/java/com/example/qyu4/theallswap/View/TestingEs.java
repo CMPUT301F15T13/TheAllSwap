@@ -46,6 +46,7 @@ public class TestingEs extends ActionBarActivity {
     private TextView tv;
     private UserController uc = new UserController();
     private TestingEs activity = this;
+    private User oldUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +59,9 @@ public class TestingEs extends ActionBarActivity {
             public void onClick(View v) {
                 User user = new User();
                 Profile userProfile = new Profile();
-                user.setUserId("hello");
-                userProfile.setUserCity("Edmonton");
-                userProfile.setUserContactInformation("hello@ualberta.ca");
+                user.setUserId("hello4");
+                userProfile.setUserCity("Edmonton4");
+                userProfile.setUserContactInformation("hello4@ualberta.ca");
                 user.setUserProfile(userProfile);
                 // Execute the thread
                 Thread thread = new AddThread(user);
@@ -71,16 +72,21 @@ public class TestingEs extends ActionBarActivity {
         showResultButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
-                User user = getUser(1);
-
-                String userEmail = user.getUserId();
+                String userEmail = oldUser.getUserId();
                 tv.setText(userEmail);
             }
         });
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        Thread thread = new GetThread(4);
+        thread.start();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -111,7 +117,7 @@ public class TestingEs extends ActionBarActivity {
         HttpClient httpClient = new DefaultHttpClient();
         Users users1 = new Users();
         try {
-            HttpPost addRequest = new HttpPost(users1.getResourceUrl() + 3);
+            HttpPost addRequest = new HttpPost(users1.getResourceUrl() + "4");
 
             StringEntity stringEntity = new StringEntity(gson.toJson(user));
             addRequest.setEntity(stringEntity);
@@ -128,13 +134,11 @@ public class TestingEs extends ActionBarActivity {
     }
     public User getUser(int userId) {
         Users usersA = new Users();
-        String a  = usersA.getResourceUrl();
-        uc.makeInputStringToast(activity, a);
+
 
         SearchHit<User> sr = null;
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet(usersA.getResourceUrl()+ userId);
-        uc.makeInputStringToast(activity, usersA.getResourceUrl()+userId);
+        HttpGet httpGet = new HttpGet(usersA.getResourceUrl()+ String.valueOf(userId));
 
         HttpResponse response = null;
 
@@ -177,7 +181,7 @@ public class TestingEs extends ActionBarActivity {
 
         @Override
         public void run() {
-            addUser(user);
+                addUser(user);
 
             // Give some time to get updated info
             try {
@@ -195,4 +199,16 @@ public class TestingEs extends ActionBarActivity {
             finish();
         }
     };
+    class GetThread extends Thread {
+        private int id;
+
+        public GetThread(int id) {
+            this.id = id;
+        }
+
+        @Override
+        public void run() {
+            oldUser = getUser(id);
+        }
+    }
 }
