@@ -119,19 +119,19 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Item"
+            android:text="Edit"
             android:id="@+id/edit_profile_button"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignEnd="@+id/new_patient_id_label" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delete Item"
+            android:text="Delete"
             android:id="@+id/remove_item_button"
-            android:layout_alignBottom="@+id/edit_profile_button"
-            android:layout_toEndOf="@+id/edit_profile_button"
-            android:layout_marginLeft="20dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/imgView"
+            android:layout_toEndOf="@+id/current_user_city" />
 
         <ImageView
             android:layout_width="50pt"
@@ -145,10 +145,10 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Upload Image"
+            android:text="Image"
             android:id="@+id/load_picture_button"
             android:layout_marginLeft="20dp"
-            android:layout_above="@+id/remove_item_button"
+            android:layout_alignTop="@+id/remove_item_button"
             android:layout_toEndOf="@+id/remove_item_button" />
 
 
