@@ -77,7 +77,6 @@ public class SingleUserFullInventory extends ActionBarActivity {
         int userId = uc.stringToInt(id);
         singleUser = userList.getUserFromId(currentUser.getFriendsList().get(userId));
 
-        //itemArray = ic.showNonPrivateItems(singleUser);
         itemArray = ic.showNonPrivateItems(singleUser);
         for(Item i : itemArray) {
             itemStringArray.add(i.getItemName());
@@ -102,7 +101,6 @@ public class SingleUserFullInventory extends ActionBarActivity {
                 if(index >= 0) {
                     uc.passValueToActivity(CreateTrade.class, activity, index);
                 }
-                //activity.finish();
             }
         });
 

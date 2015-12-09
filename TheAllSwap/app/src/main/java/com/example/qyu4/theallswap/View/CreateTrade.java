@@ -100,9 +100,14 @@ public class CreateTrade extends ActionBarActivity implements View.OnClickListen
             }
         });
 
-        resultListMine = uc.convertItemToString(currentUser, resultListMine);
-        //resultListFriend = uc.convertItemToString(friend, resultListFriend);
-        ArrayList<Item> items = ic.showNonPrivateItems(friend);
+        //Get Public Items in personal inventory
+        ArrayList<Item> items = ic.showNonPrivateItems(currentUser);
+        for(Item i : items) {
+            resultListMine.add(i.getItemName());
+        }
+
+        //Get Public Items in friend's inventory
+        items = ic.showNonPrivateItems(friend);
         for(Item i : items) {
             resultListFriend.add(i.getItemName());
         }

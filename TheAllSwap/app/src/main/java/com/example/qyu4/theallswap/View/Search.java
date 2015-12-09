@@ -72,13 +72,6 @@ public class Search extends ActionBarActivity {
         userList = UserList.getUserList();
         currentUser = userList.getCurrentUser();
 
-        /*
-        Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
-        int userId = uc.stringToInt(id);
-        singleUser = userList.getUserFromId(userList.get(userId).getUserId());
-         */
-
         //itemArray = ic.showNonPrivateItems(singleUser);
         itemArray = ic.showAllNonPrivateItems();
         for(Item i : itemArray) {
@@ -101,15 +94,18 @@ public class Search extends ActionBarActivity {
         itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selected = itemStringArray.get(position);
-                User friend = new User();
+                System.out.println("Item: " + selected);
+                User friend;
+                User owner = new User();
                 for(String username : currentUser.getFriendsList()) {
                         friend = uc.findUserById(username, userList);
                         for(Item i : friend.getInventory()){
-                            if(i.getItemName().equals(selected))
-                                break;
+                            if(i.getItemName().equals(selected)) {
+                                owner = friend;
+                            }
                         }
                 }
-                int index = currentUser.getFriendsList().indexOf(friend.getUserId());
+                int index = currentUser.getFriendsList().indexOf(owner.getUserId());
                 //if(index >= 0) {
                 uc.passValueToActivity(CreateTrade.class, activity, index);
                 //}

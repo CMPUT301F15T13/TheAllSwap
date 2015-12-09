@@ -107,6 +107,7 @@ public class SingleFriendProfile extends ActionBarActivity {
         removeFriendButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 uc.removeUserAsFriend(activity, currentUser, singleUser);
+                uc.saveInFile(userList.getFilename(), activity, userList);
                 activity.finish();
             }
         });
