@@ -258,13 +258,6 @@ public class UserController {
         context.startActivity(openNewActivity);
     }
 
-    public void passUserToActivity(Class newClass, Context context, String myID){
-        Intent openNewActivity = new Intent(context, newClass);
-        openNewActivity.putExtra("myID", String.valueOf(myID));
-        context.startActivity(openNewActivity);
-    }
-
-
     /**
      * convert a string value to int.
      * @param inputString: input string.
@@ -276,11 +269,11 @@ public class UserController {
     }
 
     /**
-     * Adds a user to another users friend list.
+     * Adds a user to another users friend list. This method is for unidirectional friend adding,
+     * it must be called for each side if two friends want to add eachother.
      * @param currentUser: User to add a friend to their friend list
      * @param otherUser: User to be added as a friend.
      */
-    //Currently unidirectional, should friendship be one sided?
     public void addUserAsFriend(Context context, User currentUser, String otherUser){
         if(currentUser.getUserId().equals(otherUser)){
             makeInputStringToast(context, "Error: Cannot add yourself");
@@ -295,11 +288,23 @@ public class UserController {
         }
     }
 
+    /**
+     * Method to remove a user as a friend.
+     * @param context Current context
+     * @param currentUser Current user that is removing the friend.
+     * @param otherUser Friend to be removed from list.
+     */
     public void removeUserAsFriend(Context context, User currentUser, String otherUser){
         currentUser.removeFriend(otherUser);
         makeInputStringToast(context, otherUser + " removed from friends");
     }
 
+    /**
+     * Method to increment the number of successful trades a user has. Used as a middleman between
+     * the model and view.
+     * @param borrowerId The name (or ID) of the User that the trade count will be increasing for.
+     * @param userList The instance of the UserList singleton should be passed here.
+     */
     public void incrBorrowerSuccTrades(String borrowerId, ArrayList<User> userList) {
         for(User user : userList) {
             if(user.getUserId().equals(borrowerId)) {
