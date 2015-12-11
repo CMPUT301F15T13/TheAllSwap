@@ -237,7 +237,7 @@ public class ItemProfile extends ActionBarActivity {
                 Bitmap bitmap = null;
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
 
-                if (bitmap.getByteCount() <= 65536) {
+                if (bitmap.getByteCount() <= 65536000) {
 
 
                     String[] filePathColumn = {MediaStore.Images.Media.DATA};
