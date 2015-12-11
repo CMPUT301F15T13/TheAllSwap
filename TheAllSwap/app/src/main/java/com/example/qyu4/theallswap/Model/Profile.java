@@ -24,10 +24,17 @@ public class Profile {
     private String userContactInformation;
     private String userCity;
 
+    /**
+     * Default constructor. All attributes initialized to null. Set each one before
+     * using
+     */
     public Profile(){
 
     }
 
+    /**
+     * Constructor to set all starting attributes of the Profile on construction
+     */
     public Profile(String userContactInformation, String userCity) {
         this.setUserContactInformation(userContactInformation);
         this.setUserCity(userCity);

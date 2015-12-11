@@ -28,7 +28,7 @@ public class Item {
     private int itemQuantity;
     private String itemQuality;
     private String itemCategory;
-    private boolean itemPrivate;
+    private boolean itemPrivate = false;
     private boolean availability = true;
     private String itemComments;
     private String itemImgId;
@@ -70,8 +70,15 @@ public class Item {
     public boolean getImgDownloadable(){return ImgDownloadable;}
 
 
-
+    /**
+     * Default constructor. All non boolean attributes initialized to null. Set each one before
+     * using
+     */
     public Item(){}
+
+    /**
+     * Constructor to set all starting attributes of the Item on construction
+     */
     public Item(String itemName, int itemQuantity,
                 String itemQuality, String itemCategory, boolean itemPrivate,
                 String ItemComments, String itemImgId, Bitmap setItemImgBitMap, boolean itemDownload) {
