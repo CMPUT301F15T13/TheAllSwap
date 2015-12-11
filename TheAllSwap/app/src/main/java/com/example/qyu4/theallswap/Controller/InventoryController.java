@@ -83,7 +83,6 @@ public class InventoryController {
      * users.
      * @return An ArrayList of Item objects containing all user's non-private items.
      */
-
     public ArrayList<Item> showAllNonPrivateItems(){
         ArrayList<Item> invList = new ArrayList<>();
         UserList userList = UserList.getUserList();

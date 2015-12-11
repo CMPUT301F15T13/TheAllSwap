@@ -32,7 +32,4 @@ public class FriendsTest extends ActivityInstrumentationTestCase2 {
         assertFalse(me.isFriend(friend));
     }
 
-    //public void testFriendExists() {
-    //    assertTrue(friend);
-    //}
 }
