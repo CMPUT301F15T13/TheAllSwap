@@ -40,15 +40,27 @@ public class User {
 
     public User(){}
 
+    /**
+     * Constructor creates a new user with a specified name. The profile is instantiated with a
+     * blank city and email address.
+     * @param userId Name for the new user
+     */
     public User(String userId) {
         this.userId = userId;
         this.userProfile = new Profile();
         this.userInventory = new ArrayList<>();
         this.userFriendList = new ArrayList<>();
-        //this.userProfile.setUserCity(null);
-        //this.userProfile.setUserContactInformation(null);
+        this.userProfile = new Profile();
+        this.userProfile.setUserCity(" ");
+        this.userProfile.setUserContactInformation(" ");
     }
 
+    /**
+     * Constructor that initializes User's name, email address and city.
+     * @param userId New user's name
+     * @param userEmail New user's email address
+     * @param userCity New user's home city
+     */
     public User(String userId, String userEmail, String userCity) {
         this.userId = userId;
         this.userInventory = new ArrayList<>();
@@ -58,22 +70,26 @@ public class User {
         this.userProfile.setUserContactInformation(userEmail);
     }
 
+    /**
+     * Getter for User's friend list
+     * @return ArrayList Strings with the names of all users in friends list
+     */
     public ArrayList<String> getFriendsList(){
         return userFriendList;
     }
 
     /**
-     * get user id
-     * @return user id
+     * Get user's name
+     * @return user name
      */
     public String getUserId() {
         return userId;
     }
+
     /**
-     * set user id
+     * Set user's name
      * @param userId: generate user id from user input
      */
-
     public void setUserId(String userId) {
         this.userId = userId;
 
@@ -145,6 +161,12 @@ public class User {
         return userId + " || "+ userProfile.getUserCity()+" || "+userProfile.getUserContactInformation();
     }
 
+    /**
+     * Overrides default equals method. A User class need only compare name as it is required to be
+     * unique within the app.
+     * @param o object to compare against.
+     * @return Boolean specifying equality.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -160,14 +182,26 @@ public class User {
         return userId.hashCode();
     }
 
+    /**
+     * Get user inventory
+     * @return ArrayList of Items in inventory
+     */
     public ArrayList<Item> getUserInventory() {
         return userInventory;
     }
 
+    /**
+     * Get the number of successful trades this user has participated in.
+     * @return int number of trades
+     */
     public int getSuccessfulTrades() {
         return successfulTrades;
     }
 
+    /**
+     * Increases number of successful trades by one. Should only be called after a trade has
+     * successfully taken place.
+     */
     public void incrementSuccessfulTrades() {
         successfulTrades++;
     }
