@@ -36,6 +36,7 @@ public class Item {
     private String itemImgId;
     private Bitmap itemImgBitMap;
     private boolean itemDownload = false;
+    private boolean ImgDownloadable = false;
 
 
     public String getItemName() {
@@ -67,6 +68,8 @@ public class Item {
     public Bitmap getItemImgBitMap() { return itemImgBitMap; }
 
     public boolean getItemDownload() { return itemDownload; }
+
+    public boolean getImgDownloadable(){return ImgDownloadable;}
 
 
 
@@ -126,5 +129,7 @@ public class Item {
     public String getItemCategory() {
         return itemCategory;
     }
+
+    public void setImgDownloadable(boolean avail){this.ImgDownloadable = avail;}
 
 }
