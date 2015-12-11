@@ -34,9 +34,18 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 /**
- * Created by aozero on 28/11/2015.
+ * Controller class for providing the view access to the model in areas regarding trading between
+ * users.
+ * @author qyu4, egsmith, lixin1, ozero, debelang.
  */
 public class TradeController {
+
+    /**
+     * Method that saves completed trades to local file.
+     * @param FileName name of file to be saved
+     * @param context current context of app
+     * @param tradeArrayList Trade list state to be saved
+     */
     public void saveTradeInFile(String FileName, Context context, ArrayList<Trade> tradeArrayList) {
         try {
             FileOutputStream fos = context.openFileOutput(FileName, 0);
@@ -46,14 +55,18 @@ public class TradeController {
             out.flush();
             fos.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException(e);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Loads list of trades from file. Loads trades into TradeList data structure.
+     * @param context current context of app
+     * @param fileName file name to load from
+     * @param tradeList the instance of TradeList singleton
+     */
     public void loadTradesFromFile(Context context, String fileName, TradeList tradeList) {
         try {
             FileInputStream fis = context.openFileInput(fileName);
@@ -71,6 +84,14 @@ public class TradeController {
         }
     }
 
+    /**
+     * Constructs a list of trades associated with a specific user that are pending.
+     * Method iterates through all trades in a passed list and adds all those that are both pending
+     * and have the specified user involved.
+     * @param userId User to find trades for
+     * @param tradeList List of trades to search
+     * @return An ArrayList of Strings representing all pending trades for a user.
+     */
     public ArrayList<String> getPendingTrades(String userId, TradeList tradeList) {
         ArrayList<Trade> pendingTradeList = new ArrayList<>();
 
@@ -88,6 +109,13 @@ public class TradeController {
         return resultList;
     }
 
+    /**
+     * Constructs a list of complete trades associated with a specific user. Iterates through a list
+     * of trades and filters out those that are not completed or do not have the user involved.
+     * @param userId User to search for
+     * @param tradeList List to Search
+     * @return ArrayList of Strings representing the trades.
+     */
     public ArrayList<String> getCompletedTrades(String userId, TradeList tradeList) {
         ArrayList<Trade> pendingTradeList = new ArrayList<>();
 
@@ -104,6 +132,7 @@ public class TradeController {
         resultList = convertTradeToString(pendingTradeList, resultList);
         return resultList;
     }
+
     /**
      * convert the Trade object list to a useful information arrayList.
      * @param tradeList: the TradeList has all Trade objects.
@@ -123,6 +152,14 @@ public class TradeController {
         return resultList;
     }
 
+    /**
+     * Searches an ArrayList of trades for a String. Compares the string to the value of each
+     * trade's toString representation. Returns the index within the list if the string is found.
+     * @throws IndexOutOfBoundsException
+     * @param tradeString Representation of a trade to search for
+     * @param tradeList List to search
+     * @return Int index
+     */
     public int getIndexOfTrade(String tradeString, ArrayList<Trade> tradeList) {
         for (int i=0; i< tradeList.size(); i++){
             Trade trade = tradeList.get(i);
