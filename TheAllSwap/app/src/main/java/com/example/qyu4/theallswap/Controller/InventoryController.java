@@ -15,9 +15,6 @@
  */
 package com.example.qyu4.theallswap.Controller;
 
-import android.content.Context;
-import android.content.Intent;
-
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.User;
 import com.example.qyu4.theallswap.Model.UserList;
@@ -25,9 +22,9 @@ import com.example.qyu4.theallswap.Model.UserList;
 import java.util.ArrayList;
 
 /**
- * InventoryController class is an Controller that handling all method that dealing with Item model class.
+ * A controller class that provides the views access to the sections of the model that are related
+ * to items and inventory management.
  * @author qyu4, egsmith, lixin1, ozero, debelang.
- *
  */
 public class InventoryController {
     /**
@@ -39,12 +36,17 @@ public class InventoryController {
         currentUser.addItemToInventory(item);
     }
 
+    /**
+     * Removes an item to current user's inventory list.
+     * @param currentUser: current user name.(it's User object here).
+     * @param item: the item current user want to add to the inventory(this method could be used in the trade success part).
+     */
     public void removeItemFromInventory(User currentUser, Item item){
         currentUser.removeItemFromInventory(item);
     }
 
     /**
-     * create a new item
+     * Creates a new item with the passed values as attributes.
      * @param itemName: item name
      * @param itemQuantity: item quantity
      * @param itemQuality: item quality
@@ -60,7 +62,7 @@ public class InventoryController {
         newItem.setItemQuantity(itemQuantity);
         newItem.setItemQuality(itemQuality);
         newItem.setItemCategory(itemCategory);
-        newItem.setItemPrivacy(itemPrivacy);
+        newItem.setItemPrivate(itemPrivacy);
         newItem.setItemComments(itemComment);
         return newItem;
     }
@@ -73,6 +75,14 @@ public class InventoryController {
     public void editItem(User currentUser, int itemId, Item newItem){
         currentUser.getUserInventory().set(itemId, newItem);
     }
+
+    /**
+     * Method that iterates through all Users within the UserList and for each one iterates through
+     * all Items in their inventories. Any Item that is public (itemPrivate attribute set to false)
+     * is added to a new list of Items. This list is then returned after iterating through all
+     * users.
+     * @return An ArrayList of Item objects containing all user's non-private items.
+     */
 
     public ArrayList<Item> showAllNonPrivateItems(){
         ArrayList<Item> invList = new ArrayList<>();
@@ -91,6 +101,12 @@ public class InventoryController {
         return invList;
     }
 
+    /**
+     * Method that iterates through a single user's inventory adding all non-private items to an
+     * ArrayList which is returned.
+     * @param friend: User who's inventory is to be searched.
+     * @return ArrayList of Items containing a single user's non-private items.
+     */
     public ArrayList<Item> showNonPrivateItems(User friend){
         ArrayList<Item> invList = new ArrayList<>();
         for(Item i : friend.getInventory()){
@@ -101,6 +117,13 @@ public class InventoryController {
         return invList;
     }
 
+    /**
+     * Method that iterates through a passed ArrayList of items and creates a new list containing
+     * only those that have a category attribute matching the string passed as the second argument.
+     * @param items: ArrayList of items to be filtered.
+     * @param category String to filter items out based upon.
+     * @return Filtered ArrayList
+     */
     public ArrayList<Item> showItemsInCategory (ArrayList<Item> items, String category){
         ArrayList<Item> invList = new ArrayList<>();
         String all = "All";
@@ -114,6 +137,13 @@ public class InventoryController {
         return invList;
     }
 
+    /**
+     * Method that iterates through a passed ArrayList of items and creates a new list containing
+     * only those that contain a specified substring within the Item's name.
+     * @param items The list of items to be filtered.
+     * @param search The Substring to search for in each item's name
+     * @return Filtered ArrayList
+     */
     public ArrayList<Item> searchSuggestions (ArrayList<Item> items, String search){
         ArrayList<Item> invList = new ArrayList<>();
         for(Item i : items){
@@ -126,6 +156,14 @@ public class InventoryController {
         return invList;
     }
 
+    /**
+     * Method that for getting an Item object owned by a specific user based on item name.
+     * Iterates through the specified user's inventory comparing each item's name to the passed
+     * String.
+     * @param name String being searched for in inventory.
+     * @param owner User who owns Item
+     * @return The item object with the name given. If no Item was found returns blank Item.
+     */
     public Item getItemByName(String name, User owner){
         Item item = new Item();
         for(Item i : owner.getInventory()) {

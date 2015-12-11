@@ -63,14 +63,16 @@ public class Trade {
      * @param trade: the trade being accepted.
      */
     private void requestAccepted(Trade trade){
-        //TODO: Accept the deal
+        trade.setOwnerAcceptedTrade(true);
     }
 
     /**
      * 'owner' cancels the deal. Set ownerAcceptedTrade and tradePending to false
      */
     public void requestDeclined(){
-        //TODO: cancel the deal
+        borrowerRetractedTrade = true;
+        tradePending = false;
+        ownerAcceptedTrade = false;
     }
 
     public String getOwnerId() {

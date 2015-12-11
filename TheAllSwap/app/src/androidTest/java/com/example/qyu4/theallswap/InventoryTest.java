@@ -1,5 +1,4 @@
 package com.example.qyu4.theallswap;
-import com.example.qyu4.theallswap.Inventory;
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.User;
@@ -7,7 +6,6 @@ import com.example.qyu4.theallswap.Model.User;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
-import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 
@@ -74,7 +72,7 @@ public class InventoryTest {
 	public void testViewUnsharedItemsNotMine() {
 		User notMe = new User();
 		Item item = new Item();
-		item.setItemPrivacy(false);
+		item.setItemPrivate(false);
 		notMe.addItemToInventory(item);
 		assertFalse(notMe.getInventory().contains(item));
 	}

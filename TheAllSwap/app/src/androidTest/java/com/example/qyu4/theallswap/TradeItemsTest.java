@@ -16,7 +16,7 @@ public class TradeItemsTest extends ActivityInstrumentationTestCase2 {
         super(Trade.class);}
 
     //tests the hasItem function for itemCollection. ItemCollections are all the items owned by a user
-    public void testhasItem(){
+    public void testHasItem(){
         User user = new User("Carl");
         Item item = new Item();
         user.addItemToInventory(item);
@@ -24,47 +24,49 @@ public class TradeItemsTest extends ActivityInstrumentationTestCase2 {
     }
 
     //tests if an item is available for trade. Items are made unavailable when already involved in another trade
-    public void testitemAvailable(){
+    public void testItemAvailable(){
         Item item = new Item();
-        assertTrue(item.isAvailable());
+        User user = new User("Carl");
+        user.addItemToInventory(item);
+        int index = user.getInventory().indexOf(item);
+        assertTrue(user.getInventory().get(index).isAvailable());
     }
 
     //tests that the toBeTraded function updates the item so that it can no longer be involved in other trades
-    public void testtoBeTraded(){
-        User user1 = new User("Penelope");
-        User user2 = new User("Lisa");
+    public void testToBeTraded(){
         Item item = new Item();
         Item item2 = new Item();
         item.setItemName("Towel");
         item2.setItemName("Bazooka");
         Trade trade = new Trade("Penelope", "Towel", "Lisa", "Bazooka");
         trade.setTradePending(true);
-        assertFalse(trade.isTradePending());
-
+        assertTrue(trade.isTradePending());
     }
 
     //tests the isNotified function which will be set to true when notifications are sent to users
-    public void testisNotified(){
+    public void testIsNotified(){
         Trade trade = new Trade();
         assertFalse(trade.isTradePending());
     }
 
     //tests the notify function which changes the result of isNotified to true
-    public void testnotify(){
+    public void testNotify(){
         Trade trade = new Trade();
         trade.setTradePending(true);
         assertTrue(trade.isTradePending());
     }
 
     //tests the isAccepted function for offers, which returns true when both parties have accepted
-    public void testisAccepted(){
+    public void testIsAccepted(){
         Trade offer = new Trade();
         assertFalse(offer.isOwnerAcceptedTrade());
+
+
     }
 
 
     //tests the acceptOffer function which updates the system when the user accepts an offer
-    public void testacceptOffer(){
+    public void testAcceptOffer(){
         Trade offer = new Trade();
         offer.setOwnerAcceptedTrade(true);
         assertTrue(offer.isOwnerAcceptedTrade());
@@ -85,10 +87,10 @@ public class TradeItemsTest extends ActivityInstrumentationTestCase2 {
     }*/
 
     //tests the deleteOffer function which is called when a user wishes to delete an offer they were working on
-    public void testdeleteOffer(){
+    public void testDeleteOffer(){
         Trade offer = new Trade();
         offer.requestDeclined();
-        assertTrue(offer==null);
+        assertTrue(offer.isOwnerAcceptedTrade());
     }
 
     //tests the addItem function for offers, which would be invoked when creating or editing an offer

@@ -17,8 +17,6 @@ package com.example.qyu4.theallswap.Model;
 
 import android.graphics.Bitmap;
 
-import java.util.ArrayList;
-
 /**
  * Item class is an Model that handles all Item structure.
  * @author qyu4, egsmith, lixin1, ozero, debelang.
@@ -30,7 +28,7 @@ public class Item {
     private int itemQuantity;
     private String itemQuality;
     private String itemCategory;
-    private boolean itemPrivacy;
+    private boolean itemPrivate;
     private boolean availability = true;
     private String itemComments;
     private String itemImgId;
@@ -52,7 +50,7 @@ public class Item {
     }
 
     public boolean isPrivate() {
-        return itemPrivacy;
+        return itemPrivate;
     }
 
     public boolean isAvailable() { return availability;}
@@ -75,14 +73,14 @@ public class Item {
 
     public Item(){}
     public Item(String itemName, int itemQuantity,
-                String itemQuality, String itemCategory, boolean itemPrivacy,
+                String itemQuality, String itemCategory, boolean itemPrivate,
                 String ItemComments, String itemImgId, Bitmap setItemImgBitMap, boolean itemDownload) {
 
         this.setItemName(itemName);
         this.setItemQuality(itemQuality);
         this.setItemQuantity(itemQuantity);
         this.setItemCategory(itemCategory);
-        this.setItemPrivacy(itemPrivacy);
+        this.setItemPrivate(itemPrivate);
         this.setItemComments(ItemComments);
         this.setItemImgId(itemImgId);
         this.setItemImgBitMap(itemImgBitMap);
@@ -107,8 +105,8 @@ public class Item {
         this.itemCategory = itemCategory;
     }
 
-    public void setItemPrivacy(boolean itemPrivacy) {
-        this.itemPrivacy = itemPrivacy;
+    public void setItemPrivate(boolean itemPrivate) {
+        this.itemPrivate = itemPrivate;
     }
     public void setItemComments(String itemComments) {
         this.itemComments = itemComments;
