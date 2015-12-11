@@ -42,6 +42,7 @@ public class User {
 
     public User(String userId) {
         this.userId = userId;
+        this.userProfile = new Profile();
         this.userInventory = new ArrayList<>();
         this.userFriendList = new ArrayList<>();
         //this.userProfile.setUserCity(null);
@@ -52,6 +53,7 @@ public class User {
         this.userId = userId;
         this.userInventory = new ArrayList<>();
         this.userFriendList = new ArrayList<>();
+        this.userProfile = new Profile();
         this.userProfile.setUserCity(userCity);
         this.userProfile.setUserContactInformation(userEmail);
     }
