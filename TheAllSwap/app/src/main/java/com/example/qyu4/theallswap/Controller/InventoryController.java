@@ -174,8 +174,30 @@ public class InventoryController {
         return item;
     }
 
+    /**
+     * Method that takes an existing item, creates a copy of it, and adds it to a user's inventory.
+     * Method does not save UserList, that is up to the caller. Save method can be found in
+     * UserController.
+     * The comments and quantity are not cloned from the target item, instead they are set to
+     * "cloned" and 1 respectively.
+     * @param target Item to be cloned
+     * @param currentUser User to have item added to inventory. Usually will be the current user.
+     */
+    public void cloneItem(Item target, User currentUser){
+        Item clone = createNewItem(
+                target.getItemName(),
+                1,
+                target.getItemQuality(),
+                target.getItemCategory(),
+                target.isPrivate(),
+                "Cloned"
+        );
+        currentUser.addItemToInventory(clone);
+    }
+
+    /*
     public void uploadImagetoItem(int imgId) {
 
     };
-
+    */
 }

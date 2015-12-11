@@ -1,27 +1,33 @@
 package com.example.qyu4.theallswap;
+import android.test.ActivityInstrumentationTestCase2;
+
+import com.example.qyu4.theallswap.Controller.InventoryController;
 import com.example.qyu4.theallswap.Model.Item;
 import com.example.qyu4.theallswap.Model.Trade;
 import com.example.qyu4.theallswap.Model.User;
+import com.example.qyu4.theallswap.Model.UserSuccessfulTradesComparator;
+import com.example.qyu4.theallswap.View.UserInventory;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import org.junit.Test;
 
-public class InventoryTest {
+public class InventoryTest extends ActivityInstrumentationTestCase2 {
 
-	@Test
+    public InventoryTest() {super(UserInventory.class);}
+
 	public void testAddItem(){
 		Item myItem = new Item();
 		User myUser = new User();
 		myUser.addItemToInventory(myItem);
 		assertTrue(myUser.getInventory().contains(myItem));
 	}
-	
-	@Test
+
 	public void testDeleteItem(){
 		Item myItem = new Item();
 		User myUser = new User();
@@ -30,8 +36,7 @@ public class InventoryTest {
 		myUser.removeItemFromInventory(myItem);
 		assertFalse(myUser.getInventory().contains(myItem));
 	}
-	
-	@Test
+
 	public void testViewItemList(){
 		Item myItem1 = new Item();
 		Item myItem2 = new Item();
@@ -44,16 +49,14 @@ public class InventoryTest {
 		assertTrue(myUser.getInventory().contains(myItem2));
 		assertTrue(myUser.getInventory().contains(myItem3));
 	}
-	
-	@Test
+
 	public void testViewMyUnsharedItems(){
 		Item myItem = new Item();
 		User myUser = new User();
 		myUser.addItemToInventory(myItem);
 		assertTrue(myUser.getInventory().contains(myItem));
 	}
-	
-	@Test
+
 	public void testAddPrivateItemsToTrade(){
 		User myUser = new User("Isaac");
 		User otherUser = new User("Frank");
@@ -68,16 +71,17 @@ public class InventoryTest {
 		assertTrue(myOffer.getOwnerItem().equals("Pumpkin"));
 	}
 
-	@Test
 	public void testViewUnsharedItemsNotMine() {
 		User notMe = new User();
 		Item item = new Item();
-		item.setItemPrivate(false);
+		item.setItemPrivate(true);
 		notMe.addItemToInventory(item);
-		assertFalse(notMe.getInventory().contains(item));
+        ArrayList<Item> visibleItems = new ArrayList<>();
+        InventoryController ic = new InventoryController();
+        visibleItems = ic.showNonPrivateItems(notMe);
+        assertFalse(visibleItems.contains(item));
 	}
-	
-	@Test
+
 	public void testEditItem(){
 		final int quantity = 1;
 		Item myItem = new Item();
@@ -89,12 +93,63 @@ public class InventoryTest {
 		assertEquals(myItem.getItemQuantity(), value);
 		
 	}
-	
-	@Test
+
+	public void testItemCloned() {
+        InventoryController ic = new InventoryController();
+        Item item = new Item();
+        item.setItemName("False face");
+        User me = new User("Alf");
+        assertFalse(me.getInventory().contains(item));
+        ic.cloneItem(item, me);
+        Item clone = me.getInventory().get(0);
+        assertNotNull(clone);
+    }
+
+    public void testCloneIsCopy() {
+        InventoryController ic = new InventoryController();
+        Item item = new Item();
+        String name = "Jetpack", category="Gadgets", qual="Silver";
+        item.setItemName(name);
+        item.setItemCategory(category);
+        item.setItemQuality(qual);
+        User me = new User("Condor");
+        ic.cloneItem(item, me);
+        Item clone = me.getInventory().get(0);
+        assertEquals(clone.getItemName(), name);
+        assertEquals(clone.getItemCategory(), category);
+        assertEquals(clone.getItemQuality(), qual);
+    }
+
+    public void testTopTradersSorted(){
+        User top = new User("Jean");
+        User second = new User("George");
+        User third = new User("Alberta");
+        User fourth = new User("Yolanda");
+        ArrayList<User> traders = new ArrayList<>();
+        traders.add(second);
+        traders.add(top);
+        traders.add(fourth);
+        traders.add(third);
+        second.incrementSuccessfulTrades();
+        Collections.sort(traders, new UserSuccessfulTradesComparator());
+        assertEquals(traders.get(0), second);
+        top.incrementSuccessfulTrades();
+        top.incrementSuccessfulTrades();
+        top.incrementSuccessfulTrades();
+        second.incrementSuccessfulTrades();
+        third.incrementSuccessfulTrades();
+        Collections.sort(traders, new UserSuccessfulTradesComparator());
+        assertEquals(traders.get(0), top); //3 trades
+        assertEquals(traders.get(1), second); //2 trades
+        assertEquals(traders.get(2), third); //1 trade
+        assertEquals(traders.get(3), fourth); //0 trades
+    }
+
 	public void testAllowedCatagory(){
 		Item myItem = new Item();
-		Inventory myInventory = new Inventory();
-		ArrayList<String> allowedCatagories = new ArrayList<String>();	
+        myItem.setItemCategory("Secret");
+		ArrayList<String> allowedCatagories = new ArrayList<String>();
+        allowedCatagories.add("Secret");
 		assertTrue(allowedCatagories.contains(myItem.getItemCategory()));
 		myItem.setItemCategory("somethingNotInList");
 		assertFalse(allowedCatagories.contains(myItem.getItemCategory()));
