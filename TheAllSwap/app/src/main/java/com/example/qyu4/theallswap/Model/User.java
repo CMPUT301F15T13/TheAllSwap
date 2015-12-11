@@ -40,22 +40,20 @@ public class User {
 
     public User(){}
 
-    //This constructor breaks for some reason
     public User(String userId) {
         this.userId = userId;
-        this.userInventory = new ArrayList<Item>();
+        this.userInventory = new ArrayList<>();
         this.userFriendList = new ArrayList<>();
-        this.userProfile.setUserCity(null);
-        this.userProfile.setUserContactInformation(null);
+        //this.userProfile.setUserCity(null);
+        //this.userProfile.setUserContactInformation(null);
     }
 
-    //As, I must assume does this one.
     public User(String userId, String userEmail, String userCity) {
         this.userId = userId;
-        this.userInventory = new ArrayList<Item>();
+        this.userInventory = new ArrayList<>();
         this.userFriendList = new ArrayList<>();
-        this.userProfile.setUserCity(null);
-        this.userProfile.setUserContactInformation(null);
+        this.userProfile.setUserCity(userCity);
+        this.userProfile.setUserContactInformation(userEmail);
     }
 
     public ArrayList<String> getFriendsList(){

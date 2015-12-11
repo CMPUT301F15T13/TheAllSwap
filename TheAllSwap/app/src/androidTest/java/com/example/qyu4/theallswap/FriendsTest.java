@@ -24,7 +24,7 @@ public class FriendsTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void testRemoveFriend() {
-        User me = new User("Robert");;
+        User me = new User("Robert");
         User friend = new User("Amanda");
         me.addFriend(friend.getUserId());
         assertTrue(me.isFriend(friend));

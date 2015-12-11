@@ -61,13 +61,13 @@ public class InventoryTest {
 		User otherUser = new User("Frank");
 		Item myItem = new Item();
 		myItem.setItemName("Pumpkin");
-		Item theirItem = new Item();
-		theirItem.setItemName("Lightbulb");
+		Item otherItem = new Item();
+		otherItem.setItemName("Lightbulb");
 		myUser.addItemToInventory(myItem);
 		
 		Trade myOffer = new Trade("Isaac", "Pumpkin", "Frank", "Lightbulb");
 
-		assertTrue(myOffer.getOwnerItem() == "Pumpkin");
+		assertTrue(myOffer.getOwnerItem().equals("Pumpkin"));
 	}
 
 	@Test

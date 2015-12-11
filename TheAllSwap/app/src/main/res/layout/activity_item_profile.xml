@@ -144,6 +144,4 @@
         android:layout_toEndOf="@+id/remove_item_button"
         android:layout_alignParentBottom="true" />
 
-
-
 </RelativeLayout>
